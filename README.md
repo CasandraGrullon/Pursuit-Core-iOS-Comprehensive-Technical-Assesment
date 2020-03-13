@@ -1,4 +1,3 @@
-# Pursuit-Core-iOS-Comprehensive-Technical-Assesment
 # Pursuit-Core-iOS-Comprehensive-Technical-Assessment
 ​
 ​
