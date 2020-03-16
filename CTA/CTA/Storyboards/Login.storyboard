@@ -52,7 +52,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="logInButtonPressed:" destination="Gop-sd-DUm" eventType="touchUpInside" id="bKB-bp-XAF"/>
+                                    <action selector="logInButtonPressed:" destination="Gop-sd-DUm" eventType="touchUpInside" id="Vqs-5l-6P4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-3Q-DQK">
@@ -68,7 +68,7 @@
                                     <color key="titleColor" red="1" green="0.81588847900000006" blue="0.36930056300000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="signUpButtonPressed:" destination="Gop-sd-DUm" eventType="touchUpInside" id="dPj-Lf-lUr"/>
+                                    <action selector="signUpButtonPressed:" destination="Gop-sd-DUm" eventType="touchUpInside" id="1s3-57-FI4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -105,6 +105,7 @@
                         <outlet property="emailTextfield" destination="Kr0-vL-ki4" id="807-TT-bTw"/>
                         <outlet property="logInButton" destination="xy2-ZD-h46" id="QUf-ZW-7De"/>
                         <outlet property="passwordTextfield" destination="paA-Nt-ubs" id="one-aj-bcc"/>
+                        <outlet property="promptLabel" destination="zpa-3Q-DQK" id="xAl-OB-Yhd"/>
                         <outlet property="signUpHereButton" destination="Va4-JC-snk" id="ufk-dx-GIg"/>
                     </connections>
                 </viewController>
@@ -115,6 +116,7 @@
         <!--App Choice View Controller-->
         <scene sceneID="v3A-hn-c9N">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="05k-xP-0In" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AppChoiceViewController" id="5bi-Nx-0Hb" customClass="AppChoiceViewController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B3b-WQ-eMv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -192,10 +194,9 @@
                         <viewLayoutGuide key="safeArea" id="CdU-Jy-4Zf"/>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="nQ2-FI-8Qc" id="xbQ-Rq-Vip"/>
+                        <outlet property="collectionView" destination="nQ2-FI-8Qc" id="oy5-fV-i8K"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="05k-xP-0In" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="724.63768115942037" y="53.571428571428569"/>
         </scene>

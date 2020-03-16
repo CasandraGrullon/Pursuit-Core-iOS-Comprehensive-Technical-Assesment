@@ -28,6 +28,7 @@
 		C63A2ACC241FF78A000342A0 /* DatabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2ACB241FF78A000342A0 /* DatabaseSession.swift */; };
 		C63A2ACF241FFAD1000342A0 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2ACE241FFAD1000342A0 /* UIViewControllerExtension.swift */; };
 		C63A2AD1241FFB28000342A0 /* MainAppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2AD0241FFB28000342A0 /* MainAppTabBar.swift */; };
+		C63A2AD324201038000342A0 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2AD224201038000342A0 /* AppUser.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		C63A2ACB241FF78A000342A0 /* DatabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSession.swift; sourceTree = "<group>"; };
 		C63A2ACE241FFAD1000342A0 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		C63A2AD0241FFB28000342A0 /* MainAppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppTabBar.swift; sourceTree = "<group>"; };
+		C63A2AD224201038000342A0 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 				C61AF468241FD8B20051D0F6 /* Events.swift */,
 				C61AF46D241FDD230051D0F6 /* Collection.swift */,
 				C61AF474241FE4DF0051D0F6 /* Artwork.swift */,
+				C63A2AD224201038000342A0 /* AppUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,8 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				C63A2AC1241FF27B000342A0 /* LoginController.swift */,
-				C63A2AD0241FFB28000342A0 /* MainAppTabBar.swift */,
 				C63A2AC3241FF359000342A0 /* AppChoiceViewController.swift */,
+				C63A2AD0241FFB28000342A0 /* MainAppTabBar.swift */,
 				C63A2ABF241FF105000342A0 /* SearchEventsController.swift */,
 			);
 			path = Controllers;
@@ -322,6 +325,7 @@
 				C63A2AC4241FF359000342A0 /* AppChoiceViewController.swift in Sources */,
 				C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */,
 				C63A2AD1241FFB28000342A0 /* MainAppTabBar.swift in Sources */,
+				C63A2AD324201038000342A0 /* AppUser.swift in Sources */,
 				C61AF455241FD8990051D0F6 /* AppDelegate.swift in Sources */,
 				C61AF457241FD8990051D0F6 /* SceneDelegate.swift in Sources */,
 				C61AF46E241FDD230051D0F6 /* Collection.swift in Sources */,
