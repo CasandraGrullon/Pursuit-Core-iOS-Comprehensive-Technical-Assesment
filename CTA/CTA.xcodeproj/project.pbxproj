@@ -20,6 +20,10 @@
 		C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C61AF47A241FE7250051D0F6 /* ImageKit */; };
 		C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */; };
 		C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */; };
+		C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */; };
+		C63A2AC0241FF105000342A0 /* SearchEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2ABF241FF105000342A0 /* SearchEventsController.swift */; };
+		C63A2AC2241FF27B000342A0 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2AC1241FF27B000342A0 /* LoginController.swift */; };
+		C63A2AC4241FF359000342A0 /* AppChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2AC3241FF359000342A0 /* AppChoiceViewController.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +44,10 @@
 		C61AF474241FE4DF0051D0F6 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumAPI.swift; sourceTree = "<group>"; };
 		C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketMasterAPI.swift; sourceTree = "<group>"; };
+		C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSearchMapView.swift; sourceTree = "<group>"; };
+		C63A2ABF241FF105000342A0 /* SearchEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEventsController.swift; sourceTree = "<group>"; };
+		C63A2AC1241FF27B000342A0 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		C63A2AC3241FF359000342A0 /* AppChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChoiceViewController.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +106,8 @@
 				C61AF456241FD8990051D0F6 /* SceneDelegate.swift */,
 				C61AF47C241FE7350051D0F6 /* NetworkServices */,
 				C61AF46C241FDD000051D0F6 /* Model */,
+				C63A2ABB241FED77000342A0 /* Views */,
+				C63A2ABE241FF0E6000342A0 /* Controllers */,
 				C61AF473241FE0E40051D0F6 /* Storyboards */,
 				C61AF45D241FD89C0051D0F6 /* Assets.xcassets */,
 				C61AF45F241FD89C0051D0F6 /* LaunchScreen.storyboard */,
@@ -133,6 +143,24 @@
 				C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */,
 			);
 			path = NetworkServices;
+			sourceTree = "<group>";
+		};
+		C63A2ABB241FED77000342A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C63A2ABE241FF0E6000342A0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C63A2AC1241FF27B000342A0 /* LoginController.swift */,
+				C63A2AC3241FF359000342A0 /* AppChoiceViewController.swift */,
+				C63A2ABF241FF105000342A0 /* SearchEventsController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +290,13 @@
 				C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */,
 				C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */,
 				C61AF469241FD8B20051D0F6 /* Events.swift in Sources */,
+				C63A2AC0241FF105000342A0 /* SearchEventsController.swift in Sources */,
+				C63A2AC4241FF359000342A0 /* AppChoiceViewController.swift in Sources */,
+				C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */,
 				C61AF455241FD8990051D0F6 /* AppDelegate.swift in Sources */,
 				C61AF457241FD8990051D0F6 /* SceneDelegate.swift in Sources */,
 				C61AF46E241FDD230051D0F6 /* Collection.swift in Sources */,
+				C63A2AC2241FF27B000342A0 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
