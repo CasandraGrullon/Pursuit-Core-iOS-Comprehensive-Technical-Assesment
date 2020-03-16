@@ -118,10 +118,10 @@
             </objects>
             <point key="canvasLocation" x="447.82608695652175" y="5.3571428571428568"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main App Tab Bar-->
         <scene sceneID="DWn-4V-dHV">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="01t-X3-nId" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainAppTabBar" automaticallyAdjustsScrollViewInsets="NO" id="01t-X3-nId" customClass="MainAppTabBar" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A0O-2L-rd2">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

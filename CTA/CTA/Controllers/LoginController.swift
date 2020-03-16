@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginController: UIViewController {
     @IBOutlet weak var appImage: UIImageView!
@@ -19,6 +20,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
 
     }
+    
     @IBAction func logInButtonPressed(_ sender: UIButton) {
     }
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
