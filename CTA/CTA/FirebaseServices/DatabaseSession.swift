@@ -22,10 +22,11 @@ class DatabaseService {
     public static let shared = DatabaseService()
 
     public func createUser(authDataResult: AuthDataResult, apiChoice: String, completion: @escaping (Result<Bool, Error>) -> ()) {
-        guard let email = authDataResult.user.email, let displayName = authDataResult.user.displayName else {
+        
+        guard let email = authDataResult.user.email else {
             return
         }
-        db.collection(DatabaseService.appUsers).document(authDataResult.user.uid).setData(["username": displayName, "userId": authDataResult.user.uid, "userEmail": email, "apiChoice": apiChoice]) { (error) in
+        db.collection(DatabaseService.appUsers).document(authDataResult.user.uid).setData(["userId": authDataResult.user.uid, "userEmail": email, "apiChoice": apiChoice]) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -33,6 +34,21 @@ class DatabaseService {
             }
         }
         
+    }
+    public func updateUser(displayName: String, photoURL: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+    
+    guard let user = Auth.auth().currentUser else {
+        return
+    }
+    
+    db.collection(DatabaseService.appUsers).document(user.uid).updateData(["displayName": displayName, "photoURL": photoURL]) { (error) in
+        
+        if let error = error {
+            completion(.failure(error))
+        } else {
+            completion(.success(true))
+        }
+    }
     }
     public func saveEvent() {
         

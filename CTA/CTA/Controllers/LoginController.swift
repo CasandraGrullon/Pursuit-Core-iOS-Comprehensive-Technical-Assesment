@@ -24,9 +24,9 @@ class LoginController: UIViewController {
     @IBOutlet weak var chooseAppExperience: UILabel!
     @IBOutlet weak var apiButtonStack: UIStackView!
     
-    
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
+    
     private var selectedAPI: String?
     
     override func viewDidLoad() {
@@ -52,6 +52,8 @@ class LoginController: UIViewController {
             signUpHereButton.setTitle("LOGIN HERE", for: .normal)
             chooseAppExperience.text = "Choose App Experience"
             apiButtonStack.isHidden = false
+            logInButton.isEnabled = false
+            logInButton.backgroundColor = .gray
         } else {
             logInButton.setTitle("LOGIN", for: .normal)
             promptLabel.text = "Don't have an acount?"
@@ -89,7 +91,19 @@ class LoginController: UIViewController {
     }
     
     private func createUser(authDataResult: AuthDataResult) {
-        
+        guard let api = selectedAPI else {
+            return
+        }
+        DatabaseService.shared.createUser(authDataResult: authDataResult, apiChoice: api) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success:
+                DispatchQueue.main.async {
+                    self?.navigateToMainApp()
+                }
+            }
+        }
     }
     
     private func navigateToMainApp() {
@@ -98,10 +112,14 @@ class LoginController: UIViewController {
     
     @IBAction func museumButtonPressed(_ sender: UIButton) {
         selectedAPI = "Rijks Museum"
+        logInButton.isEnabled = true
+        logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
     }
     
     @IBAction func ticketButtonPressed(_ sender: UIButton) {
         selectedAPI = "Ticket Master"
+        logInButton.isEnabled = true
+        logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
     }
 }
 extension LoginController: UITextFieldDelegate {

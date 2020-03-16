@@ -45,7 +45,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="logInButtonPressed:" destination="Gop-sd-DUm" eventType="touchUpInside" id="Vqs-5l-6P4"/>
+                                    <action selector="logInButtonPressed:" destination="Gop-sd-DUm" eventType="touchUpInside" id="YRc-If-RcQ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-3Q-DQK">
@@ -143,7 +143,7 @@
                         <outlet property="apiButtonStack" destination="X8z-4m-VuR" id="5QT-cW-PWZ"/>
                         <outlet property="chooseAppExperience" destination="Luv-j8-ujC" id="hc2-GQ-SOx"/>
                         <outlet property="emailTextfield" destination="Kr0-vL-ki4" id="807-TT-bTw"/>
-                        <outlet property="logInButton" destination="xy2-ZD-h46" id="QUf-ZW-7De"/>
+                        <outlet property="logInButton" destination="xy2-ZD-h46" id="nRk-d7-rG9"/>
                         <outlet property="passwordTextfield" destination="paA-Nt-ubs" id="one-aj-bcc"/>
                         <outlet property="promptLabel" destination="zpa-3Q-DQK" id="xAl-OB-Yhd"/>
                         <outlet property="signUpHereButton" destination="Va4-JC-snk" id="ufk-dx-GIg"/>
