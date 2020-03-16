@@ -21,11 +21,11 @@ class DatabaseService {
     
     public static let shared = DatabaseService()
 
-    public func createUser(authDataResult: AuthDataResult, completion: @escaping (Result<Bool, Error>) -> ()) {
+    public func createUser(authDataResult: AuthDataResult, apiChoice: String, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let email = authDataResult.user.email, let displayName = authDataResult.user.displayName else {
             return
         }
-        db.collection(DatabaseService.appUsers).document(authDataResult.user.uid).setData(["username": displayName, "userId": authDataResult.user.uid, "userEmail": email]) { (error) in
+        db.collection(DatabaseService.appUsers).document(authDataResult.user.uid).setData(["username": displayName, "userId": authDataResult.user.uid, "userEmail": email, "apiChoice": apiChoice]) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {

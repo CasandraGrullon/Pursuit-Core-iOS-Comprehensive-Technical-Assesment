@@ -15,20 +15,26 @@ enum AccountState {
 }
 
 class LoginController: UIViewController {
-    @IBOutlet weak var appImage: UIImageView!
+
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpHereButton: UIButton!
     @IBOutlet weak var promptLabel: UILabel!
+    @IBOutlet weak var chooseAppExperience: UILabel!
+    @IBOutlet weak var apiButtonStack: UIStackView!
+    
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
+    private var selectedAPI: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextfield.delegate = self
         emailTextfield.delegate = self
+        chooseAppExperience.text = ""
+        apiButtonStack.isHidden = true
     }
     
     @IBAction func logInButtonPressed(_ sender: UIButton) {
@@ -43,11 +49,15 @@ class LoginController: UIViewController {
         if accountState == .newUser {
             logInButton.setTitle("Create Account", for: .normal)
             promptLabel.text = "Already have account?"
-            signUpHereButton.setTitle("CLICK HERE TO LOGIN", for: .normal)
+            signUpHereButton.setTitle("LOGIN HERE", for: .normal)
+            chooseAppExperience.text = "Choose App Experience"
+            apiButtonStack.isHidden = false
         } else {
             logInButton.setTitle("LOGIN", for: .normal)
             promptLabel.text = "Don't have an acount?"
             signUpHereButton.setTitle("SIGN UP HERE", for: .normal)
+            chooseAppExperience.text = ""
+            apiButtonStack.isHidden = true
         }
         
     }
@@ -79,23 +89,20 @@ class LoginController: UIViewController {
     }
     
     private func createUser(authDataResult: AuthDataResult) {
-        DatabaseService.shared.createUser(authDataResult: authDataResult) { (result) in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success:
-                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-                guard let apiChoiceVC = storyboard.instantiateViewController(identifier: "AppChoiceViewController") as? AppChoiceViewController else {return}
-                self.present(apiChoiceVC, animated: true)
-                
-            }
-        }
+        
     }
     
     private func navigateToMainApp() {
         UIViewController.showViewController(storyboardName: "MainApp", viewcontrollerID: "MainAppTabBar")
     }
     
+    @IBAction func museumButtonPressed(_ sender: UIButton) {
+        selectedAPI = "Rijks Museum"
+    }
+    
+    @IBAction func ticketButtonPressed(_ sender: UIButton) {
+        selectedAPI = "Ticket Master"
+    }
 }
 extension LoginController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -103,3 +110,5 @@ extension LoginController: UITextFieldDelegate {
         return true
     }
 }
+
+
