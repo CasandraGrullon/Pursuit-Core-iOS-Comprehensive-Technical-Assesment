@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,9 @@
 		C61AF470241FDD320051D0F6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61AF46F241FDD320051D0F6 /* Login.storyboard */; };
 		C61AF472241FDEBA0051D0F6 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61AF471241FDEBA0051D0F6 /* MainApp.storyboard */; };
 		C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF474241FE4DF0051D0F6 /* Artwork.swift */; };
+		C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C61AF47A241FE7250051D0F6 /* ImageKit */; };
+		C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */; };
+		C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +38,8 @@
 		C61AF46F241FDD320051D0F6 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		C61AF471241FDEBA0051D0F6 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		C61AF474241FE4DF0051D0F6 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumAPI.swift; sourceTree = "<group>"; };
+		C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketMasterAPI.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */,
+				C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +96,7 @@
 			children = (
 				C61AF454241FD8990051D0F6 /* AppDelegate.swift */,
 				C61AF456241FD8990051D0F6 /* SceneDelegate.swift */,
-				C61AF476241FE6250051D0F6 /* NetworkServices */,
+				C61AF47C241FE7350051D0F6 /* NetworkServices */,
 				C61AF46C241FDD000051D0F6 /* Model */,
 				C61AF473241FE0E40051D0F6 /* Storyboards */,
 				C61AF45D241FD89C0051D0F6 /* Assets.xcassets */,
@@ -120,9 +126,11 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		C61AF476241FE6250051D0F6 /* NetworkServices */ = {
+		C61AF47C241FE7350051D0F6 /* NetworkServices */ = {
 			isa = PBXGroup;
 			children = (
+				C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */,
+				C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -145,6 +153,9 @@
 			dependencies = (
 			);
 			name = CTA;
+			packageProductDependencies = (
+				C61AF47A241FE7250051D0F6 /* ImageKit */,
+			);
 			productName = CTA;
 			productReference = C61AF451241FD8990051D0F6 /* CTA.app */;
 			productType = "com.apple.product-type.application";
@@ -173,6 +184,9 @@
 				Base,
 			);
 			mainGroup = C61AF448241FD8990051D0F6;
+			packageReferences = (
+				C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */,
+			);
 			productRefGroup = C61AF452241FD8990051D0F6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,6 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */,
+				C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */,
 				C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */,
 				C61AF469241FD8B20051D0F6 /* Events.swift in Sources */,
 				C61AF455241FD8990051D0F6 /* AppDelegate.swift in Sources */,
@@ -440,6 +456,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alexpaul/ImageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C61AF47A241FE7250051D0F6 /* ImageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */;
+			productName = ImageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C61AF449241FD8990051D0F6 /* Project object */;
 }

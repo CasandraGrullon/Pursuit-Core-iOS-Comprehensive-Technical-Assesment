@@ -14,6 +14,7 @@ struct Collection: Codable {
 struct ArtObjects: Codable {
     let links: Links
     let id: String
+    let objectNumber: String
     let title: String
     let artist: String//coding key
     let longTitle: String
@@ -22,6 +23,7 @@ struct ArtObjects: Codable {
     enum CodingKeys: String, CodingKey {
         case links
         case id
+        case objectNumber
         case title
         case artist = "principalOrFirstMaker"
         case longTitle

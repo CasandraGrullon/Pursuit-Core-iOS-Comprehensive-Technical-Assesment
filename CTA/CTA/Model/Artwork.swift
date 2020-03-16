@@ -10,6 +10,7 @@ import Foundation
 
 struct Artwork: Codable {
     let id: String
+    let objectNumber: String
     let title: String
     let webImage: ArtImage
     let titles: [String]
