@@ -26,7 +26,6 @@ class TicketMasterAPI {
             case .success(let data):
                 do {
                     let events = try JSONDecoder().decode(TicketMaster.self, from: data)
-                    //let results = events.embedded.events
                     completion(.success(events))
                 } catch {
                     completion(.failure(.decodingError(error)))

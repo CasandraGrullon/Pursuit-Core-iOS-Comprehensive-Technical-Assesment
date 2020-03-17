@@ -9,7 +9,7 @@
 import Foundation
 
 struct TicketMaster: Codable {
-    let embedded: EventsResults
+    let embedded: EventsResults?
     
     enum CodingKeys: String, CodingKey {
         case embedded = "_embedded"
@@ -27,7 +27,7 @@ struct Events: Codable {
     let dates: EventDates
     let promoter: Promoter
     //let info: String
-    let pleaseNote: String
+    let pleaseNote: String?
     let priceRanges: [PriceRanges]
     //let venueInfo: [Venues] //coding key required
     

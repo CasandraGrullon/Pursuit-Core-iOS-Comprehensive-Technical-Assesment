@@ -36,11 +36,26 @@ class SearchEventsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getEvents(city: "new york", postCode: "10010")
+        //getEvents(city: "new york", postCode: "10010")
         configureNavBar()
         configureSearchButton()
         configureTableView()
 
+    }
+    private func getEvents(city: String, postCode: String) {
+        TicketMasterAPI.getEvents(city: city, postalCode: postCode) { [weak self] (result) in
+            switch result {
+            case .failure(let eventsError):
+                print(eventsError)
+            case .success(let events):
+                if let noNil = events.embedded {
+                    DispatchQueue.main.async {
+                        self?.events = noNil.events
+                    }
+
+                }
+            }
+        }
     }
     private func configureTableView() {
         searchTableView.tableView.dataSource = self
@@ -68,19 +83,9 @@ class SearchEventsController: UIViewController {
             view = searchTableView
         }
     }
-    private func getEvents(city: String, postCode: String) {
-        TicketMasterAPI.getEvents(city: city, postalCode: postCode) { [weak self] (result) in
-            switch result {
-            case .failure(let eventsError):
-                print(eventsError)
-            case .success(let events):
-                self?.events = events.embedded.events
-            }
-        }
-    }
     @objc private func searchButtonPressed(_ sender: UIButton) {
         //if user api is ticket master
-        if userAPIChoice == .ticketMaster {
+        //if userAPIChoice == .ticketMaster {
             guard let city = searchTableView.searchBarOne.text, !city.isEmpty,
                 let zipcode = searchTableView.searchBarTwo.text, !zipcode.isEmpty else {
                     //add warning to fill all fields
@@ -90,15 +95,15 @@ class SearchEventsController: UIViewController {
             getEvents(city: city, postCode: zipcode)
             searchTableView.searchBarOne.resignFirstResponder()
             searchTableView.searchBarTwo.resignFirstResponder()
-        } else {
-            searchTableView.searchBarTwo.isHidden = true
-            guard let artSearch = searchTableView.searchBarOne.text, !artSearch.isEmpty else {
-                print("missing fields")
-                return
-            }
-            //api call
-            searchTableView.searchBarOne.resignFirstResponder()
-        }
+        //} else {
+//            searchTableView.searchBarTwo.isHidden = true
+//            guard let artSearch = searchTableView.searchBarOne.text, !artSearch.isEmpty else {
+//                print("missing fields")
+//                return
+//            }
+//            //api call
+//            searchTableView.searchBarOne.resignFirstResponder()
+//        }
     }
     
     
