@@ -17,10 +17,12 @@ class SearchTableView: UIView {
     
     public lazy var searchBarOne: UISearchBar = {
        let searchbar = UISearchBar()
+        searchbar.barTintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         return searchbar
     }()
     public lazy var searchBarTwo: UISearchBar = {
         let searchbar = UISearchBar()
+        searchbar.barTintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         return searchbar
     }()
     public lazy var searchStack: UIStackView = {
@@ -78,7 +80,8 @@ class SearchTableView: UIView {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: searchStack.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

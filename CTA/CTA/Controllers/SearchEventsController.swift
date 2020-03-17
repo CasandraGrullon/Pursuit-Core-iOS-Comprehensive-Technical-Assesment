@@ -36,10 +36,16 @@ class SearchEventsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getEvents(city: "new york", postCode: "10010")
         configureNavBar()
+        configureSearchButton()
+        configureTableView()
 
     }
-    
+    private func configureTableView() {
+        searchTableView.tableView.dataSource = self
+        searchTableView.tableView.register(UINib(nibName: "SearchCell", bundle: nil), forCellReuseIdentifier: "searchCell")
+    }
     private func configureNavBar() {
         if userAPIChoice == .ticketMaster {
             navigationItem.title = "Ticket Master Events"
@@ -61,13 +67,13 @@ class SearchEventsController: UIViewController {
             view = searchTableView
         }
     }
-    private func getEvents(city: String, keyword: String) {
-        TicketMasterAPI.getEvents(city: city, search: keyword) { [weak self] (result) in
+    private func getEvents(city: String, postCode: String) {
+        TicketMasterAPI.getEvents(city: city, postalCode: postCode) { [weak self] (result) in
             switch result {
             case .failure(let eventsError):
                 print(eventsError)
             case .success(let events):
-                self?.events = events
+                self?.events = events.embedded.events
             }
         }
     }
@@ -80,7 +86,7 @@ class SearchEventsController: UIViewController {
                     print("missing fields")
                     return
             }
-            getEvents(city: city, keyword: keyword)
+            getEvents(city: city, postCode: keyword)
             searchTableView.searchBarOne.resignFirstResponder()
             searchTableView.searchBarTwo.resignFirstResponder()
         } else {
@@ -96,14 +102,22 @@ class SearchEventsController: UIViewController {
     
     
 }
-//extension SearchEventsController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return events.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        //need cell
-//    }
-//
-//
-//}
+extension SearchEventsController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return events.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = searchTableView.tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchCell else {
+            fatalError("could not cast to search cell")
+        }
+        let event = events[indexPath.row]
+        cell.configureCell(event: event)
+        return cell
+    }
+}
+extension SearchEventsController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+}
