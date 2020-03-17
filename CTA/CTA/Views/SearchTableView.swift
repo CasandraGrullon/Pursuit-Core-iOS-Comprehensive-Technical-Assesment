@@ -15,19 +15,21 @@ class SearchTableView: UIView {
         return table
     }()
     
-    public lazy var searchBarOne: UISearchBar = {
-       let searchbar = UISearchBar()
-        searchbar.barTintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+    public lazy var searchBarOne: UITextField = {
+       let searchbar = UITextField()
+        searchbar.borderStyle = .line
+        searchbar.placeholder = "search by city"
         return searchbar
     }()
-    public lazy var searchBarTwo: UISearchBar = {
-        let searchbar = UISearchBar()
-        searchbar.barTintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+    public lazy var searchBarTwo: UITextField = {
+        let searchbar = UITextField()
+        searchbar.borderStyle = .line
+        searchbar.placeholder = "search by zipcode"
         return searchbar
     }()
     public lazy var searchStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [searchBarOne, searchBarTwo])
-        stack.alignment = .center
+        stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -59,16 +61,18 @@ class SearchTableView: UIView {
         addSubview(searchStack)
         searchStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            searchStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            searchStack.trailingAnchor.constraint(equalTo: trailingAnchor)
+            searchStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            searchStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
+            searchStack.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     private func searchButtonConstraints() {
         addSubview(searchButton)
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchButton.topAnchor.constraint(equalTo: searchStack.bottomAnchor),
+            searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            searchButton.leadingAnchor.constraint(equalTo: searchStack.trailingAnchor, constant: 8),
             searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             searchButton.widthAnchor.constraint(equalToConstant: 44),
             searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor)
@@ -78,7 +82,7 @@ class SearchTableView: UIView {
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: searchStack.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: searchStack.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)

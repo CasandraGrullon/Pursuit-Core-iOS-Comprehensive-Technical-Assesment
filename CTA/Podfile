@@ -14,7 +14,7 @@ target 'CTA' do
   
   pod 'Firebase/Storage'
 
-  pod 'Firebase/Analytics'
+  #pod 'Firebase/Analytics'
   
   pod 'Kingfisher'
 

@@ -44,6 +44,7 @@ class SearchEventsController: UIViewController {
     }
     private func configureTableView() {
         searchTableView.tableView.dataSource = self
+        searchTableView.tableView.delegate = self
         searchTableView.tableView.register(UINib(nibName: "SearchCell", bundle: nil), forCellReuseIdentifier: "searchCell")
     }
     private func configureNavBar() {
@@ -80,18 +81,18 @@ class SearchEventsController: UIViewController {
     @objc private func searchButtonPressed(_ sender: UIButton) {
         //if user api is ticket master
         if userAPIChoice == .ticketMaster {
-            guard let keyword = searchTableView.searchBarOne.searchTextField.text, !keyword.isEmpty,
-                let city = searchTableView.searchBarTwo.searchTextField.text, !city.isEmpty else {
+            guard let city = searchTableView.searchBarOne.text, !city.isEmpty,
+                let zipcode = searchTableView.searchBarTwo.text, !zipcode.isEmpty else {
                     //add warning to fill all fields
                     print("missing fields")
                     return
             }
-            getEvents(city: city, postCode: keyword)
+            getEvents(city: city, postCode: zipcode)
             searchTableView.searchBarOne.resignFirstResponder()
             searchTableView.searchBarTwo.resignFirstResponder()
         } else {
             searchTableView.searchBarTwo.isHidden = true
-            guard let artSearch = searchTableView.searchBarOne.searchTextField.text, !artSearch.isEmpty else {
+            guard let artSearch = searchTableView.searchBarOne.text, !artSearch.isEmpty else {
                 print("missing fields")
                 return
             }
