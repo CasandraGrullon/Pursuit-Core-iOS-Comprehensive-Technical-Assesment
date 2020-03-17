@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--Search Events Controller-->
         <scene sceneID="SLG-LJ-M71">
             <objects>
                 <viewController storyboardIdentifier="SearchEventsController" id="xk5-zR-vDW" customClass="SearchEventsController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,11 +18,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="x7L-cR-HfE"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="Sv8-Bh-pRX"/>
+                    <navigationItem key="navigationItem" id="V4Z-1g-nyk"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3D-qz-3wR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="-656"/>
+            <point key="canvasLocation" x="1328.985507246377" y="-656.25"/>
         </scene>
         <!--Profile Controller-->
         <scene sceneID="Ufm-9Z-LYm">
@@ -274,7 +274,7 @@
                         <color key="selectedImageTintColor" red="1" green="0.73136638078907157" blue="0.11361094560844143" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <segue destination="xk5-zR-vDW" kind="relationship" relationship="viewControllers" id="7vb-Nd-P3k"/>
+                        <segue destination="SG0-3M-tCG" kind="relationship" relationship="viewControllers" id="7vb-Nd-P3k"/>
                         <segue destination="ukW-2D-dqd" kind="relationship" relationship="viewControllers" id="z41-0Y-8qM"/>
                         <segue destination="Nm3-mZ-Iqx" kind="relationship" relationship="viewControllers" id="9Qw-c1-8cX"/>
                     </connections>
@@ -319,6 +319,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xzk-6a-Gzy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2030.4347826086957" y="697.76785714285711"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="grp-6t-Zqg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SG0-3M-tCG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="Sv8-Bh-pRX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SAN-wB-d33">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xk5-zR-vDW" kind="relationship" relationship="rootViewController" id="2Qn-GH-gw4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZC-tV-Y3M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="418.84057971014494" y="-656.25"/>
         </scene>
     </scenes>
     <resources>

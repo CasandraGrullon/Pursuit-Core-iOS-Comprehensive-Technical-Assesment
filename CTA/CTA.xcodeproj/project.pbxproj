@@ -30,6 +30,7 @@
 		C63A2AD324201038000342A0 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2AD224201038000342A0 /* AppUser.swift */; };
 		C6520F7B24202DA8005FA886 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6520F7A24202DA8005FA886 /* FavoritesController.swift */; };
 		C6520F7D24202DB8005FA886 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6520F7C24202DB8005FA886 /* ProfileController.swift */; };
+		C66C2FCE242123AF00D2A4CB /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		C63A2AD224201038000342A0 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C6520F7A24202DA8005FA886 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		C6520F7C24202DB8005FA886 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */,
+				C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */,
 				C61AF469241FD8B20051D0F6 /* Events.swift in Sources */,
 				C63A2AC0241FF105000342A0 /* SearchEventsController.swift in Sources */,
+				C66C2FCE242123AF00D2A4CB /* SearchTableView.swift in Sources */,
 				C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */,
 				C63A2AD1241FFB28000342A0 /* MainAppTabBar.swift in Sources */,
 				C63A2AD324201038000342A0 /* AppUser.swift in Sources */,

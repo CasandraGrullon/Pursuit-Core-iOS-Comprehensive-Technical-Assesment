@@ -10,9 +10,10 @@ import Foundation
 import NetworkHelper
 
 class TicketMasterAPI {
-    static func getEvents(postalCode: String, search: String, completion: @escaping (Result<[Events], AppError>) -> () ) {
+    static func getEvents(city: String, search: String, completion: @escaping (Result<[Events], AppError>) -> () ) {
         let searchQuery = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        let endpointURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=iYY6FrsDrhmcnXiLE9EvGCN9fA5mW775&postalCode=\(postalCode)&keyword=\(searchQuery)"
+        let citySearch = city.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        let endpointURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=iYY6FrsDrhmcnXiLE9EvGCN9fA5mW775&keyword=\(searchQuery)&city=\(citySearch)"
         guard let url = URL(string: endpointURL) else {
             completion(.failure(.badURL(endpointURL)))
             return
