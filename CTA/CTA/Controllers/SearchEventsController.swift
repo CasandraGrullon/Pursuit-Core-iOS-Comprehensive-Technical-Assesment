@@ -121,6 +121,14 @@ extension SearchEventsController: UITableViewDataSource {
         cell.configureCell(event: event)
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let event = events[indexPath.row]
+        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
+        let eventDetailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
+            return DetailController(coder: coder, event: event)
+        }
+        navigationController?.pushViewController(eventDetailVC, animated: true)
+    }
 }
 extension SearchEventsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
