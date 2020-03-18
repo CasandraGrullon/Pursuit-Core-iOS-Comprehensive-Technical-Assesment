@@ -70,17 +70,26 @@
                     <navigationItem key="navigationItem" id="guV-EM-NwR">
                         <barButtonItem key="rightBarButtonItem" title="Edit" image="line.horizontal.3" catalog="system" id="47I-4N-mlS">
                             <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="editProfileButtonPressed:" destination="nRk-tx-z6I" id="HkP-zY-uuj"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="appExperienceLabel" destination="DkG-xB-Hi2" id="sIb-Xj-Tzv"/>
+                        <outlet property="userDisplayNameLabel" destination="fYN-PO-yUt" id="OMf-IA-obw"/>
+                        <outlet property="userEmailLabel" destination="Drc-cd-43J" id="dn4-SY-6Q3"/>
+                        <outlet property="userProfileImage" destination="0do-Rf-bau" id="Mzv-tR-Jzg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6e-mC-bev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1357.9710144927537" y="697.76785714285711"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Controller-->
         <scene sceneID="GzV-by-03J">
             <objects>
-                <viewController id="O2K-RL-vWx" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditController" id="O2K-RL-vWx" customClass="EditController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I4K-61-9H8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,39 +121,38 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bFn-4V-vb0">
-                                <rect key="frame" x="102" y="451" width="210" height="95"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvf-0J-LXI">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
-                                        <color key="backgroundColor" red="0.32975227140000002" green="0.56936072339999999" blue="0.48185270749999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Gvf-0J-LXI" secondAttribute="height" multiplier="1:1" id="gD8-Ds-Xb2"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Rijks Museum"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niT-0M-5bF">
-                                        <rect key="frame" x="115" y="0.0" width="95" height="95"/>
-                                        <color key="backgroundColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="niT-0M-5bF" secondAttribute="height" multiplier="1:1" id="HC5-iF-UR8"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Ticket Master"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="update username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJb-6P-hJZ">
                                 <rect key="frame" x="20" y="356.5" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Yl-R7-zH5">
+                                <rect key="frame" x="20" y="451" width="374" height="269"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="60v-zT-8T4">
+                                    <size key="itemSize" width="299" height="234"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vkO-xP-6zP">
+                                        <rect key="frame" x="37.5" y="0.0" width="299" height="234"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Wec-4q-btu">
+                                            <rect key="frame" x="0.0" y="0.0" width="299" height="234"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="299" height="234"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="mJb-6P-hJZ" firstAttribute="top" secondItem="Ort-j0-AQ1" secondAttribute="bottom" constant="8" id="4JS-dS-oHA"/>
-                            <constraint firstItem="bFn-4V-vb0" firstAttribute="top" secondItem="vYq-pk-qbQ" secondAttribute="bottom" constant="20" id="FeN-Vq-gqQ"/>
+                            <constraint firstItem="diU-Xt-WDM" firstAttribute="trailing" secondItem="2Yl-R7-zH5" secondAttribute="trailing" constant="20" id="8lx-ju-vNr"/>
+                            <constraint firstItem="2Yl-R7-zH5" firstAttribute="leading" secondItem="diU-Xt-WDM" secondAttribute="leading" constant="20" id="Fgj-d2-v11"/>
                             <constraint firstItem="Ort-j0-AQ1" firstAttribute="top" secondItem="8gC-tp-8tY" secondAttribute="bottom" constant="20" id="GsS-E6-22O"/>
                             <constraint firstItem="diU-Xt-WDM" firstAttribute="trailing" secondItem="mJb-6P-hJZ" secondAttribute="trailing" constant="20" id="MLt-Ac-OLI"/>
                             <constraint firstItem="TQT-hs-lbP" firstAttribute="leading" secondItem="8gC-tp-8tY" secondAttribute="trailing" constant="8" id="MSD-eV-9WI"/>
@@ -153,7 +161,8 @@
                             <constraint firstItem="diU-Xt-WDM" firstAttribute="trailing" secondItem="Ort-j0-AQ1" secondAttribute="trailing" constant="20" id="YWk-f2-gXb"/>
                             <constraint firstItem="vYq-pk-qbQ" firstAttribute="top" secondItem="mJb-6P-hJZ" secondAttribute="bottom" constant="20" id="ZSE-m2-Nds"/>
                             <constraint firstItem="diU-Xt-WDM" firstAttribute="trailing" secondItem="vYq-pk-qbQ" secondAttribute="trailing" constant="20" id="aRl-8U-1bS"/>
-                            <constraint firstItem="bFn-4V-vb0" firstAttribute="centerX" secondItem="vYq-pk-qbQ" secondAttribute="centerX" id="bcK-eD-YvA"/>
+                            <constraint firstItem="2Yl-R7-zH5" firstAttribute="height" secondItem="I4K-61-9H8" secondAttribute="height" multiplier="0.3" id="azB-7g-bpc"/>
+                            <constraint firstItem="2Yl-R7-zH5" firstAttribute="top" secondItem="vYq-pk-qbQ" secondAttribute="bottom" constant="20" id="dF8-Jv-QGc"/>
                             <constraint firstItem="8gC-tp-8tY" firstAttribute="centerX" secondItem="I4K-61-9H8" secondAttribute="centerX" id="fHZ-an-fJ8"/>
                             <constraint firstItem="TQT-hs-lbP" firstAttribute="centerY" secondItem="8gC-tp-8tY" secondAttribute="centerY" id="lJ9-xB-JkP"/>
                             <constraint firstItem="Ort-j0-AQ1" firstAttribute="leading" secondItem="diU-Xt-WDM" secondAttribute="leading" constant="20" id="p7g-Dh-PA5"/>
@@ -162,13 +171,26 @@
                         <viewLayoutGuide key="safeArea" id="diU-Xt-WDM"/>
                     </view>
                     <navigationItem key="navigationItem" id="0Uu-4E-olM">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="xmark" catalog="system" id="u0L-WZ-czV"/>
-                        <barButtonItem key="rightBarButtonItem" image="checkmark" catalog="system" id="Lhx-r4-gto"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="xmark" catalog="system" id="u0L-WZ-czV">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="O2K-RL-vWx" id="2af-zQ-r5s"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="checkmark" catalog="system" id="Lhx-r4-gto">
+                            <connections>
+                                <action selector="doneEditingButtonPressed:" destination="O2K-RL-vWx" id="acO-zJ-qkU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editProfileButton" destination="TQT-hs-lbP" id="7ia-dr-QRp"/>
+                        <outlet property="profilePicture" destination="8gC-tp-8tY" id="tkE-rg-7jh"/>
+                        <outlet property="usernameTextfield" destination="mJb-6P-hJZ" id="tKh-Zr-fDh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l0-j7-Kvy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2710" y="698"/>
+            <point key="canvasLocation" x="2708.6956521739135" y="697.76785714285711"/>
         </scene>
         <!--Item-->
         <scene sceneID="sSL-lH-a7f">

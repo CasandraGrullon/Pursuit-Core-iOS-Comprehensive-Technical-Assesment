@@ -31,8 +31,16 @@ class DetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
         updateUI()
 
+    }
+    private func configureNavBar() {
+        navigationItem.title = event.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonPressed(_:)))
+    }
+    @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
+        
     }
     private func updateUI() {
         guard let eventImage = event.images.first?.url else {

@@ -22,19 +22,19 @@ class LoginController: UIViewController {
     @IBOutlet weak var signUpHereButton: UIButton!
     @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var chooseAppExperience: UILabel!
-    @IBOutlet weak var apiButtonStack: UIStackView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
     
-    private var selectedAPI: String?
+    private var selectedAPI = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextfield.delegate = self
         emailTextfield.delegate = self
         chooseAppExperience.text = ""
-        apiButtonStack.isHidden = true
+        collectionView.isHidden = true
     }
     
     @IBAction func logInButtonPressed(_ sender: UIButton) {
@@ -51,7 +51,7 @@ class LoginController: UIViewController {
             promptLabel.text = "Already have account?"
             signUpHereButton.setTitle("LOGIN HERE", for: .normal)
             chooseAppExperience.text = "Choose App Experience"
-            apiButtonStack.isHidden = false
+            collectionView.isHidden = false
             logInButton.isEnabled = false
             logInButton.backgroundColor = .gray
         } else {
@@ -59,7 +59,7 @@ class LoginController: UIViewController {
             promptLabel.text = "Don't have an acount?"
             signUpHereButton.setTitle("SIGN UP HERE", for: .normal)
             chooseAppExperience.text = ""
-            apiButtonStack.isHidden = true
+            collectionView.isHidden = true
         }
         
     }
@@ -91,10 +91,7 @@ class LoginController: UIViewController {
     }
     
     private func createUser(authDataResult: AuthDataResult) {
-        guard let api = selectedAPI else {
-            return
-        }
-        DatabaseService.shared.createUser(authDataResult: authDataResult, apiChoice: api) { [weak self] (result) in
+        DatabaseService.shared.createUser(authDataResult: authDataResult) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 print(error)
@@ -109,19 +106,8 @@ class LoginController: UIViewController {
     private func navigateToMainApp() {
         UIViewController.showViewController(storyboardName: "MainApp", viewcontrollerID: "MainAppTabBar")
     }
-    
-    @IBAction func museumButtonPressed(_ sender: UIButton) {
-        selectedAPI = "Rijks Museum"
-        logInButton.isEnabled = true
-        logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
-    }
-    
-    @IBAction func ticketButtonPressed(_ sender: UIButton) {
-        selectedAPI = "Ticket Master"
-        logInButton.isEnabled = true
-        logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
-    }
 }
+    
 extension LoginController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

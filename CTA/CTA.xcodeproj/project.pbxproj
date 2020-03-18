@@ -35,6 +35,9 @@
 		C66C2FD32421387D00D2A4CB /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66C2FD22421387D00D2A4CB /* SearchCell.xib */; };
 		C68BAE7E2421895B003E7680 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAE7D2421895B003E7680 /* EventDetailView.swift */; };
 		C68BAE802421BF34003E7680 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAE7F2421BF34003E7680 /* DetailController.swift */; };
+		C68BAEB224228105003E7680 /* EditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAEB124228105003E7680 /* EditController.swift */; };
+		C68BAEB424228775003E7680 /* APICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAEB324228775003E7680 /* APICell.swift */; };
+		C68BAEB62422877F003E7680 /* APICell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BAEB52422877F003E7680 /* APICell.xib */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +73,9 @@
 		C66C2FD22421387D00D2A4CB /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
 		C68BAE7D2421895B003E7680 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		C68BAE7F2421BF34003E7680 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		C68BAEB124228105003E7680 /* EditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditController.swift; sourceTree = "<group>"; };
+		C68BAEB324228775003E7680 /* APICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICell.swift; sourceTree = "<group>"; };
+		C68BAEB52422877F003E7680 /* APICell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = APICell.xib; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +196,7 @@
 				C68BAE7F2421BF34003E7680 /* DetailController.swift */,
 				C6520F7A24202DA8005FA886 /* FavoritesController.swift */,
 				C6520F7C24202DB8005FA886 /* ProfileController.swift */,
+				C68BAEB124228105003E7680 /* EditController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -216,6 +223,8 @@
 			children = (
 				C66C2FD02421386B00D2A4CB /* SearchCell.swift */,
 				C66C2FD22421387D00D2A4CB /* SearchCell.xib */,
+				C68BAEB324228775003E7680 /* APICell.swift */,
+				C68BAEB52422877F003E7680 /* APICell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 				C66C2FD32421387D00D2A4CB /* SearchCell.xib in Resources */,
 				C61AF46B241FDA0B0051D0F6 /* GoogleService-Info.plist in Resources */,
 				C61AF45E241FD89C0051D0F6 /* Assets.xcassets in Resources */,
+				C68BAEB62422877F003E7680 /* APICell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C68BAEB424228775003E7680 /* APICell.swift in Sources */,
 				C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */,
 				C68BAE802421BF34003E7680 /* DetailController.swift in Sources */,
 				C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */,
@@ -359,6 +370,7 @@
 				C61AF457241FD8990051D0F6 /* SceneDelegate.swift in Sources */,
 				C61AF46E241FDD230051D0F6 /* Collection.swift in Sources */,
 				C6520F7B24202DA8005FA886 /* FavoritesController.swift in Sources */,
+				C68BAEB224228105003E7680 /* EditController.swift in Sources */,
 				C63A2ACC241FF78A000342A0 /* DatabaseSession.swift in Sources */,
 				C63A2ACA241FF551000342A0 /* AuthenticationSession.swift in Sources */,
 				C68BAE7E2421895B003E7680 /* EventDetailView.swift in Sources */,

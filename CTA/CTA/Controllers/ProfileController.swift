@@ -10,21 +10,19 @@ import UIKit
 
 class ProfileController: UITabBarController {
 
+    @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var userDisplayNameLabel: UILabel!
+    @IBOutlet weak var userEmailLabel: UILabel!
+    @IBOutlet weak var appExperienceLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func editProfileButtonPressed(_ sender: UIBarButtonItem) {
+        
+        //let editProfileVC = 
+        
     }
-    */
-
 }
