@@ -39,6 +39,7 @@ class EventDetailView: UIView {
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
+        stack.backgroundColor = .white
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -57,6 +58,7 @@ class EventDetailView: UIView {
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
+        stack.backgroundColor = .white
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -91,7 +93,7 @@ class EventDetailView: UIView {
     }()
     public lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = .white
         return view
     }()
     
@@ -143,10 +145,10 @@ class EventDetailView: UIView {
         eventImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            eventImage.topAnchor.constraint(equalTo: topAnchor),
+            eventImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             eventImage.trailingAnchor.constraint(equalTo: trailingAnchor),
             eventImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            eventImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4)
+            eventImage.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     private func eventInfoConstraints() {
@@ -157,7 +159,7 @@ class EventDetailView: UIView {
             eventInfoStack.topAnchor.constraint(equalTo: eventImage.bottomAnchor, constant: 8),
             eventInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor),
             eventInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            eventInfoStack.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3)
+            eventInfoStack.heightAnchor.constraint(equalTo: eventImage.heightAnchor)
         ])
     }
     private func eventDetailsConstraints() {
@@ -168,7 +170,7 @@ class EventDetailView: UIView {
             eventDetailsStack.topAnchor.constraint(equalTo: eventInfoStack.bottomAnchor, constant: 8),
             eventDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor),
             eventDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            eventDetailsStack.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3)
+            eventDetailsStack.heightAnchor.constraint(equalTo: eventInfoStack.heightAnchor)
         ])
     }
     private func venueImageConstraints() {
@@ -178,7 +180,7 @@ class EventDetailView: UIView {
             venueImage.topAnchor.constraint(equalTo: eventDetailsStack.bottomAnchor, constant: 10),
             venueImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             venueImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            venueImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3)
+            venueImage.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     private func venueInfoConstraints() {
@@ -188,7 +190,7 @@ class EventDetailView: UIView {
             venueInfoStack.centerXAnchor.constraint(equalTo: venueImage.centerXAnchor),
             venueInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor),
             venueInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            venueInfoStack.heightAnchor.constraint(equalTo: venueImage.heightAnchor, multiplier: 0.3)
+            venueInfoStack.heightAnchor.constraint(equalTo: venueImage.heightAnchor)
         ])
     }
 }
