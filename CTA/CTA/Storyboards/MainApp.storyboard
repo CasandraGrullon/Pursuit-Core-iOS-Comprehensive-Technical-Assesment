@@ -339,6 +339,21 @@
             </objects>
             <point key="canvasLocation" x="1147" y="-648"/>
         </scene>
+        <!--Detail Controller-->
+        <scene sceneID="L6I-de-WDO">
+            <objects>
+                <viewController storyboardIdentifier="DetailController" id="mgf-Mo-bh2" customClass="DetailController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YIz-AQ-7Ud">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gWI-ng-9RF"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Qn-8I-2lL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902" y="-648"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkmark" catalog="system" width="64" height="56"/>

@@ -29,7 +29,7 @@ struct Events: Codable {
     //let info: String
     let pleaseNote: String?
     let priceRanges: [PriceRanges]
-    //let venueInfo: [Venues] //coding key required
+    let venueInfo: VenueInfo //coding key required
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -42,7 +42,7 @@ struct Events: Codable {
         //case info
         case pleaseNote
         case priceRanges
-        //case venueInfo = "_embedded"
+        case venueInfo = "_embedded"
     }
 }
 struct EventImages: Codable {
@@ -65,41 +65,44 @@ struct PriceRanges: Codable {
     let min: Double
     let max: Double
 }
-//struct Venues: Codable {
-//    let name: String
-//    let type: String
-//    let id: String
-//    let url: String
-//    let images: [VenueImages]
-//    let postalCode: String
-//    let city: City
-//    let state: State
-//    let country: Country
-//    let address: Address
-//    let location: Location
-//}
-//struct VenueImages: Codable {
-//    let ratio: String
-//    let url: String
-//}
-//struct City: Codable {
-//    let name: String
-//}
-//struct State: Codable {
-//    let name: String
-//    let stateCode: String
-//}
-//struct Country: Codable {
-//    let name: String
-//    let countryCode: String
-//}
-//struct Address: Codable {
-//    let line1: String
-//}
-//struct Location: Codable {
-//    let longitude: String
-//    let latitude: String
-//}
+struct VenueInfo: Codable {
+    let venues: [Venues]
+}
+struct Venues: Codable {
+    let name: String
+    let type: String
+    let id: String
+    let url: String
+    let images: [VenueImages]
+    let postalCode: String
+    let city: City
+    let state: State
+    let country: Country
+    let address: Address
+    let location: Location
+}
+struct VenueImages: Codable {
+    let ratio: String
+    let url: String
+}
+struct City: Codable {
+    let name: String
+}
+struct State: Codable {
+    let name: String
+    let stateCode: String
+}
+struct Country: Codable {
+    let name: String
+    let countryCode: String
+}
+struct Address: Codable {
+    let line1: String
+}
+struct Location: Codable {
+    let longitude: String
+    let latitude: String
+}
 extension String {
     var isInt: Bool {
         return Int(self) != nil

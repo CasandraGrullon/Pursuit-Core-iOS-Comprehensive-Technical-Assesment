@@ -33,6 +33,8 @@
 		C66C2FCE242123AF00D2A4CB /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */; };
 		C66C2FD12421386B00D2A4CB /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66C2FD02421386B00D2A4CB /* SearchCell.swift */; };
 		C66C2FD32421387D00D2A4CB /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66C2FD22421387D00D2A4CB /* SearchCell.xib */; };
+		C68BAE7E2421895B003E7680 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAE7D2421895B003E7680 /* EventDetailView.swift */; };
+		C68BAE802421BF34003E7680 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAE7F2421BF34003E7680 /* DetailController.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		C66C2FD02421386B00D2A4CB /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		C66C2FD22421387D00D2A4CB /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
+		C68BAE7D2421895B003E7680 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		C68BAE7F2421BF34003E7680 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +176,7 @@
 			children = (
 				C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */,
 				C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */,
+				C68BAE7D2421895B003E7680 /* EventDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				C63A2AC1241FF27B000342A0 /* LoginController.swift */,
 				C63A2AD0241FFB28000342A0 /* MainAppTabBar.swift */,
 				C63A2ABF241FF105000342A0 /* SearchEventsController.swift */,
+				C68BAE7F2421BF34003E7680 /* DetailController.swift */,
 				C6520F7A24202DA8005FA886 /* FavoritesController.swift */,
 				C6520F7C24202DB8005FA886 /* ProfileController.swift */,
 			);
@@ -339,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */,
+				C68BAE802421BF34003E7680 /* DetailController.swift in Sources */,
 				C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */,
 				C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */,
 				C61AF469241FD8B20051D0F6 /* Events.swift in Sources */,
@@ -354,6 +361,7 @@
 				C6520F7B24202DA8005FA886 /* FavoritesController.swift in Sources */,
 				C63A2ACC241FF78A000342A0 /* DatabaseSession.swift in Sources */,
 				C63A2ACA241FF551000342A0 /* AuthenticationSession.swift in Sources */,
+				C68BAE7E2421895B003E7680 /* EventDetailView.swift in Sources */,
 				C63A2ACF241FFAD1000342A0 /* UIViewControllerExtension.swift in Sources */,
 				C63A2AC2241FF27B000342A0 /* LoginController.swift in Sources */,
 				C6520F7D24202DB8005FA886 /* ProfileController.swift in Sources */,
