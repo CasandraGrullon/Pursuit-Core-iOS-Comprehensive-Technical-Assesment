@@ -15,6 +15,7 @@ class DetailController: UIViewController {
     
     override func loadView() {
         view = eventsDetailView
+        eventsDetailView.backgroundColor = .white
     }
     
     public var event: Events
@@ -46,12 +47,12 @@ class DetailController: UIViewController {
         eventsDetailView.eventImage.kf.setImage(with: URL(string: eventImage))
         eventsDetailView.eventNameLabel.text = event.name
         eventsDetailView.eventDateLabel.text = "\(event.dates.start.localDate) at \(event.dates.start.localTime)"
-        eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10) - $\(event.priceRanges.first?.max ?? 20 )"
-        eventsDetailView.promoterLabel.text = "Sponsored by" + event.promoter.name
-        eventsDetailView.pleaseNoteLabel.text = "Details: \(event.pleaseNote ?? "")"
+        eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10) - $\(event.priceRanges.first?.max ?? 20 )" //format
+        eventsDetailView.promoterLabel.text = "Sponsored by: " + event.promoter.name
+        eventsDetailView.pleaseNoteLabel.text = "Details\n\(event.pleaseNote ?? "")"
         eventsDetailView.venueImage.kf.setImage(with: URL(string: venueImage))
         eventsDetailView.venueNameLabel.text = venue.name
-        eventsDetailView.venueAddress.text = "\(venue.address)\n\(venue.city),\(venue.country) \(venue.postalCode)"
+        eventsDetailView.venueAddress.text = "\(venue.address.line1)\n\(venue.city),\(venue.country) \(venue.postalCode)"
     }
 
 }

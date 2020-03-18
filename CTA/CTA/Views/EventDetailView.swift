@@ -17,21 +17,29 @@ class EventDetailView: UIView {
     public lazy var eventNameLabel: UILabel = {
         let label = UILabel()
         label.text = "event name"
+        label.font = UIFont(name: "Thonburi", size: 30)
+        label.textColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         return label
     }()
     public lazy var eventDateLabel: UILabel = {
         let label = UILabel()
         label.text = "event date/s"
+        label.font = UIFont(name: "Thonburi", size: 17)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
     public lazy var eventLinkLabel: UILabel = {
         let label = UILabel()
         label.text = "event link"
+        label.font = UIFont(name: "Thonburi", size: 17)
+        label.textColor = .systemBlue
         return label
     }()
     public lazy var eventPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "event price range"
+        label.font = UIFont(name: "Thonburi", size: 17)
+        label.textColor = .black
         return label
     }()
     public lazy var eventInfoStack: UIStackView = {
@@ -46,11 +54,16 @@ class EventDetailView: UIView {
     public lazy var promoterLabel: UILabel = {
         let label = UILabel()
         label.text = "event price range"
+        label.font = UIFont(name: "Thonburi", size: 17)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
     public lazy var pleaseNoteLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.text = "please note"
+        label.font = UIFont(name: "Avenir Book", size: 17)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
     public lazy var eventDetailsStack: UIStackView = {
@@ -65,6 +78,8 @@ class EventDetailView: UIView {
     public lazy var venueNameLabel: UILabel = {
         let label = UILabel()
         label.text = "venue name"
+        label.font = UIFont(name: "Avenir Heavy", size: 20)
+        label.textColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         return label
     }()
     public lazy var venueImage: UIImageView = {
@@ -74,6 +89,8 @@ class EventDetailView: UIView {
     public lazy var venueAddress: UILabel = {
         let label = UILabel()
         label.text = "venue addess"
+        label.font = UIFont(name: "Avenir Book", size: 17)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
     public lazy var venueInfoStack: UIStackView = {
@@ -157,9 +174,9 @@ class EventDetailView: UIView {
         
         NSLayoutConstraint.activate([
             eventInfoStack.topAnchor.constraint(equalTo: eventImage.bottomAnchor, constant: 8),
-            eventInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            eventInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            eventInfoStack.heightAnchor.constraint(equalTo: eventImage.heightAnchor)
+            eventInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            eventInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            eventInfoStack.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
     private func eventDetailsConstraints() {
@@ -168,9 +185,9 @@ class EventDetailView: UIView {
         
         NSLayoutConstraint.activate([
             eventDetailsStack.topAnchor.constraint(equalTo: eventInfoStack.bottomAnchor, constant: 8),
-            eventDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            eventDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            eventDetailsStack.heightAnchor.constraint(equalTo: eventInfoStack.heightAnchor)
+            eventDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            eventDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            eventDetailsStack.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     private func venueImageConstraints() {
@@ -179,18 +196,19 @@ class EventDetailView: UIView {
         NSLayoutConstraint.activate([
             venueImage.topAnchor.constraint(equalTo: eventDetailsStack.bottomAnchor, constant: 10),
             venueImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            venueImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            venueImage.widthAnchor.constraint(equalToConstant: 200)
+            venueImage.widthAnchor.constraint(equalToConstant: 200),
+            venueImage.heightAnchor.constraint(equalTo: venueImage.widthAnchor),
+            venueImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
     private func venueInfoConstraints() {
         contentView.addSubview(venueInfoStack)
         venueInfoStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            venueInfoStack.centerXAnchor.constraint(equalTo: venueImage.centerXAnchor),
-            venueInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            venueInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            venueInfoStack.heightAnchor.constraint(equalTo: venueImage.heightAnchor)
+            venueInfoStack.topAnchor.constraint(equalTo: eventDetailsStack.bottomAnchor, constant: 10),
+            venueInfoStack.leadingAnchor.constraint(equalTo: venueImage.trailingAnchor, constant: 10),
+            venueInfoStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            venueInfoStack.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }
