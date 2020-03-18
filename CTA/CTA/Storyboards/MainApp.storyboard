@@ -8,84 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile Controller-->
-        <scene sceneID="Ufm-9Z-LYm">
-            <objects>
-                <viewController storyboardIdentifier="ProfileController" id="nRk-tx-z6I" customClass="ProfileController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="P6U-Hw-paH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0do-Rf-bau">
-                                <rect key="frame" x="20" y="108" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="0do-Rf-bau" secondAttribute="height" multiplier="1:1" id="mr5-oU-cIf"/>
-                                    <constraint firstAttribute="width" constant="100" id="rPH-Oz-aK5"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drc-cd-43J">
-                                <rect key="frame" x="140" y="140.5" width="254" height="22.5"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected App Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgf-SF-KcP">
-                                <rect key="frame" x="20" y="228" width="374" height="22.5"/>
-                                <fontDescription key="fontDescription" name="Thonburi-Bold" family="Thonburi" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="app experience label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-xB-Hi2">
-                                <rect key="frame" x="20" y="260.5" width="374" height="23.5"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Display name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYN-PO-yUt">
-                                <rect key="frame" x="140" y="108" width="254" height="22.5"/>
-                                <fontDescription key="fontDescription" name="Thonburi-Bold" family="Thonburi" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="tgf-SF-KcP" firstAttribute="top" secondItem="0do-Rf-bau" secondAttribute="bottom" constant="20" id="0VN-d0-U5h"/>
-                            <constraint firstItem="tgf-SF-KcP" firstAttribute="leading" secondItem="RxZ-q5-1xP" secondAttribute="leading" constant="20" id="4tM-zC-Ymf"/>
-                            <constraint firstItem="0do-Rf-bau" firstAttribute="leading" secondItem="RxZ-q5-1xP" secondAttribute="leading" constant="20" id="DgA-UZ-oFk"/>
-                            <constraint firstItem="RxZ-q5-1xP" firstAttribute="trailing" secondItem="Drc-cd-43J" secondAttribute="trailing" constant="20" id="KgW-sE-vCb"/>
-                            <constraint firstItem="RxZ-q5-1xP" firstAttribute="trailing" secondItem="tgf-SF-KcP" secondAttribute="trailing" constant="20" id="Wuc-fL-Mrq"/>
-                            <constraint firstItem="DkG-xB-Hi2" firstAttribute="top" secondItem="tgf-SF-KcP" secondAttribute="bottom" constant="10" id="aqC-9O-rmh"/>
-                            <constraint firstItem="Drc-cd-43J" firstAttribute="leading" secondItem="0do-Rf-bau" secondAttribute="trailing" constant="20" id="bDK-0e-HKE"/>
-                            <constraint firstItem="fYN-PO-yUt" firstAttribute="top" secondItem="RxZ-q5-1xP" secondAttribute="top" constant="20" id="dXr-2F-lN5"/>
-                            <constraint firstItem="fYN-PO-yUt" firstAttribute="leading" secondItem="0do-Rf-bau" secondAttribute="trailing" constant="20" id="fZo-ku-5Xd"/>
-                            <constraint firstItem="RxZ-q5-1xP" firstAttribute="trailing" secondItem="fYN-PO-yUt" secondAttribute="trailing" constant="20" id="jaU-cW-klf"/>
-                            <constraint firstItem="DkG-xB-Hi2" firstAttribute="leading" secondItem="RxZ-q5-1xP" secondAttribute="leading" constant="20" id="mTj-Gx-c0c"/>
-                            <constraint firstItem="0do-Rf-bau" firstAttribute="top" secondItem="RxZ-q5-1xP" secondAttribute="top" constant="20" id="mZW-J0-r4m"/>
-                            <constraint firstItem="Drc-cd-43J" firstAttribute="top" secondItem="fYN-PO-yUt" secondAttribute="bottom" constant="10" id="qeI-6x-gJc"/>
-                            <constraint firstItem="RxZ-q5-1xP" firstAttribute="trailing" secondItem="DkG-xB-Hi2" secondAttribute="trailing" constant="20" id="rnT-xA-0KQ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="RxZ-q5-1xP"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="guV-EM-NwR">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" image="line.horizontal.3" catalog="system" id="47I-4N-mlS">
-                            <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="editProfileButtonPressed:" destination="nRk-tx-z6I" id="HkP-zY-uuj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="appExperienceLabel" destination="DkG-xB-Hi2" id="sIb-Xj-Tzv"/>
-                        <outlet property="userDisplayNameLabel" destination="fYN-PO-yUt" id="OMf-IA-obw"/>
-                        <outlet property="userEmailLabel" destination="Drc-cd-43J" id="dn4-SY-6Q3"/>
-                        <outlet property="userProfileImage" destination="0do-Rf-bau" id="Mzv-tR-Jzg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u6e-mC-bev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1357.9710144927537" y="697.76785714285711"/>
-        </scene>
         <!--Edit Controller-->
         <scene sceneID="GzV-by-03J">
             <objects>
@@ -107,7 +29,11 @@
                                     <constraint firstAttribute="width" constant="44" id="9bu-Xd-NRV"/>
                                     <constraint firstAttribute="height" constant="44" id="Snx-2J-Bpg"/>
                                 </constraints>
+                                <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" backgroundImage="plus.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="editPictureButtonPressed:" destination="O2K-RL-vWx" eventType="touchUpInside" id="KeD-1I-KYl"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update App Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYq-pk-qbQ">
                                 <rect key="frame" x="20" y="410.5" width="374" height="20.5"/>
@@ -183,14 +109,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editProfileButton" destination="TQT-hs-lbP" id="7ia-dr-QRp"/>
+                        <outlet property="collectionView" destination="2Yl-R7-zH5" id="B7D-L2-0ub"/>
+                        <outlet property="editProfileButton" destination="TQT-hs-lbP" id="jgw-pD-n6l"/>
                         <outlet property="profilePicture" destination="8gC-tp-8tY" id="tkE-rg-7jh"/>
                         <outlet property="usernameTextfield" destination="mJb-6P-hJZ" id="tKh-Zr-fDh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l0-j7-Kvy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2708.6956521739135" y="697.76785714285711"/>
+            <point key="canvasLocation" x="1877" y="682"/>
         </scene>
         <!--Item-->
         <scene sceneID="sSL-lH-a7f">
@@ -284,31 +211,12 @@
                     <connections>
                         <segue destination="SG0-3M-tCG" kind="relationship" relationship="viewControllers" id="7vb-Nd-P3k"/>
                         <segue destination="ukW-2D-dqd" kind="relationship" relationship="viewControllers" id="z41-0Y-8qM"/>
-                        <segue destination="Nm3-mZ-Iqx" kind="relationship" relationship="viewControllers" id="9Qw-c1-8cX"/>
+                        <segue destination="9hO-bh-PAp" kind="relationship" relationship="viewControllers" id="t6o-Gw-MuO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91U-dU-yxD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-310.14492753623193" y="-113.16964285714285"/>
-        </scene>
-        <!--Profile-->
-        <scene sceneID="7lW-rZ-clp">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nm3-mZ-Iqx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" selectedImage="person.circle.fill" id="hqX-5j-Pfe"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iMI-Dl-Lwf">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="nRk-tx-z6I" kind="relationship" relationship="rootViewController" id="2YN-9W-sVk"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UZk-Fd-Ep8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="447.82608695652175" y="697.76785714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MUJ-Dr-9Az">
@@ -318,6 +226,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ebg-AU-QGw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -326,7 +235,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xzk-6a-Gzy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2030.4347826086957" y="697.76785714285711"/>
+            <point key="canvasLocation" x="1235" y="682"/>
         </scene>
         <!--Search-->
         <scene sceneID="grp-6t-Zqg">
@@ -379,9 +288,132 @@
             </objects>
             <point key="canvasLocation" x="1902" y="-648"/>
         </scene>
+        <!--Profile Controller-->
+        <scene sceneID="Qes-Wx-HoB">
+            <objects>
+                <viewController storyboardIdentifier="ProfileController" id="dbk-Z9-HKR" customClass="ProfileController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NIN-7M-jGG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sFS-2R-Jue">
+                                <rect key="frame" x="20" y="108" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Fdm-Bj-rNO"/>
+                                    <constraint firstAttribute="width" secondItem="sFS-2R-Jue" secondAttribute="height" multiplier="1:1" id="pbV-Ef-Z16"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your App Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uc3-h5-Eyj">
+                                <rect key="frame" x="20" y="288" width="384" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSH-BZ-lba">
+                                <rect key="frame" x="180" y="108" width="224" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Thonburi-Bold" family="Thonburi" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSj-I6-YnE">
+                                <rect key="frame" x="180" y="140.5" width="224" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="va7-AS-Opf">
+                                <rect key="frame" x="20" y="320.5" width="374" height="179"/>
+                            </imageView>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3z-W4-ySr">
+                                <rect key="frame" x="20" y="320.5" width="374" height="179"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="API NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30R-jL-mt7">
+                                        <rect key="frame" x="137" y="75.5" width="100" height="28"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="30R-jL-mt7" firstAttribute="centerY" secondItem="L3z-W4-ySr" secondAttribute="centerY" id="3gd-Ca-q6o"/>
+                                    <constraint firstItem="30R-jL-mt7" firstAttribute="centerX" secondItem="L3z-W4-ySr" secondAttribute="centerX" id="8Yk-S3-uXt"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="va7-AS-Opf" firstAttribute="height" secondItem="NIN-7M-jGG" secondAttribute="height" multiplier="0.2" id="CYO-Qf-mRC"/>
+                            <constraint firstItem="va7-AS-Opf" firstAttribute="leading" secondItem="fkc-LW-PGU" secondAttribute="leading" constant="20" id="EKM-Vp-jZP"/>
+                            <constraint firstItem="Uc3-h5-Eyj" firstAttribute="top" secondItem="sFS-2R-Jue" secondAttribute="bottom" constant="30" id="GPt-5r-ntd"/>
+                            <constraint firstItem="fkc-LW-PGU" firstAttribute="trailing" secondItem="CSj-I6-YnE" secondAttribute="trailing" constant="10" id="IBO-lc-nvh"/>
+                            <constraint firstItem="L3z-W4-ySr" firstAttribute="height" secondItem="va7-AS-Opf" secondAttribute="height" id="IBl-NG-XTj"/>
+                            <constraint firstItem="fkc-LW-PGU" firstAttribute="trailing" secondItem="vSH-BZ-lba" secondAttribute="trailing" constant="10" id="Mmw-2S-msR"/>
+                            <constraint firstItem="sFS-2R-Jue" firstAttribute="top" secondItem="fkc-LW-PGU" secondAttribute="top" constant="20" id="S9X-JJ-ycn"/>
+                            <constraint firstItem="Uc3-h5-Eyj" firstAttribute="leading" secondItem="fkc-LW-PGU" secondAttribute="leading" constant="20" id="XsL-SR-HKe"/>
+                            <constraint firstItem="fkc-LW-PGU" firstAttribute="trailing" secondItem="va7-AS-Opf" secondAttribute="trailing" constant="20" id="YU3-MS-e8e"/>
+                            <constraint firstItem="va7-AS-Opf" firstAttribute="top" secondItem="Uc3-h5-Eyj" secondAttribute="bottom" constant="10" id="Ymm-Vl-RSK"/>
+                            <constraint firstItem="vSH-BZ-lba" firstAttribute="top" secondItem="fkc-LW-PGU" secondAttribute="top" constant="20" id="dm6-ud-Uht"/>
+                            <constraint firstItem="L3z-W4-ySr" firstAttribute="top" secondItem="Uc3-h5-Eyj" secondAttribute="bottom" constant="10" id="e25-Qu-ja1"/>
+                            <constraint firstItem="CSj-I6-YnE" firstAttribute="leading" secondItem="sFS-2R-Jue" secondAttribute="trailing" constant="10" id="gt5-lB-B6K"/>
+                            <constraint firstItem="CSj-I6-YnE" firstAttribute="top" secondItem="vSH-BZ-lba" secondAttribute="bottom" constant="10" id="ime-Ts-cr8"/>
+                            <constraint firstItem="L3z-W4-ySr" firstAttribute="leading" secondItem="fkc-LW-PGU" secondAttribute="leading" constant="20" id="jmg-FX-8Qd"/>
+                            <constraint firstItem="fkc-LW-PGU" firstAttribute="trailing" secondItem="L3z-W4-ySr" secondAttribute="trailing" constant="20" id="tew-nQ-7oF"/>
+                            <constraint firstItem="sFS-2R-Jue" firstAttribute="leading" secondItem="fkc-LW-PGU" secondAttribute="leading" constant="20" id="v79-Tq-1MC"/>
+                            <constraint firstItem="fkc-LW-PGU" firstAttribute="trailing" secondItem="Uc3-h5-Eyj" secondAttribute="trailing" constant="10" id="v9e-cP-hu2"/>
+                            <constraint firstItem="vSH-BZ-lba" firstAttribute="leading" secondItem="sFS-2R-Jue" secondAttribute="trailing" constant="10" id="w58-Jh-PLk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fkc-LW-PGU"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VQs-G4-9qO">
+                        <barButtonItem key="leftBarButtonItem" title="SIGN OUT" image="delete.left" catalog="system" id="iHC-lU-gwF">
+                            <connections>
+                                <action selector="signOutButtonPressed:" destination="dbk-Z9-HKR" id="Grw-xH-QDT"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="SiU-g1-KPc">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="dbk-Z9-HKR" id="FiX-ya-PzA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="apiNameLabel" destination="30R-jL-mt7" id="GUG-Iy-Zau"/>
+                        <outlet property="appExpViewColor" destination="L3z-W4-ySr" id="PpG-dI-BK0"/>
+                        <outlet property="appExperienceImage" destination="va7-AS-Opf" id="vjx-st-Gug"/>
+                        <outlet property="emailLabel" destination="CSj-I6-YnE" id="4sd-zM-oKj"/>
+                        <outlet property="profileImage" destination="sFS-2R-Jue" id="FEm-bb-GmV"/>
+                        <outlet property="usernameLabel" destination="vSH-BZ-lba" id="6aM-qe-q7T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQg-aK-FMb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592.75362318840587" y="681.69642857142856"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="poo-BK-x91">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9hO-bh-PAp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" selectedImage="person.circle.fill" id="nU3-cI-IFo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nyh-W8-Lh0">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dbk-Z9-HKR" kind="relationship" relationship="rootViewController" id="0LQ-1h-kNC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aNV-QN-Arc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28" y="682"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkmark" catalog="system" width="64" height="56"/>
+        <image name="delete.left" catalog="system" width="64" height="52"/>
         <image name="heart.circle" catalog="system" width="64" height="60"/>
         <image name="heart.circle.fill" catalog="system" width="64" height="60"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
