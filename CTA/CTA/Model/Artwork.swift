@@ -15,9 +15,11 @@ struct Artwork: Codable {
     let webImage: ArtImage
     let titles: [String]
     let description: String
+    let objectTypes: [String]
     let principalMakers: PrincipalMakers
     let physicalMedium: String
     let subTitle: String
+    let dating: Dating
 }
 struct ArtImage: Codable {
     let url: String
@@ -28,4 +30,9 @@ struct PrincipalMakers: Codable {
     let dateOfBirth: String
     let dateOfDeath: String
     let placeOfDeath: String
+    let occupation: [String]
+    let nationality: String
+}
+struct Dating: Codable {
+    let presentingDate: String
 }

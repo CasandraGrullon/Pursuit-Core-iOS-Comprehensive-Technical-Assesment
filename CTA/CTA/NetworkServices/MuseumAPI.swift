@@ -10,7 +10,7 @@ import Foundation
 import NetworkHelper
 
 class MuseumAPI {
-    static func getCollections(search: String, completion: @escaping (Result<[ArtObjects], AppError>) -> ()) {
+    static func getCollections(search: String, completion: @escaping (Result<Collection, AppError>) -> ()) {
     
         let searchQuery = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         let endpointURL = "https://www.rijksmuseum.nl/api/en/collection?key=GLNK3QhB&q=\(searchQuery)"
@@ -27,7 +27,7 @@ class MuseumAPI {
             case .success(let data):
                 do {
                     let collection = try JSONDecoder().decode(Collection.self, from: data)
-                    completion(.success(collection.artObjects))
+                    completion(.success(collection))
                 } catch {
                     completion(.failure(.decodingError(error)))
                 }

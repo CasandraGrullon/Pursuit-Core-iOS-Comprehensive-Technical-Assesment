@@ -9,13 +9,16 @@
 import UIKit
 import Kingfisher
 
-class DetailController: UIViewController {
-
+class EventDetailController: UIViewController {
+    
     private let eventsDetailView = EventDetailView()
+    private let artDetailView = MuseumDetailView()
     
     override func loadView() {
+        
         view = eventsDetailView
         eventsDetailView.backgroundColor = .white
+        
     }
     
     public var event: Events
@@ -32,17 +35,22 @@ class DetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
-        updateUI()
-
+        eventsUI()
     }
     private func configureNavBar() {
+        
         navigationItem.title = event.name
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonPressed(_:)))
     }
+    
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         
     }
-    private func updateUI() {
+    
+    private func eventsUI() {
+        
         guard let eventImage = event.images.first?.url else {
             return
         }
@@ -56,11 +64,11 @@ class DetailController: UIViewController {
         eventsDetailView.eventNameLabel.text = event.name
         eventsDetailView.eventDateLabel.text = "\(event.dates.start.localDate) at \(event.dates.start.localTime)"
         eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10) - $\(event.priceRanges.first?.max ?? 20 )" //format
-        eventsDetailView.promoterLabel.text = "Sponsored by: " + event.promoter.name
+        eventsDetailView.promoterLabel.text = "Sponsored by: " + (event.promoter.name)
         eventsDetailView.pleaseNoteLabel.text = "Details\n\(event.pleaseNote ?? "")"
         eventsDetailView.venueImage.kf.setImage(with: URL(string: venueImage))
         eventsDetailView.venueNameLabel.text = venue.name
         eventsDetailView.venueAddress.text = "\(venue.address.line1)\n\(venue.city),\(venue.country) \(venue.postalCode)"
     }
-
+    
 }
