@@ -42,8 +42,8 @@ class SearchEventsController: UIViewController {
         configureTableView()
 
     }
-    private func getEvents(city: String, postCode: String) {
-        TicketMasterAPI.getEvents(city: city, postalCode: postCode) { [weak self] (result) in
+    private func getEvents(keyword: String, postCode: String) {
+        TicketMasterAPI.getEvents(keyword: keyword, postalCode: postCode) { [weak self] (result) in
             switch result {
             case .failure(let eventsError):
                 print(eventsError)
@@ -86,13 +86,13 @@ class SearchEventsController: UIViewController {
     @objc private func searchButtonPressed(_ sender: UIButton) {
         //if user api is ticket master
         //if userAPIChoice == .ticketMaster {
-            guard let city = searchTableView.searchBarOne.text, !city.isEmpty,
+            guard let keyword = searchTableView.searchBarOne.text, !keyword.isEmpty,
                 let zipcode = searchTableView.searchBarTwo.text, !zipcode.isEmpty else {
                     //add warning to fill all fields
                     print("missing fields")
                     return
             }
-            getEvents(city: city, postCode: zipcode)
+            getEvents(keyword: keyword, postCode: zipcode)
             searchTableView.searchBarOne.resignFirstResponder()
             searchTableView.searchBarTwo.resignFirstResponder()
         //} else {

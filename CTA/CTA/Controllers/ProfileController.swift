@@ -19,9 +19,12 @@ class ProfileController: UIViewController {
     @IBOutlet weak var apiNameLabel: UILabel!
     
     private var apiChoice = UserSession.shared.getAppUser()?.apiChoice
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         updateUI()
     }
     private func updateUI() {
@@ -38,11 +41,14 @@ class ProfileController: UIViewController {
             appExperienceImage.image = #imageLiteral(resourceName: "ticketmaster")
         }
         apiNameLabel.text = apiChoice
+        profileImage.kf.setImage(with: user.photoURL)
     }
 
 
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
-
+        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
+        let editVC = storyboard.instantiateViewController(identifier: "EditController")
+        navigationController?.pushViewController(editVC, animated: true)
     }
     
     @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {

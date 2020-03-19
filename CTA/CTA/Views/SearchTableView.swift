@@ -18,7 +18,7 @@ class SearchTableView: UIView {
     public lazy var searchBarOne: UITextField = {
        let searchbar = UITextField()
         searchbar.borderStyle = .line
-        searchbar.placeholder = "search by city"
+        searchbar.placeholder = "search by event type"
         return searchbar
     }()
     public lazy var searchBarTwo: UITextField = {

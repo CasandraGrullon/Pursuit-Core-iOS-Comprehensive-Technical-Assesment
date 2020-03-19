@@ -13,7 +13,6 @@ class StorageService {
 
     private let storageRef = Storage.storage().reference()
     
-    //default parameters in swift ex: userId: String? = nil
     public func uploadPhoto(userId: String? = nil, image: UIImage, completion: @escaping (Result<URL, Error>) -> ()) {
         
         
@@ -26,7 +25,6 @@ class StorageService {
         if let userId = userId {
             photoReference = storageRef.child("AppUserProfilePhotos/\(userId).jpg")
         }
-        
 
         let metadata = StorageMetadata()
 

@@ -15,7 +15,6 @@ class UserSession {
   
   private var appuser: AppUser?
   
-  // get User from Firebase
   public func getAppUser() -> AppUser? {
     guard let user = Auth.auth().currentUser else {
         return nil
@@ -33,10 +32,6 @@ class UserSession {
         }
         
     }
-    // after retrieving user from firebase set your local user
-    
-    // create AppUser from the database User snapshot
-    // self.user = snapshot.data
     return appuser
   }
   

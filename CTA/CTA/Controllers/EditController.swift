@@ -15,8 +15,7 @@ class EditController: UIViewController {
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var appUser: AppUser?
-    private var apiChoice = String()
+    private var selectedAPI = String()
     private let storageService = StorageService()
     
     private var apiChoices = ["Rijksmuseum", "Ticket Master"] {
@@ -37,15 +36,6 @@ class EditController: UIViewController {
             }
         }
     }
-//    init?(coder: NSCoder, appUser: AppUser, apiChoice: String) {
-//        self.appUser = appUser
-//        self.apiChoice = apiChoice
-//        super.init(coder: coder)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,11 +58,9 @@ class EditController: UIViewController {
     
     @IBAction func doneEditingButtonPressed(_ sender: UIBarButtonItem) {
         uploadProfileChanges()
-//        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
-//        let profileVC = storyboard.instantiateViewController(identifier: "ProfileController") { (coder) in
-//            return ProfileController(coder: coder, appUser: self.appUser, apiChoice: self.apiChoice)
-//        }
-//        navigationController?.pushViewController(profileVC, animated: true)
+        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(identifier: "ProfileController")
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -110,6 +98,7 @@ extension EditController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let api = apiChoices[indexPath.row]
+        selectedAPI = api
         grabAPIChoice(api: api)
     }
 }
@@ -173,18 +162,26 @@ extension EditController{
                   print("could not upload image \(error)")
               case .success(let url):
                 self?.updateDataBaseUser(displayName: username, photoURL: url.absoluteString)
+                let request = Auth.auth().currentUser?.createProfileChangeRequest()
+                request?.displayName = username
+                request?.photoURL = url
+                request?.commitChanges(completion: { (error) in
+                    if let error = error {
+                        print("error changing profile \(error)")
+                    } else {
+                        print("successfully updated profile")
+                    }
+                })
               }
           }
     }
     private func updateDataBaseUser(displayName: String, photoURL: String) {
-        DatabaseService.shared.updateUser(displayName: displayName, photoURL: photoURL) { [weak self] (result) in
+        DatabaseService.shared.updateUser(displayName: displayName, photoURL: photoURL) { (result) in
             switch result{
             case .failure(let error):
                 print("could not update user info \(error)")
             case .success:
-                print("")
-//                self?.appUser.imageURL = photoURL
-//                self?.appUser.username = displayName
+                print("successfully updated user")
             }
         }
     }

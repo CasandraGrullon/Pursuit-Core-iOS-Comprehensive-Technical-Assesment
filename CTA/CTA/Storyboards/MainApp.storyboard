@@ -120,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="1877" y="682"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="sSL-lH-a7f">
             <objects>
                 <viewController storyboardIdentifier="FavoritesController" id="ukW-2D-dqd" customClass="FavoritesController" customModule="CTA" customModuleProvider="target" sceneMemberID="viewController">
@@ -192,7 +192,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wpk-qv-ThM"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="heart.circle" catalog="system" selectedImage="heart.circle.fill" id="ALU-uN-nGx"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="heart.circle" catalog="system" selectedImage="heart.circle.fill" id="ALU-uN-nGx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CwR-pW-jXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -366,7 +366,7 @@
                         <viewLayoutGuide key="safeArea" id="fkc-LW-PGU"/>
                     </view>
                     <navigationItem key="navigationItem" id="VQs-G4-9qO">
-                        <barButtonItem key="leftBarButtonItem" title="SIGN OUT" image="delete.left" catalog="system" id="iHC-lU-gwF">
+                        <barButtonItem key="leftBarButtonItem" title="sign out" id="iHC-lU-gwF">
                             <connections>
                                 <action selector="signOutButtonPressed:" destination="dbk-Z9-HKR" id="Grw-xH-QDT"/>
                             </connections>
@@ -413,7 +413,6 @@
     </scenes>
     <resources>
         <image name="checkmark" catalog="system" width="64" height="56"/>
-        <image name="delete.left" catalog="system" width="64" height="52"/>
         <image name="heart.circle" catalog="system" width="64" height="60"/>
         <image name="heart.circle.fill" catalog="system" width="64" height="60"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
