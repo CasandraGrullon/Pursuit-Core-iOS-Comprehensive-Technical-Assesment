@@ -37,15 +37,15 @@ class EditController: UIViewController {
             }
         }
     }
-    init?(coder: NSCoder, appUser: AppUser, apiChoice: String) {
-        self.appUser = appUser
-        self.apiChoice = apiChoice
-        super.init(coder: coder)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init?(coder: NSCoder, appUser: AppUser, apiChoice: String) {
+//        self.appUser = appUser
+//        self.apiChoice = apiChoice
+//        super.init(coder: coder)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,11 +68,11 @@ class EditController: UIViewController {
     
     @IBAction func doneEditingButtonPressed(_ sender: UIBarButtonItem) {
         uploadProfileChanges()
-        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
-        let profileVC = storyboard.instantiateViewController(identifier: "ProfileController") { (coder) in
-            return ProfileController(coder: coder, appUser: self.appUser, apiChoice: self.apiChoice)
-        }
-        navigationController?.pushViewController(profileVC, animated: true)
+//        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
+//        let profileVC = storyboard.instantiateViewController(identifier: "ProfileController") { (coder) in
+//            return ProfileController(coder: coder, appUser: self.appUser, apiChoice: self.apiChoice)
+//        }
+//        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -182,8 +182,9 @@ extension EditController{
             case .failure(let error):
                 print("could not update user info \(error)")
             case .success:
-                self?.appUser.imageURL = photoURL
-                self?.appUser.username = displayName
+                print("")
+//                self?.appUser.imageURL = photoURL
+//                self?.appUser.username = displayName
             }
         }
     }

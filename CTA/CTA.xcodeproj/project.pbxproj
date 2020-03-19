@@ -40,6 +40,7 @@
 		C68BAEB424228775003E7680 /* APICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BAEB324228775003E7680 /* APICell.swift */; };
 		C68BAEB62422877F003E7680 /* APICell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C68BAEB52422877F003E7680 /* APICell.xib */; };
 		C6B200342422E750005F3966 /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B200332422E750005F3966 /* ResizeImage.swift */; };
+		C6B200362423CD22005F3966 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B200352423CD22005F3966 /* UserSession.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		C68BAEB324228775003E7680 /* APICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICell.swift; sourceTree = "<group>"; };
 		C68BAEB52422877F003E7680 /* APICell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = APICell.xib; sourceTree = "<group>"; };
 		C6B200332422E750005F3966 /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
+		C6B200352423CD22005F3966 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 			children = (
 				C63A2AC9241FF551000342A0 /* AuthenticationSession.swift */,
 				C63A2ACB241FF78A000342A0 /* DatabaseSession.swift */,
+				C6B200352423CD22005F3966 /* UserSession.swift */,
 				C623631D2422E47E00DD4D60 /* StorageService.swift */,
 			);
 			path = FirebaseServices;
@@ -371,6 +374,7 @@
 				C66C2FCE242123AF00D2A4CB /* SearchTableView.swift in Sources */,
 				C623631C2422C42F00DD4D60 /* ProfileController.swift in Sources */,
 				C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */,
+				C6B200362423CD22005F3966 /* UserSession.swift in Sources */,
 				C63A2AD1241FFB28000342A0 /* MainAppTabBar.swift in Sources */,
 				C63A2AD324201038000342A0 /* AppUser.swift in Sources */,
 				C623631E2422E47E00DD4D60 /* StorageService.swift in Sources */,
