@@ -65,6 +65,19 @@ class DatabaseService {
             }
         }
     }
+    public func getAPPUser(userId: String, completion: @escaping (Result<[AppUser], Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        db.collection(DatabaseService.appUsers).whereField(user.uid, isEqualTo: userId).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let appUser = snapshot.documents.compactMap {AppUser ($0.data())}
+                completion(.success(appUser))
+            }
+        }
+    }
     
     public func updateUser(displayName: String, photoURL: String, completion: @escaping (Result<Bool, Error>) -> ()) {
     

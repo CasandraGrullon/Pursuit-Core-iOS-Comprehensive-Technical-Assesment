@@ -9,10 +9,10 @@
 import Foundation
 
 struct AppUser {
-    let username: String
+    var username: String
     let userEmail: String
     let userId: String
-    let imageURL: String
+    var imageURL: String
     let apiChoice: String
 }
 extension AppUser {

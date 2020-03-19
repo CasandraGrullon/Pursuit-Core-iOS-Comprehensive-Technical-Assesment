@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class EditController: UIViewController {
     @IBOutlet weak var profilePicture: UIImageView!
@@ -14,14 +15,15 @@ class EditController: UIViewController {
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    public var appUser: AppUser?
-    //public var apiChoice = String()
+    private var appUser: AppUser?
+    private var apiChoice = String()
+    private let storageService = StorageService()
+    
     private var apiChoices = ["Rijksmuseum", "Ticket Master"] {
         didSet {
             collectionView.reloadData()
         }
     }
-    
     private lazy var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -35,21 +37,48 @@ class EditController: UIViewController {
             }
         }
     }
+    init?(coder: NSCoder, appUser: AppUser, apiChoice: String) {
+        self.appUser = appUser
+        self.apiChoice = apiChoice
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateUI()
+        usernameTextfield.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "APICell", bundle: nil), forCellWithReuseIdentifier: "apiCell")
+    }
+    private func updateUI() {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        profilePicture.kf.setImage(with: user.photoURL)
+        usernameTextfield.text = user.displayName
     }
     @IBAction func editPictureButtonPressed(_ sender: UIButton) {
         showImagePicker()
     }
-
     
     @IBAction func doneEditingButtonPressed(_ sender: UIBarButtonItem) {
+        uploadProfileChanges()
+        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(identifier: "ProfileController") { (coder) in
+            return ProfileController(coder: coder, appUser: self.appUser, apiChoice: self.apiChoice)
+        }
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        tabBarController?.selectedIndex = 2
     }
+    
     private func grabAPIChoice(api: String) {
         DatabaseService.shared.updateUserAPIChoice(apiChoice: api) {(result) in
             switch result {
@@ -59,6 +88,12 @@ class EditController: UIViewController {
                 print("\(api) was chosen")
             }
         }
+    }
+}
+extension EditController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 extension EditController: UICollectionViewDelegateFlowLayout {
@@ -121,5 +156,35 @@ extension EditController{
         alertController.addAction(photoLibrary)
         alertController.addAction(cancel)
         present(alertController, animated: true)
+    }
+    private func uploadProfileChanges() {
+        guard let username = usernameTextfield.text, !username.isEmpty,
+              let selectedImage = selectedImage else {
+                  print("missing fields")
+                  return
+          }
+          let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: profilePicture.bounds)
+          guard let user = Auth.auth().currentUser else {
+              return
+          }
+          storageService.uploadPhoto(userId: user.uid, image: resizeImage) { [weak self] (result) in
+              switch result {
+              case .failure(let error):
+                  print("could not upload image \(error)")
+              case .success(let url):
+                self?.updateDataBaseUser(displayName: username, photoURL: url.absoluteString)
+              }
+          }
+    }
+    private func updateDataBaseUser(displayName: String, photoURL: String) {
+        DatabaseService.shared.updateUser(displayName: displayName, photoURL: photoURL) { [weak self] (result) in
+            switch result{
+            case .failure(let error):
+                print("could not update user info \(error)")
+            case .success:
+                self?.appUser.imageURL = photoURL
+                self?.appUser.username = displayName
+            }
+        }
     }
 }
