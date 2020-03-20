@@ -54,6 +54,7 @@ class ProfileController: UIViewController {
     @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
+            UIViewController.showViewController(storyboardName: "Login", viewcontrollerID: "LoginController")
         } catch {
             print("could not sign out \(error)")
         }

@@ -8,6 +8,9 @@
 
 import Foundation
 
+struct ArtworkResult: Codable {
+    let artObject: Artwork
+}
 struct Artwork: Codable {
     let id: String
     let objectNumber: String
@@ -16,7 +19,7 @@ struct Artwork: Codable {
     let titles: [String]
     let description: String
     let objectTypes: [String]
-    let principalMakers: PrincipalMakers
+    //let principalMakers: [PrincipalMakers]
     let physicalMedium: String
     let subTitle: String
     let dating: Dating
@@ -24,15 +27,15 @@ struct Artwork: Codable {
 struct ArtImage: Codable {
     let url: String
 }
-struct PrincipalMakers: Codable {
-    let name: String
-    let placeOfBirth: String
-    let dateOfBirth: String
-    let dateOfDeath: String
-    let placeOfDeath: String
-    let occupation: [String]
-    let nationality: String
-}
+//struct PrincipalMakers: Codable {
+//    let name: String
+//    let placeOfBirth: String
+//    let dateOfBirth: String
+//    let dateOfDeath: String
+//    let placeOfDeath: String
+//    let occupation: [String]
+//    let nationality: String
+//}
 struct Dating: Codable {
     let presentingDate: String
 }

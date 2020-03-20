@@ -157,21 +157,25 @@ extension SearchEventsController: UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
+        var detailVC = UIViewController()
+        
         if userAPIChoice == "Ticket Master" {
             let event = events[indexPath.row]
-            let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
-            let eventDetailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
+            detailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
                 return EventDetailController(coder: coder, event: event)
             }
-            navigationController?.pushViewController(eventDetailVC, animated: true)
+
         } else {
             let artwork = artworks[indexPath.row]
-            let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
-            let artDetailVC = storyboard.instantiateViewController(identifier: "ArtDetailController") { (coder) in
+            detailVC = storyboard.instantiateViewController(identifier: "ArtDetailController") { (coder) in
                 return ArtDetailController(coder: coder, artwork: artwork)
             }
-            navigationController?.pushViewController(artDetailVC, animated: true)
         }
+            navigationController?.pushViewController(detailVC, animated: true)
+        
+        
+        
     }
 }
 extension SearchEventsController: UITableViewDelegate {
