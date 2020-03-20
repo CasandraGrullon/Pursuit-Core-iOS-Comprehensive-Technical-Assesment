@@ -17,8 +17,9 @@ struct Artwork: Codable {
     let title: String
     let webImage: ArtImage
     let titles: [String]
-    let description: String
+    let plaqueDescriptionEnglish: String
     let objectTypes: [String]
+    let principalMaker: String
     //let principalMakers: [PrincipalMakers]
     let physicalMedium: String
     let subTitle: String

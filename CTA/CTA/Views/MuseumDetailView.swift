@@ -51,6 +51,7 @@ class MuseumDetailView: UIView {
         let label = UILabel()
         label.text = "description"
         label.textColor = .white
+        label.numberOfLines = 0
         label.font = UIFont(name: "Thonburi", size: 17)
         return label
     }()
@@ -142,7 +143,7 @@ class MuseumDetailView: UIView {
         artworkImageConstraints()
         artInfoConstraints()
         artDetailsConstraints()
-        artistInfoConstraints() 
+        //artistInfoConstraints()
     }
 
     private func scrollViewContraints() {
@@ -197,7 +198,8 @@ class MuseumDetailView: UIView {
             artDetailsStack.topAnchor.constraint(equalTo: artInfoStack.bottomAnchor, constant: 8),
             artDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            artDetailsStack.heightAnchor.constraint(equalToConstant: 200)
+            artDetailsStack.heightAnchor.constraint(equalToConstant: 200),
+            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     private func artistInfoConstraints() {

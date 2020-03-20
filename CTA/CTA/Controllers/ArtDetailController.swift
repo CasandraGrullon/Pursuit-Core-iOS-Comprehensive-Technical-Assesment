@@ -62,8 +62,8 @@ class ArtDetailController: UIViewController {
         
     }
     private func artUI() {
-        artDetailView.artistNameLabel.text = art?.title
-        artDetailView.artDescription.text = art?.description
+        artDetailView.artTitleLabel.text = art?.title
+        artDetailView.artDescription.text = art?.plaqueDescriptionEnglish
         artDetailView.artImageView.kf.setImage(with: URL(string: art?.webImage.url ?? ""))
         artDetailView.dateLabel.text = art?.dating.presentingDate
         artDetailView.otherTitles.text = "other titles: \(art?.titles.joined(separator: ",") ?? "")"
@@ -71,7 +71,7 @@ class ArtDetailController: UIViewController {
         artDetailView.artSizeLabel.text = art?.subTitle
         artDetailView.objectTypeLabel.text = art?.objectTypes.joined(separator: ",")
            
-//        artDetailView.artistNameLabel.text = art?.principalMakers.first?.name
+        artDetailView.artistNameLabel.text = art?.principalMaker
 //        artDetailView.artistBirthDay.text = "born \(art?.principalMakers.dateOfBirth ?? "") in \(art?.principalMakers.placeOfBirth ?? "") "
 //        artDetailView.artistDeath.text = "died \(art?.principalMakers.dateOfDeath ?? "") in \(art?.principalMakers.placeOfDeath ?? "")"
 //        artDetailView.artistOccupation.text = "\(art?.principalMakers.occupation.joined(separator: "\n") ?? "")"
