@@ -35,6 +35,7 @@ class DatabaseService {
         }
         
     }
+    
     public func updateUserAPIChoice(apiChoice: String, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let user = Auth.auth().currentUser else {
             return
@@ -93,11 +94,99 @@ class DatabaseService {
         }
     }
     }
-    public func saveEvent() {
-        
+    public func addEventToFavorites(event: Events, completion: @escaping (Result<Bool, Error>) -> () ) {
+        guard let user = Auth.auth().currentUser, let eventImage = event.images.first?.url else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(event.id).setData(["eventId":event.id, "eventName": event.name, "eventImageURL": eventImage, "dateFavorited": Timestamp(date: Date())]) { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
     }
-    public func saveArtwork() {
+
+    public func removeEventFromFavorites(event: Events, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
         
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(event.id).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
     }
-    
+    public func isEventInFavorites(event: Events, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).whereField("eventId", isEqualTo: event.id).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let count = snapshot.documents.count
+                if count > 0 {
+                    completion(.success(true))
+                } else {
+                    completion(.success(false))
+                }
+            }
+        }
+    }
+    public func getFavoriteEvents(completion: @escaping (Result<[FavoriteEvent], Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let favoriteEvents = snapshot.documents.compactMap {FavoriteEvent ($0.data())}
+                completion(.success(favoriteEvents.sorted(by: {$0.dateFavorited.dateValue() > $1.dateFavorited.dateValue()})))
+            }
+        }
+    }
+
+    public func addArtToFavorites(artwork: Artwork, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.objectNumber).setData(["artObjectNumber": artwork.objectNumber, "artTitle": artwork.title, "artistName": artwork.principalMaker, "artImageURL": artwork.webImage.url, "dateFavorited": Timestamp(date: Date())]) { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
+    public func removeArtFromFavorites(artwork: Artwork, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.objectNumber).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
+    public func isArtInFavorites(artwork: Artwork, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artwork.objectNumber).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let count = snapshot.documents.count
+                if count > 0 {
+                    completion(.success(true))
+                } else {
+                    completion(.success(false))
+                }
+            }
+        }
+    }
+    public func getFavoriteArtworks(completion: @escaping (Result<[FavoriteArtwork], Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let favoriteArtworks = snapshot.documents.compactMap { FavoriteArtwork ($0.data()) }
+                completion(.success(favoriteArtworks.sorted(by: {$0.dateFavorited.dateValue() > $1.dateFavorited.dateValue()} )))
+            }
+        }
+    }
 }

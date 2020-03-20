@@ -28,9 +28,7 @@ class UserSession {
                 return
             }
             self.appuser = appUser
-            
         }
-        
     }
     return appuser
   }

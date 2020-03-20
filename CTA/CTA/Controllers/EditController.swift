@@ -17,6 +17,7 @@ class EditController: UIViewController {
     
     private var selectedAPI = String()
     private let storageService = StorageService()
+    private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice
     
     private var apiChoices = ["Rijksmuseum", "Ticket Master"] {
         didSet {
@@ -58,6 +59,7 @@ class EditController: UIViewController {
     
     @IBAction func doneEditingButtonPressed(_ sender: UIBarButtonItem) {
         uploadProfileChanges()
+        grabAPIChoice(api: selectedAPI)
         let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
         let profileVC = storyboard.instantiateViewController(identifier: "ProfileController")
         navigationController?.pushViewController(profileVC, animated: true)
@@ -68,12 +70,13 @@ class EditController: UIViewController {
     }
     
     private func grabAPIChoice(api: String) {
-        DatabaseService.shared.updateUserAPIChoice(apiChoice: api) {(result) in
+        DatabaseService.shared.updateUserAPIChoice(apiChoice: api) { [weak self] (result) in
             switch result {
                 case .failure(let error):
                     print("error getting api choice \(error)")
                 case .success:
                 print("\(api) was chosen")
+                self?.userApiChoice = api
             }
         }
     }
@@ -99,7 +102,6 @@ extension EditController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let api = apiChoices[indexPath.row]
         selectedAPI = api
-        grabAPIChoice(api: api)
     }
 }
 extension EditController: UICollectionViewDataSource {

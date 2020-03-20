@@ -23,7 +23,7 @@ class MuseumDetailView: UIView {
     
     public lazy var artImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     public lazy var artTitleLabel: UILabel = {
@@ -67,6 +67,7 @@ class MuseumDetailView: UIView {
         let label = UILabel()
         label.text = "other titles"
         label.textColor = .white
+        label.numberOfLines = 0
         label.font = UIFont(name: "Thonburi", size: 17)
         return label
     }()
@@ -175,17 +176,17 @@ class MuseumDetailView: UIView {
         contentView.addSubview(artImageView)
         artImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            artImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            artImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             artImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             artImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            artImageView.heightAnchor.constraint(equalToConstant: 300)
+            artImageView.heightAnchor.constraint(equalToConstant: 400)
         ])
     }
     private func artInfoConstraints() {
         contentView.addSubview(artInfoStack)
         artInfoStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            artInfoStack.topAnchor.constraint(equalTo: artImageView.bottomAnchor, constant: 8),
+            artInfoStack.topAnchor.constraint(equalTo: artImageView.bottomAnchor, constant: 20),
             artInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             artInfoStack.heightAnchor.constraint(equalToConstant: 200)
@@ -195,22 +196,22 @@ class MuseumDetailView: UIView {
         contentView.addSubview(artDetailsStack)
         artDetailsStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            artDetailsStack.topAnchor.constraint(equalTo: artInfoStack.bottomAnchor, constant: 8),
+            artDetailsStack.topAnchor.constraint(equalTo: artInfoStack.bottomAnchor, constant: 10),
             artDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            artDetailsStack.heightAnchor.constraint(equalToConstant: 200),
-            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            artDetailsStack.heightAnchor.constraint(equalToConstant: 150),
+            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
-    private func artistInfoConstraints() {
-        contentView.addSubview(artistInfoStack)
-        artistInfoStack.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            artistInfoStack.topAnchor.constraint(equalTo: artDetailsStack.bottomAnchor, constant: 10),
-            artistInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            artistInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            artistInfoStack.heightAnchor.constraint(equalToConstant: 200),
-            artistInfoStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
-    }
+//    private func artistInfoConstraints() {
+//        contentView.addSubview(artistInfoStack)
+//        artistInfoStack.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            artistInfoStack.topAnchor.constraint(equalTo: artDetailsStack.bottomAnchor, constant: 10),
+//            artistInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+//            artistInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+//            artistInfoStack.heightAnchor.constraint(equalToConstant: 200),
+//            artistInfoStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//        ])
+//    }
 }

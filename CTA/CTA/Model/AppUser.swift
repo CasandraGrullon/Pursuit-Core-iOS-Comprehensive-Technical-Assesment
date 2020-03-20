@@ -13,7 +13,7 @@ struct AppUser {
     let userEmail: String
     let userId: String
     var imageURL: String
-    let apiChoice: String
+    var apiChoice: String
 }
 extension AppUser {
     init?(_ dictionary: [String: Any]) {

@@ -26,6 +26,7 @@ class LoginController: UIViewController {
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
+    private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice
     
     private var apiChoices = ["Rijksmuseum", "Ticket Master"] {
         didSet {
@@ -100,6 +101,8 @@ class LoginController: UIViewController {
                     print(error)
                 case .success(let authDataResult):
                     self?.createUser(authDataResult: authDataResult)
+                    
+                    
                 }
             }
         }
@@ -123,12 +126,13 @@ class LoginController: UIViewController {
     }
     
     private func grabAPIChoice(api: String) {
-        DatabaseService.shared.updateUserAPIChoice(apiChoice: api) {(result) in
+        DatabaseService.shared.updateUserAPIChoice(apiChoice: api) { [weak self] (result) in
             switch result {
                 case .failure(let error):
                     print("error getting api choice \(error)")
                 case .success:
                 print("\(api) was chosen")
+                self?.userApiChoice = api
             }
         }
     }
@@ -158,7 +162,6 @@ extension LoginController: UICollectionViewDelegateFlowLayout {
         grabAPIChoice(api: apiChoice)
         logInButton.isEnabled = true
         logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
-
     }
 }
 extension LoginController: UICollectionViewDataSource {
