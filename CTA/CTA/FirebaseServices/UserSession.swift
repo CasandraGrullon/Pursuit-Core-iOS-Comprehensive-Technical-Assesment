@@ -32,6 +32,19 @@ class UserSession {
     }
     return appuser
   }
-  
+    public func getApi() -> String {
+        var apichoice = String()
+        DatabaseService.shared.getUserApiChoice { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let api):
+                self.appuser?.apiChoice = api
+                apichoice = api
+            }
+        }
+        return apichoice
+    }
+   
 }
 

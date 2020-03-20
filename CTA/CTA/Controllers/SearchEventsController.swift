@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SearchEventsController: UIViewController {
     
@@ -17,30 +18,57 @@ class SearchEventsController: UIViewController {
         view = searchTableView
         searchMapView.backgroundColor = .white
     }
+    private var userAPIChoice = "" {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateUI()
+                self.configureNavBar()
+            }
+        }
+    }
     
     private var events = [Events]() {
         didSet {
-            DispatchQueue.main.async {
-                self.searchTableView.tableView.reloadData()
+            if userAPIChoice == "Ticket Master" {
+                DispatchQueue.main.async {
+                    self.searchTableView.tableView.reloadData()
+                }
             }
         }
     }
     private var artworks = [ArtObjects]() {
         didSet {
-            DispatchQueue.main.async {
-                self.searchTableView.tableView.reloadData()
+            if userAPIChoice == "Rijksmuseum" {
+                DispatchQueue.main.async {
+                    self.searchTableView.tableView.reloadData()
+                }
             }
+            
         }
     }
     private var isMapButtonPressed = false
-    private var userAPIChoice = UserSession.shared.getAppUser()?.apiChoice
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavBar()
         configureSearchButton()
         configureTableView()
-        updateUI()
+        getApiChoice()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getApiChoice()
+        configureSearchButton()
+        configureTableView()
+    }
+    private func getApiChoice() {
+        DatabaseService.shared.getUserApiChoice { [weak self] (result) in
+            switch result{
+            case .failure(let error):
+                print(error)
+            case .success(let api):
+                self?.userAPIChoice = api
+            }
+        }
     }
     private func updateUI() {
         searchTableView.tableView.backgroundColor = .clear
@@ -48,12 +76,14 @@ class SearchEventsController: UIViewController {
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             searchTableView.backgroundColor = .white
-        } else {
+        } else if userAPIChoice == "Rijksmuseum" {
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             searchTableView.backgroundColor = .darkGray
             searchTableView.searchBarOne.placeholder = "Search by artist or keyword"
             searchTableView.searchBarOne.backgroundColor = .white
             
+        } else {
+            searchTableView.searchBarOne.backgroundColor = .red
         }
     }
     private func getEvents(keyword: String, postCode: String) {
@@ -83,7 +113,7 @@ class SearchEventsController: UIViewController {
             }
         }
     }
-
+    
     private func configureTableView() {
         searchTableView.tableView.dataSource = self
         searchTableView.tableView.delegate = self
@@ -165,14 +195,14 @@ extension SearchEventsController: UITableViewDataSource {
             detailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
                 return EventDetailController(coder: coder, event: event)
             }
-
+            
         } else {
             let artwork = artworks[indexPath.row]
             detailVC = storyboard.instantiateViewController(identifier: "ArtDetailController") { (coder) in
                 return ArtDetailController(coder: coder, artwork: artwork)
             }
         }
-            navigationController?.pushViewController(detailVC, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
         
         
         

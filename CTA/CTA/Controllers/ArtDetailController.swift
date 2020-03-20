@@ -19,6 +19,7 @@ class ArtDetailController: UIViewController {
     }
     
     private var artwork: ArtObjects
+    private var isFavorite = false
     
     private var art: Artwork! {
         didSet {
@@ -74,7 +75,27 @@ class ArtDetailController: UIViewController {
     //        artDetailView.artistOccupation.text = "\(art?.principalMakers.occupation.joined(separator: "\n") ?? "")"
            }
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
-        
+        if isFavorite {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+            DatabaseService.shared.removeArtFromFavorites(artwork: art) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    print("removed from favorites")
+                }
+            }
+        } else {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+            DatabaseService.shared.addArtToFavorites(artwork: art) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                print(error)
+            case .success:
+                print("added from favorites")
+                }
+            }
+        }
     }
 
 

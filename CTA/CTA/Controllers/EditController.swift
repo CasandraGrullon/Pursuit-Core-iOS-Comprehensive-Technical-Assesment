@@ -14,8 +14,17 @@ class EditController: UIViewController {
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var updateLabel: UILabel!
     
-    private var selectedAPI = String()
+    private var selectedAPI = String() {
+        didSet {
+            self.userApiChoice = selectedAPI
+            DispatchQueue.main.async {
+                self.appColors()
+                self.viewWillAppear(true)
+            }
+        }
+    }
     private let storageService = StorageService()
     private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice
     
@@ -46,6 +55,10 @@ class EditController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "APICell", bundle: nil), forCellWithReuseIdentifier: "apiCell")
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        appColors()
+    }
     private func updateUI() {
         guard let user = Auth.auth().currentUser else {
             return
@@ -53,15 +66,32 @@ class EditController: UIViewController {
         profilePicture.kf.setImage(with: user.photoURL)
         usernameTextfield.text = user.displayName
     }
+    private func appColors() {
+        if userApiChoice == "TicketMaster"{
+            navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            editProfileButton.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            view.backgroundColor = .darkGray
+            usernameTextfield.backgroundColor = .darkGray
+            usernameTextfield.textColor = .white
+            updateLabel.textColor = .white
+        } else {
+            navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+            editProfileButton.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+            view.backgroundColor = .white
+        }
+    }
     @IBAction func editPictureButtonPressed(_ sender: UIButton) {
         showImagePicker()
     }
     
     @IBAction func doneEditingButtonPressed(_ sender: UIBarButtonItem) {
         uploadProfileChanges()
-        grabAPIChoice(api: selectedAPI)
+
         let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
         let profileVC = storyboard.instantiateViewController(identifier: "ProfileController")
+        
         navigationController?.pushViewController(profileVC, animated: true)
     }
     
@@ -102,6 +132,7 @@ extension EditController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let api = apiChoices[indexPath.row]
         selectedAPI = api
+        grabAPIChoice(api: api)
     }
 }
 extension EditController: UICollectionViewDataSource {

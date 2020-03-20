@@ -113,6 +113,7 @@
                         <outlet property="collectionView" destination="2Yl-R7-zH5" id="B7D-L2-0ub"/>
                         <outlet property="editProfileButton" destination="TQT-hs-lbP" id="jgw-pD-n6l"/>
                         <outlet property="profilePicture" destination="8gC-tp-8tY" id="tkE-rg-7jh"/>
+                        <outlet property="updateLabel" destination="vYq-pk-qbQ" id="3eh-BK-r61"/>
                         <outlet property="usernameTextfield" destination="mJb-6P-hJZ" id="tKh-Zr-fDh"/>
                     </connections>
                 </viewController>

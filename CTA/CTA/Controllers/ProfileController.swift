@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import Kingfisher
+import FirebaseFirestore
 
 class ProfileController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
@@ -18,60 +19,67 @@ class ProfileController: UIViewController {
     @IBOutlet weak var appExpViewColor: UIView!
     @IBOutlet weak var apiNameLabel: UILabel!
     
-    public var apiChoice = UserSession.shared.getAppUser()?.apiChoice {
+    public var profileListener: ListenerRegistration?
+    public var apiChoice = String() {
         didSet {
             DispatchQueue.main.async {
-                self.updateUI()
+                self.updateApiUI()
+                self.viewWillAppear(true)
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAppUserApi()
-        //updateUI()
+        getApiExperience()
+        updateUserUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //updateUI()
-        
+        getApiExperience()
+        updateUserUI()
     }
-    private func updateUI() {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        updateUserUI()
+    }
+    
+    private func updateUserUI() {
         guard let user = Auth.auth().currentUser else {
             return
         }
         usernameLabel.text = user.displayName ?? "no display name"
         emailLabel.text = user.email ?? "no email"
+        profileImage.kf.setImage(with: user.photoURL)
+    }
+    private func updateApiUI() {
         if apiChoice == "Rijksmuseum" {
             appExpViewColor.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             appExperienceImage.image = #imageLiteral(resourceName: "museum")
             apiNameLabel.text = apiChoice
-        } else {
+        } else if apiChoice == "Ticket Master"{
             appExpViewColor.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             appExperienceImage.image = #imageLiteral(resourceName: "ticketmaster")
             apiNameLabel.text = apiChoice
+        } else {
+            appExperienceImage.image = UIImage(systemName: "photo")
         }
-        profileImage.kf.setImage(with: user.photoURL)
     }
-    private func getAppUserApi() {
-        guard let user = Auth.auth().currentUser else {
-            return
-        }
-        DatabaseService.shared.getUserAPIChoice(userId: user.uid) { [weak self] (result) in
+    private func getApiExperience() {
+        DatabaseService.shared.getUserApiChoice { [weak self] (result) in
             switch result {
             case .failure(let error):
-                print("could not get api choice \(error)")
-            case .success(let apiChoice):
-                self?.apiChoice = apiChoice
+                print(error)
+            case .success(let apichoice):
+                self?.apiChoice = apichoice
             }
         }
     }
-    
     
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "MainApp", bundle: nil)

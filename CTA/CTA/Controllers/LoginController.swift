@@ -26,7 +26,7 @@ class LoginController: UIViewController {
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
-    private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice
+    private var userApiChoice = ""
     
     private var apiChoices = ["Rijksmuseum", "Ticket Master"] {
         didSet {
@@ -101,20 +101,19 @@ class LoginController: UIViewController {
                     print(error)
                 case .success(let authDataResult):
                     self?.createUser(authDataResult: authDataResult)
-                    
-                    
                 }
             }
         }
     }
     
     private func createUser(authDataResult: AuthDataResult) {
-        DatabaseService.shared.createUser(authDataResult: authDataResult) { [weak self] (result) in
+        DatabaseService.shared.createDBUser(authDataResult: authDataResult) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 print(error)
             case .success:
                 DispatchQueue.main.async {
+                    self?.grabAPIChoice(api: self?.userApiChoice ?? "")
                     self?.navigateToMainApp()
                 }
             }
@@ -159,9 +158,12 @@ extension LoginController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let apiChoice = apiChoices[indexPath.row]
-        grabAPIChoice(api: apiChoice)
+        //grabAPIChoice(api: apiChoice)
+        userApiChoice = apiChoice
+        print("selected: \(apiChoice)")
         logInButton.isEnabled = true
         logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+
     }
 }
 extension LoginController: UICollectionViewDataSource {
