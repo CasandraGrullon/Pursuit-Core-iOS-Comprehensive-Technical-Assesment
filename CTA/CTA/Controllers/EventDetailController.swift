@@ -46,10 +46,8 @@ class EventDetailController: UIViewController {
         isInFavorite()
     }
     private func configureNavBar() {
-        
         navigationItem.title = event.name
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonPressed(_:)))
     }
     
@@ -62,6 +60,7 @@ class EventDetailController: UIViewController {
                         self?.showAlert(title: "Unable to remove event from favorites", message: error.localizedDescription)
                     }
                 case .success:
+                    UIViewController.getNotification(title: "Removed from favorites", body: "\(String(describing: self?.event.name)) was removed")
                     self?.isFavorite = false
                 }
             }
@@ -73,6 +72,7 @@ class EventDetailController: UIViewController {
                         self?.showAlert(title: "Unable to add event to favorites", message: error.localizedDescription)
                     }
                 case .success:
+                    UIViewController.getNotification(title: "Added to favorites", body: "\(String(describing: self?.event.name)) was added")
                     self?.isFavorite = true
                 }
             }

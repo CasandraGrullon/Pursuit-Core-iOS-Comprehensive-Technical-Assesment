@@ -58,8 +58,11 @@ class ProfileController: UIViewController {
             appExpViewColor.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            view.backgroundColor = .darkGray
             appExperienceImage.image = #imageLiteral(resourceName: "museum")
             apiNameLabel.text = apiChoice
+            usernameLabel.textColor = .white
+            emailLabel.textColor = .white
         } else if apiChoice == "Ticket Master"{
             appExpViewColor.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
@@ -94,7 +97,9 @@ class ProfileController: UIViewController {
             try Auth.auth().signOut()
             UIViewController.showViewController(storyboardName: "Login", viewcontrollerID: "LoginController")
         } catch {
-            print("could not sign out \(error)")
+            DispatchQueue.main.async {
+                self.showAlert(title: "Unable to sign out at this time", message: error.localizedDescription)
+            }
         }
     }
     

@@ -109,6 +109,7 @@ class ArtDetailController: UIViewController {
                         self?.showAlert(title: "Unable to remove art from user favorites", message: error.localizedDescription)
                     }
                 case .success:
+                    UIViewController.getNotification(title: "Removed from favorites", body: "\(String(describing: self?.artwork.title)) was removed")
                     self?.isFavorite = false
                 }
             }
@@ -120,6 +121,7 @@ class ArtDetailController: UIViewController {
                         self?.showAlert(title: "Unable to add art to user favorites", message: error.localizedDescription)
                     }
                 case .success:
+                    UIViewController.getNotification(title: "Added to favorites", body: "\(String(describing: self?.artwork.title)) was added")
                     self?.isFavorite = true
                 }
             }

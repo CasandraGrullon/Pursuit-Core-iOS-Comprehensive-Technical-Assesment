@@ -33,6 +33,7 @@ class EditController: UIViewController {
             collectionView.reloadData()
         }
     }
+    
     private lazy var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -67,11 +68,12 @@ class EditController: UIViewController {
         usernameTextfield.text = user.displayName
     }
     private func appColors() {
-        if userApiChoice == "TicketMaster"{
+        if userApiChoice == "Rijksmuseum"{
             navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             editProfileButton.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             view.backgroundColor = .darkGray
+            collectionView.backgroundColor = .darkGray
             usernameTextfield.backgroundColor = .darkGray
             usernameTextfield.textColor = .white
             updateLabel.textColor = .white
@@ -134,6 +136,14 @@ extension EditController: UICollectionViewDelegateFlowLayout {
         let api = apiChoices[indexPath.row]
         selectedAPI = api
         grabAPIChoice(api: api)
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+            cell?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }) { (completed) in
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+                cell?.transform = CGAffineTransform.identity
+            })
+        }
     }
 }
 extension EditController: UICollectionViewDataSource {
@@ -147,8 +157,10 @@ extension EditController: UICollectionViewDataSource {
         }
         let apichoice = apiChoices[indexPath.row]
         cell.configureCell(api: apichoice)
+        
         return cell
     }
+    
 }
 extension EditController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -181,14 +193,13 @@ extension EditController{
         present(alertController, animated: true)
     }
     private func uploadProfileChanges() {
-        guard let username = usernameTextfield.text, !username.isEmpty,
-              let selectedImage = selectedImage else {
+        guard let username = usernameTextfield.text, !username.isEmpty, let selectedImage = selectedImage else {
                   DispatchQueue.main.async {
                       self.showAlert(title: "Missing Fields", message: "please fill in all required fields")
                   }
                   return
           }
-          let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: profilePicture.bounds)
+        let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: profilePicture.bounds)
           guard let user = Auth.auth().currentUser else {
               return
           }
@@ -223,7 +234,9 @@ extension EditController{
                     self?.showAlert(title: "Unable to update database user", message: error.localizedDescription)
                 }
             case .success:
-                print("successfully updated user")
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Profile Updated!", message: "")
+                }
             }
         }
     }

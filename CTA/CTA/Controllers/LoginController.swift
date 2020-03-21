@@ -26,8 +26,14 @@ class LoginController: UIViewController {
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
-    private var userApiChoice = ""
+    private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice
     
+    private var selectedAPI = "" {
+        didSet {
+            userApiChoice = selectedAPI
+        }
+    }
+        
     private var apiChoices = ["Rijksmuseum", "Ticket Master"] {
         didSet {
             collectionView.reloadData()
@@ -58,7 +64,6 @@ class LoginController: UIViewController {
     }
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
         accountState = accountState == .existingUser ? .newUser : .existingUser
-        //TODO: add animations
         if accountState == .newUser {
             logInButton.setTitle("Create Account", for: .normal)
             promptLabel.text = "Already have account?"
@@ -139,7 +144,7 @@ class LoginController: UIViewController {
                 DispatchQueue.main.async {
                     self?.showAlert(title: "App Experience Picked!", message: "\(api)" )
                 }
-                self?.userApiChoice = api
+                self?.selectedAPI = api
             }
         }
     }
@@ -166,9 +171,17 @@ extension LoginController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let apiChoice = apiChoices[indexPath.row]
-        userApiChoice = apiChoice
         logInButton.isEnabled = true
         logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+        selectedAPI = apiChoice
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+            cell?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }) { (completed) in
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+                cell?.transform = CGAffineTransform.identity
+            })
+        }
 
     }
 }

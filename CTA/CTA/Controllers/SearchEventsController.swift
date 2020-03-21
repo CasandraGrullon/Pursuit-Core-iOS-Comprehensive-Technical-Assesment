@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import UserNotifications
 
 class SearchEventsController: UIViewController {
     
@@ -24,6 +25,7 @@ class SearchEventsController: UIViewController {
                 self.updateUI()
                 self.configureNavBar()
             }
+            
         }
     }
     private var events = [Events]() {
@@ -57,12 +59,46 @@ class SearchEventsController: UIViewController {
             }
         }
     }
+    private let center = UNUserNotificationCenter.current()
+    private let pendingNotifications = PendingNotifications()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getApiChoice()
         configureSearchButton()
         configureTableView()
+        checkForNotificationAuthorization()
+        center.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         getApiChoice()
+        updateUI()
+        configureSearchButton()
+        configureNavBar()
+        configureTableView()
+    }
+    private func checkForNotificationAuthorization() {
+        center.getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                print("app is authorized for notifications")
+            } else {
+                self.requestNotificationPermission()
+            }
+        }
+    }
+    private func requestNotificationPermission() {
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if let error = error {
+                print("error requestion authorization: \(error)")
+                return
+            }
+            if granted {
+                print("access was granted")
+            } else {
+                print("access not granted")
+            }
+        }
     }
     private func getApiChoice() {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in
@@ -82,48 +118,53 @@ class SearchEventsController: UIViewController {
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             searchTableView.backgroundColor = .white
-        } else if userAPIChoice == "Rijksmuseum" {
+            searchTableView.searchBarOne.isHidden = false
+            searchTableView.searchBarOne.isHidden = false
+        } else {
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             searchTableView.backgroundColor = .darkGray
             searchTableView.searchBarOne.placeholder = "Search by artist or keyword"
             searchTableView.searchBarOne.backgroundColor = .white
-            
-        } else {
-            searchTableView.searchBarOne.backgroundColor = .red
         }
     }
     private func getEvents(keyword: String, postCode: String) {
-        TicketMasterAPI.getEvents(keyword: keyword, postalCode: postCode) { [weak self] (result) in
-            switch result {
-            case .failure(let eventsError):
-                DispatchQueue.main.async {
-                    self?.showAlert(title: "Unable to get events from api", message: eventsError.localizedDescription)
-                }
-            case .success(let events):
-                if let noNil = events.embedded {
+        if userAPIChoice == "Ticket Master" {
+            TicketMasterAPI.getEvents(keyword: keyword, postalCode: postCode) { [weak self] (result) in
+                switch result {
+                case .failure(let eventsError):
                     DispatchQueue.main.async {
-                        self?.events = noNil.events
+                        self?.showAlert(title: "Unable to get events from api", message: eventsError.localizedDescription)
                     }
-                    
+                case .success(let events):
+                    if let noNil = events.embedded {
+                        DispatchQueue.main.async {
+                            self?.events = noNil.events
+                        }
+                        
+                    }
                 }
             }
         }
+        
     }
     private func getArtCollection(keyword: String) {
-        MuseumAPI.getCollections(search: keyword) { [weak self] (result) in
-            switch result {
-            case .failure(let artError):
-                DispatchQueue.main.async {
-                    self?.showAlert(title: "Unable to get artwork from api", message: artError.localizedDescription)
-                }
-            case .success(let artworks):
-                DispatchQueue.main.async {
-                    self?.artworks = artworks.artObjects
+        if userAPIChoice == "Rijksmuseum" {
+            MuseumAPI.getCollections(search: keyword) { [weak self] (result) in
+                switch result {
+                case .failure(let artError):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to get artwork from api", message: artError.localizedDescription)
+                    }
+                case .success(let artworks):
+                    DispatchQueue.main.async {
+                        self?.artworks = artworks.artObjects
+                    }
                 }
             }
         }
+        
     }
     
     private func configureTableView() {
@@ -183,8 +224,8 @@ class SearchEventsController: UIViewController {
             DatabaseService.shared.isEventInFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                   DispatchQueue.main.async {
-                    self?.showAlert(title: "Unable to check user favorite events", message: error.localizedDescription)
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to check user favorite events", message: error.localizedDescription)
                     }
                 case .success(let successful):
                     if successful {
@@ -199,7 +240,7 @@ class SearchEventsController: UIViewController {
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
-                    self?.showAlert(title: "Unable to check user favorite artworks", message: error.localizedDescription)
+                        self?.showAlert(title: "Unable to check user favorite artworks", message: error.localizedDescription)
                     }
                 case .success(let successful):
                     if successful {
@@ -237,8 +278,8 @@ extension SearchEventsController: UITableViewDataSource {
             cell.configureCell(art: artwork)
         }
         cell.backgroundColor = .clear
-        cell.apichoice = userAPIChoice
-        cell.updateUI(apichoice: userAPIChoice)
+        cell.apichoice = userAPIChoice ?? ""
+        cell.updateUI(apichoice: userAPIChoice ?? "")
         cell.delegate = self
         return cell
     }
@@ -277,12 +318,13 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
-                        self?.showAlert(title: "Unable to remove event from favorites", message: error.localizedDescription)
+                            self?.showAlert(title: "Unable to remove event from favorites", message: error.localizedDescription)
                         }
                     case .success:
+                        UIViewController.getNotification(title: "Removed from favorites", body: "\(event.name) was removed")
                         self?.isFavorite = false
                         self?.updateButtonUI(event: event)
-                        searchCell.favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
                     }
                 }
             } else {
@@ -290,12 +332,13 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
-                        self?.showAlert(title: "Unable to add event to favorites", message: error.localizedDescription)
+                            self?.showAlert(title: "Unable to add event to favorites", message: error.localizedDescription)
                         }
                     case .success:
+                        UIViewController.getNotification(title: "Added to favorites", body: "\(event.name) was added")
                         self?.isFavorite = true
                         self?.updateButtonUI(event: event)
-                        searchCell.favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                         
                     }
                 }
@@ -311,9 +354,10 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
-                        self?.showAlert(title: "Unable to remove art from favorites", message: error.localizedDescription)
+                            self?.showAlert(title: "Unable to remove art from favorites", message: error.localizedDescription)
                         }
                     case .success:
+                        UIViewController.getNotification(title: "Removed from favorites", body: "\(artwork.title) was removed")
                         self?.isFavorite = false
                         self?.updateButtonUI(art: artwork)
                         searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
@@ -324,10 +368,10 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
-                        self?.showAlert(title: "Unable to add art to favorites", message: error.localizedDescription)
+                            self?.showAlert(title: "Unable to add art to favorites", message: error.localizedDescription)
                         }
                     case .success:
-                        print("added to favorites")
+                        UIViewController.getNotification(title: "Added to favorites", body: "\(artwork.title) was added")
                         self?.isFavorite = true
                         self?.updateButtonUI(art: artwork)
                         searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -337,5 +381,11 @@ extension SearchEventsController: FavoriteButtonDelegate {
         }
         
         
+    }
+}
+extension SearchEventsController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler(.alert)
     }
 }

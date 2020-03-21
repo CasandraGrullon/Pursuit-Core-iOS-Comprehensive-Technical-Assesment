@@ -185,20 +185,19 @@ class DatabaseService {
     public func isArtInFavorites(artwork: Artwork? = nil, artObject: ArtObjects? = nil, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let user = Auth.auth().currentUser else { return }
         
-        if let artwork = artwork {
-            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artwork.objectNumber).getDocuments { (snapshot, error) in
-                if let error = error {
-                    completion(.failure(error))
-                } else if let snapshot = snapshot {
-                    let count = snapshot.documents.count
-                    if count > 0 {
-                        completion(.success(true))
-                    } else {
-                        completion(.success(false))
+        if let artwork = artwork {                db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artwork.objectNumber).getDocuments { (snapshot, error) in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else if let snapshot = snapshot {
+                        let count = snapshot.documents.count
+                        if count > 0 {
+                            completion(.success(true))
+                        } else {
+                            completion(.success(false))
+                        }
                     }
                 }
-            }
-        } else if let artObject = artObject {
+            } else if let artObject = artObject {
             db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artObject.objectNumber).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
