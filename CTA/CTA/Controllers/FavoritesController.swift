@@ -26,6 +26,7 @@ class FavoritesController: UIViewController {
             if userAPIChoice == "Ticket Master" {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.viewWillAppear(true)
                 }
             }
             
@@ -36,6 +37,7 @@ class FavoritesController: UIViewController {
             if userAPIChoice == "Rijksmuseum" {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.viewWillAppear(true)
                 }
             }
             
@@ -47,6 +49,10 @@ class FavoritesController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        getApiChoice()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         getApiChoice()
     }
     private func getApiChoice() {
@@ -68,6 +74,7 @@ class FavoritesController: UIViewController {
                 case .success(let faveEvents):
                     DispatchQueue.main.async {
                         self?.favoriteEvents = faveEvents
+                        self?.collectionView.backgroundColor = .white
                     }
                 }
             }
@@ -79,6 +86,7 @@ class FavoritesController: UIViewController {
                 case .success(let faveArtworks):
                     DispatchQueue.main.async {
                         self?.favoriteArtworks = faveArtworks
+                        self?.collectionView.backgroundColor = .darkGray
                     }
                 }
             }

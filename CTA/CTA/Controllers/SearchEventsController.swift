@@ -47,6 +47,7 @@ class SearchEventsController: UIViewController {
         }
     }
     private var isMapButtonPressed = false
+    
     private var isFavorite = false
     
     override func viewDidLoad() {
@@ -54,6 +55,13 @@ class SearchEventsController: UIViewController {
         configureSearchButton()
         configureTableView()
         getApiChoice()
+        for event in events {
+            updateButtonUI(event: event)
+        }
+        for art in artworks {
+            updateButtonUI(art: art)
+        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -161,6 +169,38 @@ class SearchEventsController: UIViewController {
             searchTableView.searchBarOne.resignFirstResponder()
         }
     }
+    private func updateButtonUI(art: ArtObjects? = nil, event: Events? = nil) {
+        guard let event = event, let art = art else {
+            return
+        }
+        if userAPIChoice == "Ticket Master" {
+            DatabaseService.shared.isEventInFavorites(event: event) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let successful):
+                    if successful {
+                        self?.isFavorite = true
+                    } else {
+                        self?.isFavorite = false
+                    }
+                }
+            }
+        } else {
+            DatabaseService.shared.isArtInFavorites(artObject: art) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let successful):
+                    if successful {
+                        self?.isFavorite = true
+                    } else {
+                        self?.isFavorite = false
+                    }
+                }
+            }
+        }
+    }
     
 }
 extension SearchEventsController: UITableViewDataSource {
@@ -201,7 +241,6 @@ extension SearchEventsController: UITableViewDataSource {
             detailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
                 return EventDetailController(coder: coder, event: event)
             }
-            
         } else {
             let artwork = artworks[indexPath.row]
             detailVC = storyboard.instantiateViewController(identifier: "ArtDetailController") { (coder) in
@@ -224,7 +263,6 @@ extension SearchEventsController: FavoriteButtonDelegate {
     func didPressButtonEvent(_ searchCell: SearchCell, event: Events) {
         if userAPIChoice == "Ticket Master"{
             if isFavorite {
-                searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                 DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
@@ -232,10 +270,11 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     case .success:
                         print("added to favorites")
                         self?.isFavorite = false
+                        self?.updateButtonUI(event: event)
+                        searchCell.favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
                     }
                 }
             } else {
-                searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
                 DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
@@ -243,17 +282,19 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     case .success:
                         print("added to favorites")
                         self?.isFavorite = true
+                        self?.updateButtonUI(event: event)
+                        searchCell.favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+
                     }
                 }
             }
-
+            
         }
     }
     
     func didPressButtonArtwork(_ searchCell: SearchCell, artwork: ArtObjects) {
         if userAPIChoice == "Rijksmuseum" {
             if isFavorite {
-                searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                 DatabaseService.shared.removeArtFromFavorites(artObject: artwork) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
@@ -261,11 +302,25 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     case .success:
                         print("added to favorites")
                         self?.isFavorite = false
+                        self?.updateButtonUI(art: artwork)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                    }
+                }
+            } else {
+                DatabaseService.shared.addArtToFavorites(artObject: artwork) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success:
+                        print("added to favorites")
+                        self?.isFavorite = false
+                        self?.updateButtonUI(art: artwork)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                     }
                 }
             }
         }
+        
+        
     }
-    
-    
 }

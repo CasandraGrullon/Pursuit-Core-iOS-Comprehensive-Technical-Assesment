@@ -147,16 +147,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-mb-Qcv">
-                                                    <rect key="frame" x="0.0" y="0.0" width="381" height="286.5"/>
+                                                    <rect key="frame" x="8" y="8" width="365" height="327"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name/ Artwork Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-Nx-sNU">
-                                                    <rect key="frame" x="8" y="294.5" width="365" height="26.5"/>
+                                                    <rect key="frame" x="8" y="343" width="365" height="26.5"/>
                                                     <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIW-lm-lNX">
-                                                    <rect key="frame" x="10" y="331" width="361" height="21"/>
+                                                    <rect key="frame" x="10" y="379.5" width="361" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -166,13 +166,13 @@
                                                 <constraint firstItem="RIW-lm-lNX" firstAttribute="top" secondItem="HHF-Nx-sNU" secondAttribute="bottom" constant="10" id="10A-UD-huU"/>
                                                 <constraint firstItem="RIW-lm-lNX" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" constant="10" id="F1P-wP-DFQ"/>
                                                 <constraint firstItem="HHF-Nx-sNU" firstAttribute="top" secondItem="Uam-mb-Qcv" secondAttribute="bottom" constant="8" id="MiT-Sg-eXJ"/>
-                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="height" secondItem="ga8-0G-TyA" secondAttribute="height" multiplier="0.7" id="RuN-rR-tUx"/>
+                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="height" secondItem="ga8-0G-TyA" secondAttribute="height" multiplier="0.8" id="RuN-rR-tUx"/>
                                                 <constraint firstAttribute="trailing" secondItem="HHF-Nx-sNU" secondAttribute="trailing" constant="8" id="TXu-G4-LjM"/>
                                                 <constraint firstItem="HHF-Nx-sNU" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" constant="8" id="bW8-sr-FK0"/>
-                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" id="f8a-un-4NH"/>
-                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="top" secondItem="ga8-0G-TyA" secondAttribute="top" id="goc-Ka-cUT"/>
+                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" constant="8" id="f8a-un-4NH"/>
+                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="top" secondItem="ga8-0G-TyA" secondAttribute="top" constant="8" id="goc-Ka-cUT"/>
                                                 <constraint firstAttribute="trailing" secondItem="RIW-lm-lNX" secondAttribute="trailing" constant="10" id="gxJ-ty-Kvo"/>
-                                                <constraint firstAttribute="trailing" secondItem="Uam-mb-Qcv" secondAttribute="trailing" id="yTa-Ab-Ecy"/>
+                                                <constraint firstAttribute="trailing" secondItem="Uam-mb-Qcv" secondAttribute="trailing" constant="8" id="yTa-Ab-Ecy"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="381" height="409"/>
@@ -459,6 +459,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Xy-pS-1F8">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
