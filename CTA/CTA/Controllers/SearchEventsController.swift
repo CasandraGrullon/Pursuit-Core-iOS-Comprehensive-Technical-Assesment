@@ -48,20 +48,22 @@ class SearchEventsController: UIViewController {
     }
     private var isMapButtonPressed = false
     
-    private var isFavorite = false
+    private var isFavorite = false {
+        didSet {
+            for event in events {
+                updateButtonUI(event: event)
+            }
+            for art in artworks {
+                updateButtonUI(art: art)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchButton()
         configureTableView()
         getApiChoice()
-        for event in events {
-            updateButtonUI(event: event)
-        }
-        for art in artworks {
-            updateButtonUI(art: art)
-        }
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -300,7 +302,7 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     case .failure(let error):
                         print(error)
                     case .success:
-                        print("added to favorites")
+                        print("removed to favorites")
                         self?.isFavorite = false
                         self?.updateButtonUI(art: artwork)
                         searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
@@ -313,7 +315,7 @@ extension SearchEventsController: FavoriteButtonDelegate {
                         print(error)
                     case .success:
                         print("added to favorites")
-                        self?.isFavorite = false
+                        self?.isFavorite = true
                         self?.updateButtonUI(art: artwork)
                         searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                     }
