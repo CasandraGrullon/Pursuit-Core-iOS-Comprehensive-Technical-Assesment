@@ -59,7 +59,9 @@ class FavoritesController: UIViewController {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in
             switch result{
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get user app experience", message: error.localizedDescription)
+                }
             case .success(let api):
                 self?.userAPIChoice = api
             }
@@ -70,7 +72,9 @@ class FavoritesController: UIViewController {
             DatabaseService.shared.getFavoriteEvents { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to get user favorite events", message: error.localizedDescription)
+                    }
                 case .success(let faveEvents):
                     DispatchQueue.main.async {
                         self?.favoriteEvents = faveEvents
@@ -82,7 +86,9 @@ class FavoritesController: UIViewController {
             DatabaseService.shared.getFavoriteArtworks { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to get user favorite artworks", message: error.localizedDescription)
+                    }
                 case .success(let faveArtworks):
                     DispatchQueue.main.async {
                         self?.favoriteArtworks = faveArtworks

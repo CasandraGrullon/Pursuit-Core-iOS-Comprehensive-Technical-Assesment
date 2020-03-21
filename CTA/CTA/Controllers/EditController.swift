@@ -103,9 +103,10 @@ class EditController: UIViewController {
         DatabaseService.shared.updateUserAPIChoice(apiChoice: api) { [weak self] (result) in
             switch result {
                 case .failure(let error):
-                    print("error getting api choice \(error)")
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to update user app experience", message: error.localizedDescription)
+                    }
                 case .success:
-                print("\(api) was chosen")
                 self?.userApiChoice = api
             }
         }
@@ -182,7 +183,9 @@ extension EditController{
     private func uploadProfileChanges() {
         guard let username = usernameTextfield.text, !username.isEmpty,
               let selectedImage = selectedImage else {
-                  print("missing fields")
+                  DispatchQueue.main.async {
+                      self.showAlert(title: "Missing Fields", message: "please fill in all required fields")
+                  }
                   return
           }
           let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: profilePicture.bounds)
@@ -192,7 +195,9 @@ extension EditController{
           storageService.uploadPhoto(userId: user.uid, image: resizeImage) { [weak self] (result) in
               switch result {
               case .failure(let error):
-                  print("could not upload image \(error)")
+                  DispatchQueue.main.async {
+                      self?.showAlert(title: "Unable to update user image", message: error.localizedDescription)
+                  }
               case .success(let url):
                 self?.updateDataBaseUser(displayName: username, photoURL: url.absoluteString)
                 let request = Auth.auth().currentUser?.createProfileChangeRequest()
@@ -200,7 +205,9 @@ extension EditController{
                 request?.photoURL = url
                 request?.commitChanges(completion: { (error) in
                     if let error = error {
-                        print("error changing profile \(error)")
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Unable to update user profile", message: error.localizedDescription)
+                        }
                     } else {
                         print("successfully updated profile")
                     }
@@ -209,10 +216,12 @@ extension EditController{
           }
     }
     private func updateDataBaseUser(displayName: String, photoURL: String) {
-        DatabaseService.shared.updateUser(displayName: displayName, photoURL: photoURL) { (result) in
+        DatabaseService.shared.updateUser(displayName: displayName, photoURL: photoURL) { [weak self] (result) in
             switch result{
             case .failure(let error):
-                print("could not update user info \(error)")
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to update database user", message: error.localizedDescription)
+                }
             case .success:
                 print("successfully updated user")
             }

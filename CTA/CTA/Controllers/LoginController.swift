@@ -85,8 +85,9 @@ class LoginController: UIViewController {
             authSession.signInExistingUser(email: email, password: password) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    //TODO: add show alert
-                    print(error)
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to login", message: error.localizedDescription)
+                    }
                 case .success:
                     DispatchQueue.main.async {
                         self?.navigateToMainApp()
@@ -97,8 +98,9 @@ class LoginController: UIViewController {
             authSession.createNewUser(email: email, password: password) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    //TODO: add show alert
-                    print(error)
+                   DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to create account", message: error.localizedDescription)
+                    }
                 case .success(let authDataResult):
                     self?.createUser(authDataResult: authDataResult)
                 }
@@ -110,7 +112,9 @@ class LoginController: UIViewController {
         DatabaseService.shared.createDBUser(authDataResult: authDataResult) { [weak self] (result) in
             switch result {
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to create user", message: error.localizedDescription)
+                }
             case .success:
                 DispatchQueue.main.async {
                     self?.grabAPIChoice(api: self?.userApiChoice ?? "")
@@ -128,9 +132,13 @@ class LoginController: UIViewController {
         DatabaseService.shared.updateUserAPIChoice(apiChoice: api) { [weak self] (result) in
             switch result {
                 case .failure(let error):
-                    print("error getting api choice \(error)")
+                   DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to fetch user experience", message: error.localizedDescription)
+                    }
                 case .success:
-                print("\(api) was chosen")
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "App Experience Picked!", message: "\(api)" )
+                }
                 self?.userApiChoice = api
             }
         }
@@ -158,9 +166,7 @@ extension LoginController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let apiChoice = apiChoices[indexPath.row]
-        //grabAPIChoice(api: apiChoice)
         userApiChoice = apiChoice
-        print("selected: \(apiChoice)")
         logInButton.isEnabled = true
         logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
 

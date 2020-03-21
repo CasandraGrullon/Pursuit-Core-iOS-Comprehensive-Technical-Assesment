@@ -30,7 +30,9 @@ class MainAppTabBar: UITabBarController {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in
             switch result{
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to fetch user experience", message: error.localizedDescription)
+                }
             case .success(let api):
                 self?.userAPIChoice = api
             }

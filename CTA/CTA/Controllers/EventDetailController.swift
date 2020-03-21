@@ -20,7 +20,15 @@ class EventDetailController: UIViewController {
     }
     
     public var event: Events
-    private var isFavorite = false
+    private var isFavorite = false {
+        didSet {
+            if isFavorite{
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+            } else {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+            }
+        }
+    }
     
     init?(coder: NSCoder, event: Events) {
         self.event = event
@@ -35,6 +43,7 @@ class EventDetailController: UIViewController {
         super.viewDidLoad()
         configureNavBar()
         eventsUI()
+        isInFavorite()
     }
     private func configureNavBar() {
         
@@ -46,32 +55,47 @@ class EventDetailController: UIViewController {
     
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         if isFavorite {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
             DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to remove event from favorites", message: error.localizedDescription)
+                    }
                 case .success:
-                    print("removed from faves")
                     self?.isFavorite = false
                 }
             }
         } else {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
             DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to add event to favorites", message: error.localizedDescription)
+                    }
                 case .success:
-                    print("added to faves")
                     self?.isFavorite = true
+                }
+            }
+        }
+    }
+    private func isInFavorite() {
+        DatabaseService.shared.isEventInFavorites(event: event) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get user favorite events", message: error.localizedDescription)
+                }
+            case .success(let successful):
+                if successful {
+                    self?.isFavorite = true
+                } else {
+                    self?.isFavorite = false
                 }
             }
         }
     }
     
     private func eventsUI() {
-        
         guard let eventImage = event.images.first?.url else {
             return
         }

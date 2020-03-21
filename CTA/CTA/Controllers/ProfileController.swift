@@ -74,7 +74,9 @@ class ProfileController: UIViewController {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in
             switch result {
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get user app experience", message: error.localizedDescription)
+                }
             case .success(let apichoice):
                 self?.apiChoice = apichoice
             }

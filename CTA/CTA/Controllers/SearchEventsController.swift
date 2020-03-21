@@ -26,7 +26,6 @@ class SearchEventsController: UIViewController {
             }
         }
     }
-    
     private var events = [Events]() {
         didSet {
             if userAPIChoice == "Ticket Master" {
@@ -65,17 +64,13 @@ class SearchEventsController: UIViewController {
         configureTableView()
         getApiChoice()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        getApiChoice()
-        configureSearchButton()
-        configureTableView()
-    }
     private func getApiChoice() {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in
             switch result{
             case .failure(let error):
-                print(error)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get user experience", message: error.localizedDescription)
+                }
             case .success(let api):
                 self?.userAPIChoice = api
             }
@@ -89,6 +84,8 @@ class SearchEventsController: UIViewController {
             searchTableView.backgroundColor = .white
         } else if userAPIChoice == "Rijksmuseum" {
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             searchTableView.backgroundColor = .darkGray
             searchTableView.searchBarOne.placeholder = "Search by artist or keyword"
             searchTableView.searchBarOne.backgroundColor = .white
@@ -101,7 +98,9 @@ class SearchEventsController: UIViewController {
         TicketMasterAPI.getEvents(keyword: keyword, postalCode: postCode) { [weak self] (result) in
             switch result {
             case .failure(let eventsError):
-                print(eventsError)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get events from api", message: eventsError.localizedDescription)
+                }
             case .success(let events):
                 if let noNil = events.embedded {
                     DispatchQueue.main.async {
@@ -116,7 +115,9 @@ class SearchEventsController: UIViewController {
         MuseumAPI.getCollections(search: keyword) { [weak self] (result) in
             switch result {
             case .failure(let artError):
-                print(artError)
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get artwork from api", message: artError.localizedDescription)
+                }
             case .success(let artworks):
                 DispatchQueue.main.async {
                     self?.artworks = artworks.artObjects
@@ -155,8 +156,9 @@ class SearchEventsController: UIViewController {
         if userAPIChoice == "Ticket Master" {
             guard let keyword = searchTableView.searchBarOne.text, !keyword.isEmpty,
                 let zipcode = searchTableView.searchBarTwo.text, !zipcode.isEmpty else {
-                    //add warning to fill all fields
-                    print("missing fields")
+                    DispatchQueue.main.async {
+                        self.showAlert(title: "Missing Fields", message: "please fill all required fields")
+                    }
                     return
             }
             getEvents(keyword: keyword, postCode: zipcode)
@@ -164,7 +166,9 @@ class SearchEventsController: UIViewController {
             searchTableView.searchBarTwo.resignFirstResponder()
         } else {
             guard let artSearch = searchTableView.searchBarOne.text, !artSearch.isEmpty else {
-                print("missing fields")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Missing Fields", message: "please fill all required fields")
+                }
                 return
             }
             getArtCollection(keyword: artSearch)
@@ -179,7 +183,9 @@ class SearchEventsController: UIViewController {
             DatabaseService.shared.isEventInFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    print(error)
+                   DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to check user favorite events", message: error.localizedDescription)
+                    }
                 case .success(let successful):
                     if successful {
                         self?.isFavorite = true
@@ -192,7 +198,9 @@ class SearchEventsController: UIViewController {
             DatabaseService.shared.isArtInFavorites(artObject: art) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to check user favorite artworks", message: error.localizedDescription)
+                    }
                 case .success(let successful):
                     if successful {
                         self?.isFavorite = true
@@ -268,9 +276,10 @@ extension SearchEventsController: FavoriteButtonDelegate {
                 DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
-                        print(error)
+                        DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to remove event from favorites", message: error.localizedDescription)
+                        }
                     case .success:
-                        print("added to favorites")
                         self?.isFavorite = false
                         self?.updateButtonUI(event: event)
                         searchCell.favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -280,13 +289,14 @@ extension SearchEventsController: FavoriteButtonDelegate {
                 DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
-                        print(error)
+                        DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to add event to favorites", message: error.localizedDescription)
+                        }
                     case .success:
-                        print("added to favorites")
                         self?.isFavorite = true
                         self?.updateButtonUI(event: event)
                         searchCell.favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-
+                        
                     }
                 }
             }
@@ -300,9 +310,10 @@ extension SearchEventsController: FavoriteButtonDelegate {
                 DatabaseService.shared.removeArtFromFavorites(artObject: artwork) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
-                        print(error)
+                        DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to remove art from favorites", message: error.localizedDescription)
+                        }
                     case .success:
-                        print("removed to favorites")
                         self?.isFavorite = false
                         self?.updateButtonUI(art: artwork)
                         searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
@@ -312,7 +323,9 @@ extension SearchEventsController: FavoriteButtonDelegate {
                 DatabaseService.shared.addArtToFavorites(artObject: artwork) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
-                        print(error)
+                        DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to add art to favorites", message: error.localizedDescription)
+                        }
                     case .success:
                         print("added to favorites")
                         self?.isFavorite = true
