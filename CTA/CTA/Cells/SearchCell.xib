@@ -28,8 +28,11 @@
                         <state key="normal" backgroundImage="suit.heart" catalog="system">
                             <color key="titleColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </state>
+                        <connections>
+                            <action selector="favoriteButtonPressed:" destination="owP-Wh-oU3" eventType="touchUpInside" id="86s-PD-4I0"/>
+                        </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date/Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGF-ws-gXO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date/Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGF-ws-gXO">
                         <rect key="frame" x="266.5" y="64" width="344.5" height="22.5"/>
                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

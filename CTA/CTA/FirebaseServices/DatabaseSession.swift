@@ -20,7 +20,7 @@ class DatabaseService {
     private init() {}
     
     public static let shared = DatabaseService()
-
+    
     public func createDBUser(authDataResult: AuthDataResult, completion: @escaping (Result<Bool, Error>) -> ()) {
         
         guard let email = authDataResult.user.email else {
@@ -48,19 +48,19 @@ class DatabaseService {
         }
     }
     public func getUserApiChoice(completion: @escaping (Result<String, Error>) -> ()) {
-      guard let user = Auth.auth().currentUser else { return }
-      db.collection(DatabaseService.appUsers).document(user.uid).getDocument { (snapshot, error) in
-        if let error = error {
-          completion(.failure(error))
-        } else if let snapshot = snapshot{
-          guard let userData = snapshot.data() else { return }
-            let appuser = AppUser(userData)
-            completion(.success(appuser.apiChoice))
-            
-           
+        guard let user = Auth.auth().currentUser else { return }
+        db.collection(DatabaseService.appUsers).document(user.uid).getDocument { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot{
+                guard let userData = snapshot.data() else { return }
+                let appuser = AppUser(userData)
+                completion(.success(appuser.apiChoice))
+                
+                
+            }
         }
-      }
-       
+        
     }
     public func getAPPUser(userId: String, completion: @escaping (Result<[AppUser], Error>) -> ()) {
         guard let user = Auth.auth().currentUser else {
@@ -77,18 +77,18 @@ class DatabaseService {
     }
     
     public func updateUser(displayName: String, photoURL: String, completion: @escaping (Result<Bool, Error>) -> ()) {
-    
-    guard let user = Auth.auth().currentUser else {
-        return
-    }
-    db.collection(DatabaseService.appUsers).document(user.uid).updateData(["displayName": displayName, "photoURL": photoURL]) { (error) in
         
-        if let error = error {
-            completion(.failure(error))
-        } else {
-            completion(.success(true))
+        guard let user = Auth.auth().currentUser else {
+            return
         }
-    }
+        db.collection(DatabaseService.appUsers).document(user.uid).updateData(["displayName": displayName, "photoURL": photoURL]) { (error) in
+            
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
     }
     public func addEventToFavorites(event: Events, completion: @escaping (Result<Bool, Error>) -> () ) {
         guard let user = Auth.auth().currentUser, let eventImage = event.images.first?.url else { return }
@@ -100,7 +100,7 @@ class DatabaseService {
             }
         }
     }
-
+    
     public func removeEventFromFavorites(event: Events, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let user = Auth.auth().currentUser else {return}
         
@@ -138,38 +138,77 @@ class DatabaseService {
             }
         }
     }
-
-    public func addArtToFavorites(artwork: Artwork, completion: @escaping (Result<Bool, Error>) -> ()) {
+    
+    public func addArtToFavorites(artwork: Artwork? = nil, artObject: ArtObjects? = nil, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let user = Auth.auth().currentUser else { return }
-        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.objectNumber).setData(["artObjectNumber": artwork.objectNumber, "artTitle": artwork.title, "artistName": artwork.principalMaker, "artImageURL": artwork.webImage.url, "dateFavorited": Timestamp(date: Date())]) { (error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(true))
-            }
-        }
-    }
-    public func removeArtFromFavorites(artwork: Artwork, completion: @escaping (Result<Bool, Error>) -> ()) {
-        guard let user = Auth.auth().currentUser else { return }
-        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.objectNumber).delete { (error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(true))
-            }
-        }
-    }
-    public func isArtInFavorites(artwork: Artwork, completion: @escaping (Result<Bool, Error>) -> ()) {
-        guard let user = Auth.auth().currentUser else { return }
-        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artwork.objectNumber).getDocuments { (snapshot, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else if let snapshot = snapshot {
-                let count = snapshot.documents.count
-                if count > 0 {
-                    completion(.success(true))
+        
+        if let artwork = artwork {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.objectNumber).setData(["artObjectNumber": artwork.objectNumber, "artTitle": artwork.title, "artistName": artwork.principalMaker, "artImageURL": artwork.webImage.url, "dateFavorited": Timestamp(date: Date())]) { (error) in
+                if let error = error {
+                    completion(.failure(error))
                 } else {
-                    completion(.success(false))
+                    completion(.success(true))
+                }
+            }
+        } else if let artObject = artObject {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artObject.objectNumber).setData(["artObjectNumber": artObject.objectNumber, "artTitle": artObject.title, "artistName": artObject.artist, "artImageURL": artObject.webImage.url, "dateFavorited": Timestamp(date: Date())]) { (error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
+            }
+        }
+    }
+    public func removeArtFromFavorites(artwork: Artwork? = nil, artObject: ArtObjects? = nil, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        
+        if let artwork = artwork {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.objectNumber).delete { (error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
+            }
+        } else if let artObject = artObject {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artObject.objectNumber).delete { (error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
+            }
+        }
+        
+    }
+    public func isArtInFavorites(artwork: Artwork? = nil, artObject: ArtObjects? = nil, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        
+        if let artwork = artwork {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artwork.objectNumber).getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let snapshot = snapshot {
+                    let count = snapshot.documents.count
+                    if count > 0 {
+                        completion(.success(true))
+                    } else {
+                        completion(.success(false))
+                    }
+                }
+            }
+        } else if let artObject = artObject {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artObject.objectNumber).getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let snapshot = snapshot {
+                    let count = snapshot.documents.count
+                    if count > 0 {
+                        completion(.success(true))
+                    } else {
+                        completion(.success(false))
+                    }
                 }
             }
         }

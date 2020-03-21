@@ -70,9 +70,6 @@ class ArtDetailController: UIViewController {
             artDetailView.objectTypeLabel.text = art?.objectTypes.joined(separator: ",")
                
             artDetailView.artistNameLabel.text = art?.principalMaker
-    //        artDetailView.artistBirthDay.text = "born \(art?.principalMakers.dateOfBirth ?? "") in \(art?.principalMakers.placeOfBirth ?? "") "
-    //        artDetailView.artistDeath.text = "died \(art?.principalMakers.dateOfDeath ?? "") in \(art?.principalMakers.placeOfDeath ?? "")"
-    //        artDetailView.artistOccupation.text = "\(art?.principalMakers.occupation.joined(separator: "\n") ?? "")"
            }
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         if isFavorite {
@@ -83,6 +80,7 @@ class ArtDetailController: UIViewController {
                     print(error)
                 case .success:
                     print("removed from favorites")
+                    self?.isFavorite = false
                 }
             }
         } else {
@@ -93,6 +91,7 @@ class ArtDetailController: UIViewController {
                 print(error)
             case .success:
                 print("added from favorites")
+                    self?.isFavorite = true
                 }
             }
         }

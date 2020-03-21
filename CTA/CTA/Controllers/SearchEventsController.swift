@@ -47,6 +47,7 @@ class SearchEventsController: UIViewController {
         }
     }
     private var isMapButtonPressed = false
+    private var isFavorite = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,13 +178,18 @@ extension SearchEventsController: UITableViewDataSource {
         }
         if userAPIChoice == "Ticket Master" {
             let event = events[indexPath.row]
+            cell.event = event
+            
             cell.configureCell(event: event)
         } else {
             let artwork = artworks[indexPath.row]
+            cell.artwork = artwork
             cell.configureCell(art: artwork)
         }
         cell.backgroundColor = .clear
-        cell.updateUI(apichoice: userAPIChoice ?? "")
+        cell.apichoice = userAPIChoice
+        cell.updateUI(apichoice: userAPIChoice)
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -203,9 +209,6 @@ extension SearchEventsController: UITableViewDataSource {
             }
         }
         navigationController?.pushViewController(detailVC, animated: true)
-        
-        
-        
     }
 }
 extension SearchEventsController: UITableViewDelegate {
@@ -216,4 +219,53 @@ extension SearchEventsController: UITableViewDelegate {
             return 160
         }
     }
+}
+extension SearchEventsController: FavoriteButtonDelegate {
+    func didPressButtonEvent(_ searchCell: SearchCell, event: Events) {
+        if userAPIChoice == "Ticket Master"{
+            if isFavorite {
+                searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success:
+                        print("added to favorites")
+                        self?.isFavorite = false
+                    }
+                }
+            } else {
+                searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success:
+                        print("added to favorites")
+                        self?.isFavorite = true
+                    }
+                }
+            }
+
+        }
+    }
+    
+    func didPressButtonArtwork(_ searchCell: SearchCell, artwork: ArtObjects) {
+        if userAPIChoice == "Rijksmuseum" {
+            if isFavorite {
+                searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                DatabaseService.shared.removeArtFromFavorites(artObject: artwork) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success:
+                        print("added to favorites")
+                        self?.isFavorite = false
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }

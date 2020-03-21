@@ -12,16 +12,15 @@ import Kingfisher
 class EventDetailController: UIViewController {
     
     private let eventsDetailView = EventDetailView()
-    private let artDetailView = MuseumDetailView()
     
     override func loadView() {
-        
         view = eventsDetailView
         eventsDetailView.backgroundColor = .white
         
     }
     
     public var event: Events
+    private var isFavorite = false
     
     init?(coder: NSCoder, event: Events) {
         self.event = event
@@ -46,7 +45,29 @@ class EventDetailController: UIViewController {
     }
     
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
-        
+        if isFavorite {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+            DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    print("removed from faves")
+                    self?.isFavorite = false
+                }
+            }
+        } else {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+            DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    print("added to faves")
+                    self?.isFavorite = true
+                }
+            }
+        }
     }
     
     private func eventsUI() {

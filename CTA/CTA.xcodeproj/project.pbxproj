@@ -46,6 +46,7 @@
 		C6B200382423E63F005F3966 /* MuseumDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B200372423E63F005F3966 /* MuseumDetailView.swift */; };
 		C6B2003A242428B9005F3966 /* ArtDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B20039242428B9005F3966 /* ArtDetailController.swift */; };
 		C6B2003C24242ED7005F3966 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B2003B24242ED7005F3966 /* FavoritesController.swift */; };
+		C6D3826824258E6C0096E050 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3826724258E6C0096E050 /* FavoriteCell.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		C6B200372423E63F005F3966 /* MuseumDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumDetailView.swift; sourceTree = "<group>"; };
 		C6B20039242428B9005F3966 /* ArtDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDetailController.swift; sourceTree = "<group>"; };
 		C6B2003B24242ED7005F3966 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		C6D3826724258E6C0096E050 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +251,7 @@
 				C66C2FD22421387D00D2A4CB /* SearchCell.xib */,
 				C68BAEB324228775003E7680 /* APICell.swift */,
 				C68BAEB52422877F003E7680 /* APICell.xib */,
+				C6D3826724258E6C0096E050 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				C66C2FCE242123AF00D2A4CB /* SearchTableView.swift in Sources */,
 				C623631C2422C42F00DD4D60 /* ProfileController.swift in Sources */,
 				C6B2003C24242ED7005F3966 /* FavoritesController.swift in Sources */,
+				C6D3826824258E6C0096E050 /* FavoriteCell.swift in Sources */,
 				C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */,
 				C6B200362423CD22005F3966 /* UserSession.swift in Sources */,
 				C63A2AD1241FFB28000342A0 /* MainAppTabBar.swift in Sources */,
