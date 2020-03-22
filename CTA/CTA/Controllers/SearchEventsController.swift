@@ -12,17 +12,16 @@ import UserNotifications
 
 class SearchEventsController: UIViewController {
     
-    private var searchMapView = EventsSearchMapView()
     private var searchTableView = SearchTableView()
     
     override func loadView() {
         view = searchTableView
-        searchMapView.backgroundColor = .white
     }
     private var userAPIChoice = "" {
         didSet {
             DispatchQueue.main.async {
                 self.updateUI()
+                self.configureNavBar()
             }
         }
     }
@@ -45,8 +44,6 @@ class SearchEventsController: UIViewController {
             
         }
     }
-    private var isMapButtonPressed = false
-    
     private var isFavorite = false {
         didSet {
             for event in events {
@@ -63,6 +60,8 @@ class SearchEventsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getApiChoice()
+        searchTableView.searchBarTwo.delegate = self
+        searchTableView.searchBarOne.delegate = self
         configureSearchButton()
         configureTableView()
         checkForNotificationAuthorization()
@@ -71,7 +70,6 @@ class SearchEventsController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getApiChoice()
-        updateUI()
     }
     private func checkForNotificationAuthorization() {
         center.getNotificationSettings { (settings) in
@@ -108,7 +106,6 @@ class SearchEventsController: UIViewController {
         }
     }
     private func updateUI() {
-        configureNavBar()
         searchTableView.tableView.backgroundColor = .clear
         if userAPIChoice == "Ticket Master" {
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
@@ -134,8 +131,6 @@ class SearchEventsController: UIViewController {
     private func configureNavBar() {
         if userAPIChoice == "Ticket Master" {
             navigationItem.title = "Ticket Master Events"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(changeView(_:)))
-            
         } else {
             navigationItem.title = "Rijks Museum Collection"
             navigationItem.rightBarButtonItem?.accessibilityElementsHidden = true
@@ -181,13 +176,6 @@ class SearchEventsController: UIViewController {
     }
     private func configureSearchButton() {
         searchTableView.searchButton.addTarget(self, action: #selector(searchButtonPressed(_:)), for: .touchUpInside)
-    }
-    @objc private func changeView(_ sender: UIBarButtonItem){
-        if isMapButtonPressed {
-            view = searchMapView
-        } else {
-            view = searchTableView
-        }
     }
     @objc private func searchButtonPressed(_ sender: UIButton) {
         if userAPIChoice == "Ticket Master" {
@@ -274,8 +262,8 @@ extension SearchEventsController: UITableViewDataSource {
             cell.configureCell(art: artwork)
         }
         cell.backgroundColor = .clear
-        cell.apichoice = userAPIChoice ?? ""
-        cell.updateUI(apichoice: userAPIChoice ?? "")
+        cell.apichoice = userAPIChoice
+        cell.updateUI(apichoice: userAPIChoice)
         cell.delegate = self
         return cell
     }
@@ -295,6 +283,12 @@ extension SearchEventsController: UITableViewDataSource {
             }
         }
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+extension SearchEventsController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 extension SearchEventsController: UITableViewDelegate {
@@ -381,7 +375,6 @@ extension SearchEventsController: FavoriteButtonDelegate {
 }
 extension SearchEventsController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
         completionHandler(.alert)
     }
 }

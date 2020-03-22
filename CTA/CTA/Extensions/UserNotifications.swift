@@ -26,7 +26,7 @@ extension UIViewController {
         notification.body = body
         notification.sound = .default
         let identifier = UUID().uuidString
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Date().timeIntervalSinceNow, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Date().timeIntervalSinceNow + 2, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: notification, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
