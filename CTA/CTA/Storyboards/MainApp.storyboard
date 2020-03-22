@@ -249,8 +249,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SG0-3M-tCG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="Sv8-Bh-pRX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="SAN-wB-d33">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SAN-wB-d33">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
@@ -435,7 +435,6 @@
         <!--Navigation Controller-->
         <scene sceneID="BM3-uO-7Z5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y6P-um-Tc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="66s-T7-RUi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="C9r-fg-wcp">
@@ -452,13 +451,13 @@
                         <segue destination="lQV-9f-fHV" kind="relationship" relationship="rootViewController" id="YMp-sv-TrM"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y6P-um-Tc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2134.7826086956525" y="-177.45535714285714"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jbW-xm-4fb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nGy-eG-trg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tfe-fb-Kbj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0Xy-pS-1F8">
@@ -475,6 +474,7 @@
                         <segue destination="mgf-Mo-bh2" kind="relationship" relationship="rootViewController" id="0VO-It-fVJ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nGy-eG-trg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2111.594202898551" y="-830.35714285714278"/>
         </scene>

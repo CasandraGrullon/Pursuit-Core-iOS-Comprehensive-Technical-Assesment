@@ -26,11 +26,15 @@ class LoginController: UIViewController {
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
-    private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice
+    private var userApiChoice = UserSession.shared.getAppUser()?.apiChoice {
+        didSet {
+            userApiChoice = selectedAPI
+        }
+    }
     
     private var selectedAPI = "" {
         didSet {
-            userApiChoice = selectedAPI
+            grabAPIChoice(api: selectedAPI)
         }
     }
         
@@ -122,7 +126,7 @@ class LoginController: UIViewController {
                 }
             case .success:
                 DispatchQueue.main.async {
-                    self?.grabAPIChoice(api: self?.userApiChoice ?? "")
+                    self?.grabAPIChoice(api: self?.selectedAPI ?? "")
                     self?.navigateToMainApp()
                 }
             }
@@ -144,7 +148,7 @@ class LoginController: UIViewController {
                 DispatchQueue.main.async {
                     self?.showAlert(title: "App Experience Picked!", message: "\(api)" )
                 }
-                self?.selectedAPI = api
+                self?.userApiChoice = api
             }
         }
     }

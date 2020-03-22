@@ -23,9 +23,7 @@ class SearchEventsController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.updateUI()
-                self.configureNavBar()
             }
-            
         }
     }
     private var events = [Events]() {
@@ -74,9 +72,6 @@ class SearchEventsController: UIViewController {
         super.viewDidAppear(true)
         getApiChoice()
         updateUI()
-        configureSearchButton()
-        configureNavBar()
-        configureTableView()
     }
     private func checkForNotificationAuthorization() {
         center.getNotificationSettings { (settings) in
@@ -113,13 +108,14 @@ class SearchEventsController: UIViewController {
         }
     }
     private func updateUI() {
+        configureNavBar()
         searchTableView.tableView.backgroundColor = .clear
         if userAPIChoice == "Ticket Master" {
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
             searchTableView.backgroundColor = .white
             searchTableView.searchBarOne.isHidden = false
-            searchTableView.searchBarOne.isHidden = false
+            searchTableView.searchBarTwo.isHidden = false
         } else {
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
@@ -127,6 +123,23 @@ class SearchEventsController: UIViewController {
             searchTableView.backgroundColor = .darkGray
             searchTableView.searchBarOne.placeholder = "Search by artist or keyword"
             searchTableView.searchBarOne.backgroundColor = .white
+            searchTableView.searchBarTwo.isHidden = true
+        }
+    }
+    private func configureTableView() {
+        searchTableView.tableView.dataSource = self
+        searchTableView.tableView.delegate = self
+        searchTableView.tableView.register(UINib(nibName: "SearchCell", bundle: nil), forCellReuseIdentifier: "searchCell")
+    }
+    private func configureNavBar() {
+        if userAPIChoice == "Ticket Master" {
+            navigationItem.title = "Ticket Master Events"
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(changeView(_:)))
+            
+        } else {
+            navigationItem.title = "Rijks Museum Collection"
+            navigationItem.rightBarButtonItem?.accessibilityElementsHidden = true
+            navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
     private func getEvents(keyword: String, postCode: String) {
@@ -165,23 +178,6 @@ class SearchEventsController: UIViewController {
             }
         }
         
-    }
-    
-    private func configureTableView() {
-        searchTableView.tableView.dataSource = self
-        searchTableView.tableView.delegate = self
-        searchTableView.tableView.register(UINib(nibName: "SearchCell", bundle: nil), forCellReuseIdentifier: "searchCell")
-    }
-    private func configureNavBar() {
-        if userAPIChoice == "Ticket Master" {
-            navigationItem.title = "Ticket Master Events"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(changeView(_:)))
-        } else {
-            navigationItem.title = "Rijks Museum Collection"
-            navigationItem.rightBarButtonItem?.accessibilityElementsHidden = true
-            navigationItem.rightBarButtonItem?.isEnabled = false
-            searchTableView.searchBarTwo.isHidden = true
-        }
     }
     private func configureSearchButton() {
         searchTableView.searchButton.addTarget(self, action: #selector(searchButtonPressed(_:)), for: .touchUpInside)
