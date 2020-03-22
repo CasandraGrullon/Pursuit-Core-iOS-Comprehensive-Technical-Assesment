@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import UserNotifications
 
+
 class SearchEventsController: UIViewController {
     
     private var searchTableView = SearchTableView()
@@ -25,6 +26,9 @@ class SearchEventsController: UIViewController {
             }
         }
     }
+    
+    private var refreshControl: UIRefreshControl!
+    
     private var events = [Events]() {
         didSet {
             if userAPIChoice == "Ticket Master" {
@@ -64,12 +68,15 @@ class SearchEventsController: UIViewController {
         searchTableView.searchBarOne.delegate = self
         configureSearchButton()
         configureTableView()
+        refreshControl = UIRefreshControl()
+        searchTableView.tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
         checkForNotificationAuthorization()
         center.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        getApiChoice()
+        //getApiChoice()
     }
     private func checkForNotificationAuthorization() {
         center.getNotificationSettings { (settings) in
@@ -93,15 +100,22 @@ class SearchEventsController: UIViewController {
             }
         }
     }
-    private func getApiChoice() {
+    @objc private func loadData() {
+        getApiChoice()
+        getArtCollection(keyword: searchTableView.searchBarOne.text ?? "")
+        getEvents(keyword: searchTableView.searchBarOne.text ?? "", postCode: searchTableView.searchBarTwo.text ?? "")
+    }
+    @objc private func getApiChoice() {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in
             switch result{
             case .failure(let error):
                 DispatchQueue.main.async {
                     self?.showAlert(title: "Unable to get user experience", message: error.localizedDescription)
+                    self?.refreshControl.endRefreshing()
                 }
             case .success(let api):
                 self?.userAPIChoice = api
+                self?.refreshControl.endRefreshing()
             }
         }
     }
@@ -137,18 +151,20 @@ class SearchEventsController: UIViewController {
             navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
-    private func getEvents(keyword: String, postCode: String) {
+    @objc private func getEvents(keyword: String, postCode: String) {
         if userAPIChoice == "Ticket Master" {
             TicketMasterAPI.getEvents(keyword: keyword, postalCode: postCode) { [weak self] (result) in
                 switch result {
                 case .failure(let eventsError):
                     DispatchQueue.main.async {
                         self?.showAlert(title: "Unable to get events from api", message: eventsError.localizedDescription)
+                        self?.refreshControl.endRefreshing()
                     }
                 case .success(let events):
                     if let noNil = events.embedded {
                         DispatchQueue.main.async {
                             self?.events = noNil.events
+                            self?.refreshControl.endRefreshing()
                         }
                         
                     }
@@ -157,17 +173,19 @@ class SearchEventsController: UIViewController {
         }
         
     }
-    private func getArtCollection(keyword: String) {
+    @objc private func getArtCollection(keyword: String) {
         if userAPIChoice == "Rijksmuseum" {
             MuseumAPI.getCollections(search: keyword) { [weak self] (result) in
                 switch result {
                 case .failure(let artError):
                     DispatchQueue.main.async {
                         self?.showAlert(title: "Unable to get artwork from api", message: artError.localizedDescription)
+                        self?.refreshControl.endRefreshing()
                     }
                 case .success(let artworks):
                     DispatchQueue.main.async {
                         self?.artworks = artworks.artObjects
+                        self?.refreshControl.endRefreshing()
                     }
                 }
             }
@@ -254,7 +272,6 @@ extension SearchEventsController: UITableViewDataSource {
         if userAPIChoice == "Ticket Master" {
             let event = events[indexPath.row]
             cell.event = event
-            
             cell.configureCell(event: event)
         } else {
             let artwork = artworks[indexPath.row]
@@ -276,11 +293,13 @@ extension SearchEventsController: UITableViewDataSource {
             detailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
                 return EventDetailController(coder: coder, event: event)
             }
+           
         } else {
             let artwork = artworks[indexPath.row]
             detailVC = storyboard.instantiateViewController(identifier: "ArtDetailController") { (coder) in
                 return ArtDetailController(coder: coder, artwork: artwork)
             }
+            
         }
         navigationController?.pushViewController(detailVC, animated: true)
     }
