@@ -32,7 +32,8 @@ class EventDetailController: UIViewController {
     }
     public lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer()
-        gesture.addTarget(eventsDetailView.eventLinkLabel, action: #selector(didTapURL(_:)))
+        gesture.addTarget(self, action: #selector(didTapURL(_:)))
+        
         return gesture
     }()
     
@@ -51,9 +52,12 @@ class EventDetailController: UIViewController {
         eventsUI()
         isInFavorite()
         eventsDetailView.eventLinkLabel.isUserInteractionEnabled = true
+        eventsDetailView.eventInfoStack.isUserInteractionEnabled = true
         eventsDetailView.eventLinkLabel.addGestureRecognizer(tapGesture)
+        
     }
-    @objc private func didTapURL(_ sender: UITapGestureRecognizer) {
+    @objc func didTapURL(_ sender: UITapGestureRecognizer) {
+        
         guard let url = URL(string: event.url) else {
             return
         }
@@ -120,6 +124,7 @@ class EventDetailController: UIViewController {
         guard let venue = event.venueInfo.venues.first else {
             return
         }
+        
         eventsDetailView.eventImage.kf.setImage(with: URL(string: eventImage))
         eventsDetailView.eventNameLabel.text = event.name
         eventsDetailView.eventLinkLabel.text = event.url

@@ -45,7 +45,7 @@ class EventDetailView: UIView {
         return label
     }()
     public lazy var eventInfoStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [eventNameLabel, eventDateLabel, eventLinkLabel, eventPriceLabel])
+        let stack = UIStackView(arrangedSubviews: [eventNameLabel, eventDateLabel, eventPriceLabel, promoterLabel, eventLinkLabel, pleaseNoteLabel])
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
@@ -68,24 +68,6 @@ class EventDetailView: UIView {
         label.font = UIFont(name: "Avenir Book", size: 17)
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
-    }()
-    public lazy var eventDetailsStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [promoterLabel, pleaseNoteLabel])
-        stack.alignment = .fill
-        stack.axis = .vertical
-        stack.distribution = .equalSpacing
-        stack.backgroundColor = .white
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    public lazy var eventStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [eventInfoStack, eventDetailsStack])
-        stack.alignment = .fill
-        stack.axis = .vertical
-        stack.distribution = .equalSpacing
-        stack.backgroundColor = .white
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
     }()
     public lazy var venueNameLabel: UILabel = {
         let label = UILabel()
@@ -181,32 +163,21 @@ class EventDetailView: UIView {
         ])
     }
     private func eventInfoConstraints() {
-        contentView.addSubview(eventStack)
-        eventStack.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(eventInfoStack)
+        eventInfoStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            eventStack.topAnchor.constraint(equalTo: eventImage.bottomAnchor, constant: 8),
-            eventStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            eventStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            eventStack.heightAnchor.constraint(equalTo: eventImage.heightAnchor)
+            eventInfoStack.topAnchor.constraint(equalTo: eventImage.bottomAnchor, constant: 8),
+            eventInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            eventInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            eventInfoStack.heightAnchor.constraint(equalTo: eventImage.heightAnchor)
         ])
     }
-//    private func eventDetailsConstraints() {
-//        contentView.addSubview(eventDetailsStack)
-//        eventDetailsStack.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            eventDetailsStack.topAnchor.constraint(equalTo: eventInfoStack.bottomAnchor, constant: 8),
-//            eventDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            eventDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-//            eventDetailsStack.heightAnchor.constraint(equalToConstant: 200)
-//        ])
-//    }
     private func venueImageConstraints() {
         contentView.addSubview(venueImage)
         venueImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            venueImage.topAnchor.constraint(equalTo: eventDetailsStack.bottomAnchor, constant: 10),
+            venueImage.topAnchor.constraint(equalTo: eventInfoStack.bottomAnchor, constant: 10),
             venueImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             venueImage.widthAnchor.constraint(equalToConstant: 100),
             venueImage.heightAnchor.constraint(equalTo: venueImage.widthAnchor),
@@ -217,7 +188,7 @@ class EventDetailView: UIView {
         contentView.addSubview(venueInfoStack)
         venueInfoStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            venueInfoStack.topAnchor.constraint(equalTo: eventDetailsStack.bottomAnchor, constant: 10),
+            venueInfoStack.topAnchor.constraint(equalTo: eventInfoStack.bottomAnchor, constant: 10),
             venueInfoStack.leadingAnchor.constraint(equalTo: venueImage.trailingAnchor, constant: 10),
             venueInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             venueInfoStack.heightAnchor.constraint(equalTo: venueImage.heightAnchor, multiplier: 0.5)
