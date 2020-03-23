@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9335A9710E67BAD7888CC434 /* Pods_CTATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF19D843456663CF1D8CDF07 /* Pods_CTATests.framework */; };
 		C606BE0F2425152E00F6D66D /* FavoriteEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606BE0E2425152E00F6D66D /* FavoriteEvent.swift */; };
 		C606BE11242516B400F6D66D /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606BE10242516B400F6D66D /* DateFormatter.swift */; };
 		C606BE1324251BE500F6D66D /* FavoriteArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606BE1224251BE500F6D66D /* FavoriteArtwork.swift */; };
@@ -22,7 +23,7 @@
 		C61AF470241FDD320051D0F6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61AF46F241FDD320051D0F6 /* Login.storyboard */; };
 		C61AF472241FDEBA0051D0F6 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61AF471241FDEBA0051D0F6 /* MainApp.storyboard */; };
 		C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF474241FE4DF0051D0F6 /* Artwork.swift */; };
-		C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C61AF47A241FE7250051D0F6 /* ImageKit */; };
+		C61AF47B241FE7250051D0F6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C61AF47A241FE7250051D0F6 /* SwiftPackageProductDependency */; };
 		C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */; };
 		C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */; };
 		C623631C2422C42F00DD4D60 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C623631B2422C42F00DD4D60 /* ProfileController.swift */; };
@@ -49,11 +50,25 @@
 		C6B2003A242428B9005F3966 /* ArtDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B20039242428B9005F3966 /* ArtDetailController.swift */; };
 		C6B2003C24242ED7005F3966 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B2003B24242ED7005F3966 /* FavoritesController.swift */; };
 		C6D3826824258E6C0096E050 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3826724258E6C0096E050 /* FavoriteCell.swift */; };
+		C6EECC4F242964780096A4B9 /* CTATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EECC4E242964780096A4B9 /* CTATests.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C6EECC51242964780096A4B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C61AF449241FD8990051D0F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C61AF450241FD8990051D0F6;
+			remoteInfo = CTA;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1486920E73A200EFC3736AB2 /* Pods-CTATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTATests.release.xcconfig"; path = "Target Support Files/Pods-CTATests/Pods-CTATests.release.xcconfig"; sourceTree = "<group>"; };
+		69494E4583DFDE4EFE0119FF /* Pods-CTATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTATests.debug.xcconfig"; path = "Target Support Files/Pods-CTATests/Pods-CTATests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B65B761AC3B66E6C5C0A147 /* Pods-CTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.release.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.release.xcconfig"; sourceTree = "<group>"; };
+		AF19D843456663CF1D8CDF07 /* Pods_CTATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C606BE0E2425152E00F6D66D /* FavoriteEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEvent.swift; sourceTree = "<group>"; };
 		C606BE10242516B400F6D66D /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -98,6 +113,9 @@
 		C6B20039242428B9005F3966 /* ArtDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDetailController.swift; sourceTree = "<group>"; };
 		C6B2003B24242ED7005F3966 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		C6D3826724258E6C0096E050 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		C6EECC4C242964780096A4B9 /* CTATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6EECC4E242964780096A4B9 /* CTATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTATests.swift; sourceTree = "<group>"; };
+		C6EECC50242964780096A4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA.debug.xcconfig"; path = "Target Support Files/Pods-CTA/Pods-CTA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +125,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */,
-				C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */,
+				C61AF47B241FE7250051D0F6 /* BuildFile in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6EECC49242964780096A4B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9335A9710E67BAD7888CC434 /* Pods_CTATests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */,
+				AF19D843456663CF1D8CDF07 /* Pods_CTATests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,6 +154,8 @@
 			children = (
 				D4B0F5CA7766429E437FA917 /* Pods-CTA.debug.xcconfig */,
 				9B65B761AC3B66E6C5C0A147 /* Pods-CTA.release.xcconfig */,
+				69494E4583DFDE4EFE0119FF /* Pods-CTATests.debug.xcconfig */,
+				1486920E73A200EFC3736AB2 /* Pods-CTATests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -135,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				C61AF453241FD8990051D0F6 /* CTA */,
+				C6EECC4D242964780096A4B9 /* CTATests */,
 				C61AF452241FD8990051D0F6 /* Products */,
 				4B8D3FFCB847DE093045FFD9 /* Pods */,
 				118821F74258773E81FFFB6F /* Frameworks */,
@@ -145,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				C61AF451241FD8990051D0F6 /* CTA.app */,
+				C6EECC4C242964780096A4B9 /* CTATests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,6 +293,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C6EECC4D242964780096A4B9 /* CTATests */ = {
+			isa = PBXGroup;
+			children = (
+				C6EECC4E242964780096A4B9 /* CTATests.swift */,
+				C6EECC50242964780096A4B9 /* Info.plist */,
+			);
+			path = CTATests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,11 +321,31 @@
 			);
 			name = CTA;
 			packageProductDependencies = (
-				C61AF47A241FE7250051D0F6 /* ImageKit */,
+				C61AF47A241FE7250051D0F6 /* SwiftPackageProductDependency */,
 			);
 			productName = CTA;
 			productReference = C61AF451241FD8990051D0F6 /* CTA.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C6EECC4B242964780096A4B9 /* CTATests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6EECC53242964780096A4B9 /* Build configuration list for PBXNativeTarget "CTATests" */;
+			buildPhases = (
+				4BEF3D26A9B140C08C6B8E49 /* [CP] Check Pods Manifest.lock */,
+				C6EECC48242964780096A4B9 /* Sources */,
+				C6EECC49242964780096A4B9 /* Frameworks */,
+				C6EECC4A242964780096A4B9 /* Resources */,
+				D8A99931AEFC106E1E2D111E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6EECC52242964780096A4B9 /* PBXTargetDependency */,
+			);
+			name = CTATests;
+			productName = CTATests;
+			productReference = C6EECC4C242964780096A4B9 /* CTATests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -300,6 +360,10 @@
 					C61AF450241FD8990051D0F6 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
+					C6EECC4B242964780096A4B9 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = C61AF450241FD8990051D0F6;
+					};
 				};
 			};
 			buildConfigurationList = C61AF44C241FD8990051D0F6 /* Build configuration list for PBXProject "CTA" */;
@@ -312,13 +376,14 @@
 			);
 			mainGroup = C61AF448241FD8990051D0F6;
 			packageReferences = (
-				C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */,
+				C61AF479241FE7250051D0F6 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = C61AF452241FD8990051D0F6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				C61AF450241FD8990051D0F6 /* CTA */,
+				C6EECC4B242964780096A4B9 /* CTATests */,
 			);
 		};
 /* End PBXProject section */
@@ -335,6 +400,13 @@
 				C61AF46B241FDA0B0051D0F6 /* GoogleService-Info.plist in Resources */,
 				C61AF45E241FD89C0051D0F6 /* Assets.xcassets in Resources */,
 				C68BAEB62422877F003E7680 /* APICell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6EECC4A242964780096A4B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +435,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4BEF3D26A9B140C08C6B8E49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CTATests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		76391C5CB48B0430D17BEFDA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -378,6 +472,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CTA/Pods-CTA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8A99931AEFC106E1E2D111E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CTATests/Pods-CTATests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CTATests/Pods-CTATests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CTATests/Pods-CTATests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -424,7 +535,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C6EECC48242964780096A4B9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6EECC4F242964780096A4B9 /* CTATests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C6EECC52242964780096A4B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C61AF450241FD8990051D0F6 /* CTA */;
+			targetProxy = C6EECC51242964780096A4B9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C61AF45F241FD89C0051D0F6 /* LaunchScreen.storyboard */ = {
@@ -590,6 +717,48 @@
 			};
 			name = Release;
 		};
+		C6EECC54242964780096A4B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69494E4583DFDE4EFE0119FF /* Pods-CTATests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JRUP55ZMLQ;
+				INFOPLIST_FILE = CTATests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.casandragrullon.CTATests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CTA.app/CTA";
+			};
+			name = Debug;
+		};
+		C6EECC55242964780096A4B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1486920E73A200EFC3736AB2 /* Pods-CTATests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JRUP55ZMLQ;
+				INFOPLIST_FILE = CTATests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.casandragrullon.CTATests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CTA.app/CTA";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -611,10 +780,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		C6EECC53242964780096A4B9 /* Build configuration list for PBXNativeTarget "CTATests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6EECC54242964780096A4B9 /* Debug */,
+				C6EECC55242964780096A4B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */ = {
+		C61AF479241FE7250051D0F6 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alexpaul/ImageKit";
 			requirement = {
@@ -625,9 +803,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C61AF47A241FE7250051D0F6 /* ImageKit */ = {
+		C61AF47A241FE7250051D0F6 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */;
+			package = C61AF479241FE7250051D0F6 /* RemoteSwiftPackageReference */;
 			productName = ImageKit;
 		};
 /* End XCSwiftPackageProductDependency section */

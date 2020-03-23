@@ -92,7 +92,7 @@ class DatabaseService {
     }
     public func addEventToFavorites(event: Events, completion: @escaping (Result<Bool, Error>) -> () ) {
         guard let user = Auth.auth().currentUser, let eventImage = event.images.first?.url else { return }
-        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(event.id).setData(["eventId":event.id, "eventName": event.name, "eventImageURL": eventImage, "dateFavorited": Timestamp(date: Date())]) { (error) in
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(event.id).setData(["eventId":event.id, "eventName": event.name, "eventDate": event.dates.start.localDate, "eventImageURL": eventImage, "dateFavorited": Timestamp(date: Date())]) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -220,6 +220,26 @@ class DatabaseService {
             } else if let snapshot = snapshot {
                 let favoriteArtworks = snapshot.documents.compactMap { FavoriteArtwork ($0.data()) }
                 completion(.success(favoriteArtworks.sorted(by: {$0.dateFavorited.dateValue() > $1.dateFavorited.dateValue()} )))
+            }
+        }
+    }
+    public func editFavorites(event: FavoriteEvent? = nil , artwork: FavoriteArtwork? = nil, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
+        if let event = event {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(event.eventId).delete { (error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
+            }
+        } else if let artwork = artwork {
+            db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.artObjectNumber).delete { (error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
             }
         }
     }

@@ -39,7 +39,6 @@ struct Events: Codable {
         case images
         case dates
         case promoter
-        //case info
         case pleaseNote
         case priceRanges
         case venueInfo = "_embedded"
@@ -55,6 +54,7 @@ struct EventDates: Codable {
 struct Start: Codable {
     let localDate: String
     let localTime: String
+    let dateTime: String
 }
 struct Promoter: Codable {
     let name: String

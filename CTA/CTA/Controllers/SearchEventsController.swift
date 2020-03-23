@@ -74,10 +74,6 @@ class SearchEventsController: UIViewController {
         checkForNotificationAuthorization()
         center.delegate = self
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        //getApiChoice()
-    }
     private func checkForNotificationAuthorization() {
         center.getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
@@ -102,8 +98,6 @@ class SearchEventsController: UIViewController {
     }
     @objc private func loadData() {
         getApiChoice()
-        getArtCollection(keyword: searchTableView.searchBarOne.text ?? "")
-        getEvents(keyword: searchTableView.searchBarOne.text ?? "", postCode: searchTableView.searchBarTwo.text ?? "")
     }
     @objc private func getApiChoice() {
         DatabaseService.shared.getUserApiChoice { [weak self] (result) in

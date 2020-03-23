@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NFD-3n-i1k">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="J6p-oH-Dt0">
                                     <size key="itemSize" width="381" height="409"/>
@@ -147,16 +147,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-mb-Qcv">
-                                                    <rect key="frame" x="8" y="8" width="365" height="327"/>
+                                                    <rect key="frame" x="8" y="8" width="365" height="286.5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name/ Artwork Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-Nx-sNU">
-                                                    <rect key="frame" x="8" y="343" width="365" height="26.5"/>
+                                                    <rect key="frame" x="8" y="302.5" width="365" height="26.5"/>
                                                     <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIW-lm-lNX">
-                                                    <rect key="frame" x="10" y="379.5" width="361" height="21"/>
+                                                    <rect key="frame" x="10" y="339" width="361" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -166,7 +166,7 @@
                                                 <constraint firstItem="RIW-lm-lNX" firstAttribute="top" secondItem="HHF-Nx-sNU" secondAttribute="bottom" constant="10" id="10A-UD-huU"/>
                                                 <constraint firstItem="RIW-lm-lNX" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" constant="10" id="F1P-wP-DFQ"/>
                                                 <constraint firstItem="HHF-Nx-sNU" firstAttribute="top" secondItem="Uam-mb-Qcv" secondAttribute="bottom" constant="8" id="MiT-Sg-eXJ"/>
-                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="height" secondItem="ga8-0G-TyA" secondAttribute="height" multiplier="0.8" id="RuN-rR-tUx"/>
+                                                <constraint firstItem="Uam-mb-Qcv" firstAttribute="height" secondItem="ga8-0G-TyA" secondAttribute="height" multiplier="0.7" id="RuN-rR-tUx"/>
                                                 <constraint firstAttribute="trailing" secondItem="HHF-Nx-sNU" secondAttribute="trailing" constant="8" id="TXu-G4-LjM"/>
                                                 <constraint firstItem="HHF-Nx-sNU" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" constant="8" id="bW8-sr-FK0"/>
                                                 <constraint firstItem="Uam-mb-Qcv" firstAttribute="leading" secondItem="ga8-0G-TyA" secondAttribute="leading" constant="8" id="f8a-un-4NH"/>
@@ -177,7 +177,7 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="381" height="409"/>
                                         <connections>
-                                            <outlet property="artistNameLabel" destination="RIW-lm-lNX" id="ZAe-0d-p7P"/>
+                                            <outlet property="cellDetailLabel" destination="RIW-lm-lNX" id="ZAe-0d-p7P"/>
                                             <outlet property="cellLabel" destination="HHF-Nx-sNU" id="96B-uJ-fRb"/>
                                             <outlet property="image" destination="Uam-mb-Qcv" id="FWt-0A-VbA"/>
                                         </connections>
@@ -194,14 +194,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wpk-qv-ThM"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="heart.circle" catalog="system" selectedImage="heart.circle.fill" id="ALU-uN-nGx"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="AF3-Iq-7NM"/>
                     <connections>
                         <outlet property="collectionView" destination="NFD-3n-i1k" id="hPT-sq-ciq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CwR-pW-jXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447.82608695652175" y="5.3571428571428568"/>
+            <point key="canvasLocation" x="1235" y="5"/>
         </scene>
         <!--Main App Tab Bar-->
         <scene sceneID="DWn-4V-dHV">
@@ -216,7 +216,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="SG0-3M-tCG" kind="relationship" relationship="viewControllers" id="7vb-Nd-P3k"/>
-                        <segue destination="ukW-2D-dqd" kind="relationship" relationship="viewControllers" id="z41-0Y-8qM"/>
+                        <segue destination="mFy-6B-tFw" kind="relationship" relationship="viewControllers" id="z41-0Y-8qM"/>
                         <segue destination="9hO-bh-PAp" kind="relationship" relationship="viewControllers" id="t6o-Gw-MuO"/>
                     </connections>
                 </tabBarController>
@@ -293,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Qn-8I-2lL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3021.739130434783" y="-830.35714285714278"/>
+            <point key="canvasLocation" x="1928" y="-767"/>
         </scene>
         <!--Art Detail Controller-->
         <scene sceneID="5bu-Ee-cMz">
@@ -309,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5os-Ol-yZv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3044.9275362318845" y="-177.45535714285714"/>
+            <point key="canvasLocation" x="2684" y="-767"/>
         </scene>
         <!--Profile Controller-->
         <scene sceneID="Qes-Wx-HoB">
@@ -432,51 +432,24 @@
             </objects>
             <point key="canvasLocation" x="-28" y="682"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="BM3-uO-7Z5">
+        <!--Favorites-->
+        <scene sceneID="5gy-tO-fwv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="66s-T7-RUi" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mFy-6B-tFw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="heart.circle" catalog="system" selectedImage="heart.circle.fill" id="ALU-uN-nGx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="C9r-fg-wcp">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WH9-yN-OtK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.32975227140000002" green="0.56936072339999999" blue="0.48185270749999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" red="0.32975227140000002" green="0.56936072339999999" blue="0.48185270749999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="lQV-9f-fHV" kind="relationship" relationship="rootViewController" id="YMp-sv-TrM"/>
+                        <segue destination="ukW-2D-dqd" kind="relationship" relationship="rootViewController" id="tVH-0x-X3p"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y6P-um-Tc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SfN-os-K1s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2134.7826086956525" y="-177.45535714285714"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="jbW-xm-4fb">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tfe-fb-Kbj" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0Xy-pS-1F8">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" red="1" green="0.73136638080000005" blue="0.1136109456" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <color key="textShadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="mgf-Mo-bh2" kind="relationship" relationship="rootViewController" id="0VO-It-fVJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nGy-eG-trg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2111.594202898551" y="-830.35714285714278"/>
+            <point key="canvasLocation" x="447.82608695652175" y="5.3571428571428568"/>
         </scene>
     </scenes>
     <resources>

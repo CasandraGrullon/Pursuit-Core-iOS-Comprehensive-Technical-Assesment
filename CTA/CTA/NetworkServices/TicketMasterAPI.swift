@@ -29,6 +29,7 @@ class TicketMasterAPI {
                     completion(.success(events))
                 } catch {
                     completion(.failure(.decodingError(error)))
+                    print(error)
                 }
             }
         }

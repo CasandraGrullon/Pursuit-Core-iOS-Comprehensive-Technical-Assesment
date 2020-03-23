@@ -13,18 +13,19 @@ class FavoriteCell: UICollectionViewCell {
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var cellLabel: UILabel!
-    @IBOutlet weak var artistNameLabel: UILabel!
+    @IBOutlet weak var cellDetailLabel: UILabel!
         
     public func configureCell(event: FavoriteEvent) {
         cellLabel.text = event.eventName
-        artistNameLabel.isHidden = true
+        cellDetailLabel.text = event.eventDate
+        cellDetailLabel.textColor = .lightGray
         image.kf.setImage(with: URL(string: event.eventImageURL))
     }
     public func configureCell(art: FavoriteArtwork) {
         cellLabel.text = art.artTitle
         cellLabel.textColor = .white
-        artistNameLabel.text = art.artistName
-        artistNameLabel.textColor = .lightGray
+        cellDetailLabel.text = art.artistName
+        cellDetailLabel.textColor = .lightGray
         image.kf.setImage(with: URL(string: art.artImageURL))
     }
     

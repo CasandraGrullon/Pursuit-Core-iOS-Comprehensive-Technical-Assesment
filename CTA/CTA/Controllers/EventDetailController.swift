@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SafariServices
 
 class EventDetailController: UIViewController {
     
@@ -29,6 +30,11 @@ class EventDetailController: UIViewController {
             }
         }
     }
+    public lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer()
+        gesture.addTarget(eventsDetailView.eventLinkLabel, action: #selector(didTapURL(_:)))
+        return gesture
+    }()
     
     init?(coder: NSCoder, event: Events) {
         self.event = event
@@ -44,6 +50,15 @@ class EventDetailController: UIViewController {
         configureNavBar()
         eventsUI()
         isInFavorite()
+        eventsDetailView.eventLinkLabel.isUserInteractionEnabled = true
+        eventsDetailView.eventLinkLabel.addGestureRecognizer(tapGesture)
+    }
+    @objc private func didTapURL(_ sender: UITapGestureRecognizer) {
+        guard let url = URL(string: event.url) else {
+            return
+        }
+        let safariPage = SFSafariViewController(url: url)
+        present(safariPage, animated: true)
     }
     private func configureNavBar() {
         navigationItem.title = event.name
@@ -107,8 +122,9 @@ class EventDetailController: UIViewController {
         }
         eventsDetailView.eventImage.kf.setImage(with: URL(string: eventImage))
         eventsDetailView.eventNameLabel.text = event.name
+        eventsDetailView.eventLinkLabel.text = event.url
         eventsDetailView.eventDateLabel.text = "\(event.dates.start.localDate) at \(event.dates.start.localTime)"
-        eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10) - $\(event.priceRanges.first?.max ?? 20 )" //format
+        eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10.0) - $\(event.priceRanges.first?.max ?? 10.0)"
         eventsDetailView.promoterLabel.text = "Sponsored by: " + (event.promoter.name)
         eventsDetailView.pleaseNoteLabel.text = "Details\n\(event.pleaseNote ?? "")"
         eventsDetailView.venueImage.kf.setImage(with: URL(string: venueImage))
