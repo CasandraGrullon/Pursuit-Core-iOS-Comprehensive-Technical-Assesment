@@ -27,7 +27,6 @@
 		C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */; };
 		C623631C2422C42F00DD4D60 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C623631B2422C42F00DD4D60 /* ProfileController.swift */; };
 		C623631E2422E47E00DD4D60 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C623631D2422E47E00DD4D60 /* StorageService.swift */; };
-		C62C5A602426EEE200660D84 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C5A5F2426EEE200660D84 /* AppColors.swift */; };
 		C63A2ABD241FED9F000342A0 /* EventsSearchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */; };
 		C63A2AC0241FF105000342A0 /* SearchEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2ABF241FF105000342A0 /* SearchEventsController.swift */; };
 		C63A2AC2241FF27B000342A0 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A2AC1241FF27B000342A0 /* LoginController.swift */; };
@@ -77,7 +76,6 @@
 		C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketMasterAPI.swift; sourceTree = "<group>"; };
 		C623631B2422C42F00DD4D60 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		C623631D2422E47E00DD4D60 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
-		C62C5A5F2426EEE200660D84 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C63A2ABC241FED9F000342A0 /* EventsSearchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSearchMapView.swift; sourceTree = "<group>"; };
 		C63A2ABF241FF105000342A0 /* SearchEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEventsController.swift; sourceTree = "<group>"; };
 		C63A2AC1241FF27B000342A0 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 				C606BE10242516B400F6D66D /* DateFormatter.swift */,
 				C6137E1C24269B34003B3C8B /* ShowAlert.swift */,
 				C6137E1E2426A127003B3C8B /* UserNotifications.swift */,
-				C62C5A5F2426EEE200660D84 /* AppColors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -408,7 +405,6 @@
 				C6B200362423CD22005F3966 /* UserSession.swift in Sources */,
 				C63A2AD1241FFB28000342A0 /* MainAppTabBar.swift in Sources */,
 				C63A2AD324201038000342A0 /* AppUser.swift in Sources */,
-				C62C5A602426EEE200660D84 /* AppColors.swift in Sources */,
 				C623631E2422E47E00DD4D60 /* StorageService.swift in Sources */,
 				C6B200382423E63F005F3966 /* MuseumDetailView.swift in Sources */,
 				C61AF455241FD8990051D0F6 /* AppDelegate.swift in Sources */,

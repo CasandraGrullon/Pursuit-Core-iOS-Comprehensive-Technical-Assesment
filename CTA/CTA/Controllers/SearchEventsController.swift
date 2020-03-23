@@ -12,7 +12,6 @@ import UserNotifications
 
 
 class SearchEventsController: UIViewController {
-    
     private var searchTableView = SearchTableView()
     
     override func loadView() {
@@ -23,6 +22,7 @@ class SearchEventsController: UIViewController {
             DispatchQueue.main.async {
                 self.updateUI()
                 self.configureNavBar()
+                self.searchTableView.tableView.reloadData()
             }
         }
     }
@@ -130,7 +130,6 @@ class SearchEventsController: UIViewController {
         } else {
             searchTableView.searchButton.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
-            navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
             searchTableView.backgroundColor = .darkGray
             searchTableView.searchBarOne.placeholder = "Search by artist or keyword"
             searchTableView.searchBarOne.backgroundColor = .white
