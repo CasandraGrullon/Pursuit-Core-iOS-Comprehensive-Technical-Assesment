@@ -19,7 +19,7 @@ class EventDetailView: UIView {
         label.text = "event name"
         label.numberOfLines = 0
         label.font = UIFont(name: "Thonburi", size: 20)
-        label.textColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+        label.textColor = .black
         return label
     }()
     public lazy var eventDateLabel: UILabel = {
@@ -31,8 +31,9 @@ class EventDetailView: UIView {
     }()
     public lazy var eventLinkLabel: UILabel = {
         let label = UILabel()
-        label.text = "event link"
-        label.numberOfLines = 2
+        label.text = "Get Tickets"
+        label.isUserInteractionEnabled = true
+        label.numberOfLines = 3
         label.font = UIFont(name: "Thonburi", size: 17)
         label.textColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         return label
@@ -121,7 +122,6 @@ class EventDetailView: UIView {
         contentViewContraints()
         eventImageConstraints()
         eventInfoConstraints()
-        //eventDetailsConstraints()
         venueImageConstraints()
         venueInfoConstraints()
     }
@@ -159,7 +159,7 @@ class EventDetailView: UIView {
             eventImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             eventImage.trailingAnchor.constraint(equalTo: trailingAnchor),
             eventImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            eventImage.heightAnchor.constraint(equalToConstant: 300)
+            eventImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4)
         ])
     }
     private func eventInfoConstraints() {
@@ -170,7 +170,7 @@ class EventDetailView: UIView {
             eventInfoStack.topAnchor.constraint(equalTo: eventImage.bottomAnchor, constant: 8),
             eventInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             eventInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            eventInfoStack.heightAnchor.constraint(equalTo: eventImage.heightAnchor)
+            eventInfoStack.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4)
         ])
     }
     private func venueImageConstraints() {

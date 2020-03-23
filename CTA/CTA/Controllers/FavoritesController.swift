@@ -81,18 +81,16 @@ class FavoritesController: UIViewController {
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.showAlert(title: "Unable to get user favorite events", message: error.localizedDescription)
-                        DispatchQueue.main.async {
-                            self?.refreshControl.endRefreshing()
-                        }
+                        self?.refreshControl.endRefreshing()
+                        
                     }
                 case .success(let faveEvents):
                     DispatchQueue.main.async {
                         self?.favoriteEvents = faveEvents
                         self?.collectionView.backgroundColor = .white
                         self?.refreshControl.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
-                        DispatchQueue.main.async {
-                            self?.refreshControl.endRefreshing()
-                        }
+                        self?.refreshControl.endRefreshing()
+                        
                     }
                 }
             }
@@ -102,18 +100,16 @@ class FavoritesController: UIViewController {
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.showAlert(title: "Unable to get user favorite artworks", message: error.localizedDescription)
-                        DispatchQueue.main.async {
-                            self?.refreshControl.endRefreshing()
-                        }
+                        self?.refreshControl.endRefreshing()
+                        
                     }
                 case .success(let faveArtworks):
                     DispatchQueue.main.async {
                         self?.favoriteArtworks = faveArtworks
                         self?.collectionView.backgroundColor = .darkGray
                         self?.refreshControl.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
-                        DispatchQueue.main.async {
-                            self?.refreshControl.endRefreshing()
-                        }
+                        self?.refreshControl.endRefreshing()
+                        
                     }
                 }
             }
@@ -121,34 +117,45 @@ class FavoritesController: UIViewController {
     }
     private func actionSheet(event: FavoriteEvent? = nil, artwork: FavoriteArtwork? = nil) {
         let actionSheet = UIAlertController(title: "Edit Favorites", message: "", preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "Remove From Favorites", style: .destructive) { (action) in
-            if let event = event, let artwork = artwork {
-                DatabaseService.shared.editFavorites(event: event, artwork: artwork) { [weak self] (result) in
+        let deleteAction = UIAlertAction(title: "Remove From Favorites", style: .destructive) { [weak self] (action) in
+            if let event = event {
+                DatabaseService.shared.editFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
                             self?.showAlert(title: "Unable to remove from favorites", message: error.localizedDescription)
                         }
                     case .success:
-                        if self?.userAPIChoice == "Ticket Master" {
-                            DispatchQueue.main.async {
-                                self?.showAlert(title: "Removed from favorites", message: "\(event.eventName) was removed")
-                            }
-                        } else {
-                            DispatchQueue.main.async {
-                                self?.showAlert(title: "Removed from favorites", message: "\(artwork.artTitle) was removed")
-                            }
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Removed from Favorites", message: "\(event.eventName) was removed")
+                            self?.collectionView.reloadData()
                         }
-                        
+                    }
+                }
+            } else if let artwork = artwork {
+                DatabaseService.shared.editFavorites(artwork: artwork) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Unable to remove from favorites", message: error.localizedDescription)
+                        }
+                    case .success:
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Removed from Favorites", message: "\(artwork.artTitle) was removed")
+                            self?.collectionView.reloadData()
+                        }
                     }
                 }
             }
+            
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(cancelAction)
         present(actionSheet, animated: true)
     }
+    
     
 }
 extension FavoritesController: UICollectionViewDelegateFlowLayout {

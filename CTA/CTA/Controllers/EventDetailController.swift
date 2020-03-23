@@ -56,18 +56,19 @@ class EventDetailController: UIViewController {
         eventsDetailView.eventLinkLabel.addGestureRecognizer(tapGesture)
         
     }
-    @objc func didTapURL(_ sender: UITapGestureRecognizer) {
-        
-        guard let url = URL(string: event.url) else {
-            return
-        }
-        let safariPage = SFSafariViewController(url: url)
-        present(safariPage, animated: true)
-    }
+
     private func configureNavBar() {
         navigationItem.title = event.name
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonPressed(_:)))
+    }
+    @objc func didTapURL(_ sender: UITapGestureRecognizer) {
+        print("did tap")
+        guard let url = URL(string: event.url) else {
+            return
+        }
+        let safariPage = SFSafariViewController(url: url)
+        navigationController?.pushViewController(safariPage, animated: true)
     }
     
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
@@ -127,11 +128,10 @@ class EventDetailController: UIViewController {
         
         eventsDetailView.eventImage.kf.setImage(with: URL(string: eventImage))
         eventsDetailView.eventNameLabel.text = event.name
-        eventsDetailView.eventLinkLabel.text = event.url
         eventsDetailView.eventDateLabel.text = "\(event.dates.start.localDate) at \(event.dates.start.localTime)"
-        eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10.0) - $\(event.priceRanges.first?.max ?? 10.0)"
+        eventsDetailView.eventPriceLabel.text = "Prices: $\(event.priceRanges.first?.min ?? 10.0)0 - $\(event.priceRanges.first?.max ?? 10.0)0"
         eventsDetailView.promoterLabel.text = "Sponsored by: " + (event.promoter.name)
-        eventsDetailView.pleaseNoteLabel.text = "Details\n\(event.pleaseNote ?? "")"
+        eventsDetailView.pleaseNoteLabel.text = event.pleaseNote ?? ""
         eventsDetailView.venueImage.kf.setImage(with: URL(string: venueImage))
         eventsDetailView.venueNameLabel.text = venue.name
         eventsDetailView.venueAddress.text = "\(venue.address.line1)\n\(venue.city),\(venue.country) \(venue.postalCode)"
