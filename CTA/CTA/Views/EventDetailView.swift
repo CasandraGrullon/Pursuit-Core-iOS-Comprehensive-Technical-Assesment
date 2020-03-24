@@ -133,8 +133,6 @@ class EventDetailView: UIView {
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            //scrollView.widthAnchor.constraint(equalToConstant: self.bounds.width),
-            //scrollView.heightAnchor.constraint(equalToConstant: self.bounds.height)
         ])
     }
     
