@@ -21,19 +21,3 @@ extension Date {
     }
 }
 
-extension String {
-    func getDate() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy HH:mm a"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-        return dateFormatter.date(from: self)
-    }
-    func getTime() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm a"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-        return dateFormatter.date(from: self)
-    }
-}

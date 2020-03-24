@@ -23,7 +23,7 @@
 		C61AF470241FDD320051D0F6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61AF46F241FDD320051D0F6 /* Login.storyboard */; };
 		C61AF472241FDEBA0051D0F6 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C61AF471241FDEBA0051D0F6 /* MainApp.storyboard */; };
 		C61AF475241FE4DF0051D0F6 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF474241FE4DF0051D0F6 /* Artwork.swift */; };
-		C61AF47B241FE7250051D0F6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C61AF47A241FE7250051D0F6 /* SwiftPackageProductDependency */; };
+		C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C61AF47A241FE7250051D0F6 /* ImageKit */; };
 		C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47D241FE7520051D0F6 /* MuseumAPI.swift */; };
 		C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61AF47F241FE75E0051D0F6 /* TicketMasterAPI.swift */; };
 		C623631C2422C42F00DD4D60 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C623631B2422C42F00DD4D60 /* ProfileController.swift */; };
@@ -49,6 +49,7 @@
 		C6B200382423E63F005F3966 /* MuseumDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B200372423E63F005F3966 /* MuseumDetailView.swift */; };
 		C6B2003A242428B9005F3966 /* ArtDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B20039242428B9005F3966 /* ArtDetailController.swift */; };
 		C6B2003C24242ED7005F3966 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B2003B24242ED7005F3966 /* FavoritesController.swift */; };
+		C6CE7EB824298378002F763B /* Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE7EB724298377002F763B /* Designable.swift */; };
 		C6D3826824258E6C0096E050 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3826724258E6C0096E050 /* FavoriteCell.swift */; };
 		C6EECC4F242964780096A4B9 /* CTATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EECC4E242964780096A4B9 /* CTATests.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
@@ -112,6 +113,7 @@
 		C6B200372423E63F005F3966 /* MuseumDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumDetailView.swift; sourceTree = "<group>"; };
 		C6B20039242428B9005F3966 /* ArtDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDetailController.swift; sourceTree = "<group>"; };
 		C6B2003B24242ED7005F3966 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		C6CE7EB724298377002F763B /* Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designable.swift; sourceTree = "<group>"; };
 		C6D3826724258E6C0096E050 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		C6EECC4C242964780096A4B9 /* CTATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EECC4E242964780096A4B9 /* CTATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTATests.swift; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */,
-				C61AF47B241FE7250051D0F6 /* BuildFile in Frameworks */,
+				C61AF47B241FE7250051D0F6 /* ImageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +279,7 @@
 				C606BE10242516B400F6D66D /* DateFormatter.swift */,
 				C6137E1C24269B34003B3C8B /* ShowAlert.swift */,
 				C6137E1E2426A127003B3C8B /* UserNotifications.swift */,
+				C6CE7EB724298377002F763B /* Designable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,7 +324,7 @@
 			);
 			name = CTA;
 			packageProductDependencies = (
-				C61AF47A241FE7250051D0F6 /* SwiftPackageProductDependency */,
+				C61AF47A241FE7250051D0F6 /* ImageKit */,
 			);
 			productName = CTA;
 			productReference = C61AF451241FD8990051D0F6 /* CTA.app */;
@@ -376,7 +379,7 @@
 			);
 			mainGroup = C61AF448241FD8990051D0F6;
 			packageReferences = (
-				C61AF479241FE7250051D0F6 /* RemoteSwiftPackageReference */,
+				C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */,
 			);
 			productRefGroup = C61AF452241FD8990051D0F6 /* Products */;
 			projectDirPath = "";
@@ -499,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C68BAEB424228775003E7680 /* APICell.swift in Sources */,
+				C6CE7EB824298378002F763B /* Designable.swift in Sources */,
 				C61AF47E241FE7520051D0F6 /* MuseumAPI.swift in Sources */,
 				C68BAE802421BF34003E7680 /* EventDetailController.swift in Sources */,
 				C61AF480241FE75E0051D0F6 /* TicketMasterAPI.swift in Sources */,
@@ -792,7 +796,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C61AF479241FE7250051D0F6 /* RemoteSwiftPackageReference */ = {
+		C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alexpaul/ImageKit";
 			requirement = {
@@ -803,9 +807,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C61AF47A241FE7250051D0F6 /* SwiftPackageProductDependency */ = {
+		C61AF47A241FE7250051D0F6 /* ImageKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C61AF479241FE7250051D0F6 /* RemoteSwiftPackageReference */;
+			package = C61AF479241FE7250051D0F6 /* XCRemoteSwiftPackageReference "ImageKit" */;
 			productName = ImageKit;
 		};
 /* End XCSwiftPackageProductDependency section */

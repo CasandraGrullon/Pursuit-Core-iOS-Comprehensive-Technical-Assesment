@@ -15,6 +15,12 @@ class FavoriteCell: UICollectionViewCell {
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var cellDetailLabel: UILabel!
         
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 13
+    }
+    
     public func configureCell(event: FavoriteEvent) {
         cellLabel.text = event.eventName
         cellDetailLabel.text = event.eventDate

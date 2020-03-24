@@ -13,6 +13,12 @@ class APICell: UICollectionViewCell {
     @IBOutlet weak var transparentView: UIView!
     @IBOutlet weak var apiNameLabel: UILabel!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 13
+    }
+    
     public func configureCell(api: String) {
         apiNameLabel.text = api
         if api == "Rijksmuseum" {

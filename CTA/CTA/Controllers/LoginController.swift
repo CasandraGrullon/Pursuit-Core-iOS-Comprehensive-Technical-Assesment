@@ -85,6 +85,7 @@ class LoginController: UIViewController {
             chooseAppExperience.text = ""
             collectionView.isHidden = true
             logInButton.isEnabled = true
+            logInButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         }
         
     }
