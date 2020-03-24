@@ -228,7 +228,7 @@ class DatabaseService {
     }
     public func deleteDBArtworkFavorite(artwork: FavoriteArtwork, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let user = Auth.auth().currentUser else {return}
-        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(artwork.artObjectNumber).delete { (error) in
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).document(artwork.artObjectNumber).delete { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
