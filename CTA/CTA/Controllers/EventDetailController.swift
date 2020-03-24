@@ -53,6 +53,7 @@ class EventDetailController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonPressed(_:)))
     }
+    
     @objc func ticketButtonPressed(_ sender: UIButton) {
         print("did tap")
         guard let url = URL(string: event.url) else {
@@ -125,7 +126,8 @@ class EventDetailController: UIViewController {
         eventsDetailView.pleaseNoteLabel.text = event.pleaseNote ?? ""
         eventsDetailView.venueImage.kf.setImage(with: URL(string: venueImage))
         eventsDetailView.venueNameLabel.text = venue.name
-        eventsDetailView.venueAddress.text = "\(venue.address.line1)\n\(venue.city),\(venue.country) \(venue.postalCode)"
+        eventsDetailView.venueAddress.text = "\(venue.address.line1)\n\(venue.city.name),\(venue.country.countryCode) \(venue.postalCode)"
     }
     
 }
+

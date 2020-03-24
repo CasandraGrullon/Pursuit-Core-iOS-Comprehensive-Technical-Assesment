@@ -26,10 +26,9 @@ struct Events: Codable {
     let images: [EventImages]
     let dates: EventDates
     let promoter: Promoter
-    //let info: String
     let pleaseNote: String?
     let priceRanges: [PriceRanges]
-    let venueInfo: VenueInfo //coding key required
+    let venueInfo: VenueInfo
     
     enum CodingKeys: String, CodingKey {
         case name
