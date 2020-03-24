@@ -165,18 +165,18 @@ class DatabaseService {
                 }
             }
         } else if let artwork = artwork {                db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artwork.objectNumber).getDocuments { (snapshot, error) in
-                    if let error = error {
-                        completion(.failure(error))
-                    } else if let snapshot = snapshot {
-                        let count = snapshot.documents.count
-                        if count > 0 {
-                            completion(.success(true))
-                        } else {
-                            completion(.success(false))
-                        }
-                    }
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let count = snapshot.documents.count
+                if count > 0 {
+                    completion(.success(true))
+                } else {
+                    completion(.success(false))
                 }
-            } else if let artObject = artObject {
+            }
+            }
+        } else if let artObject = artObject {
             db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteArtworks).whereField("artObjectNumber", isEqualTo: artObject.objectNumber).getDocuments { (snapshot, error) in
                 if let error = error {
                     completion(.failure(error))
@@ -212,6 +212,27 @@ class DatabaseService {
             } else if let snapshot = snapshot {
                 let favoriteArtworks = snapshot.documents.compactMap { FavoriteArtwork ($0.data()) }
                 completion(.success(favoriteArtworks.sorted(by: {$0.dateFavorited.dateValue() > $1.dateFavorited.dateValue()} )))
+            }
+        }
+    }
+    
+    public func deleteDBEventFavorite(event: FavoriteEvent, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(event.eventId).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
+    public func deleteDBArtworkFavorite(artwork: FavoriteArtwork, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
+        db.collection(DatabaseService.appUsers).document(user.uid).collection(DatabaseService.favoriteEvents).document(artwork.artObjectNumber).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
             }
         }
     }

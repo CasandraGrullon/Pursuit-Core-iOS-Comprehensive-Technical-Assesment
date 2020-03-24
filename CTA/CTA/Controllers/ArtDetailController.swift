@@ -88,12 +88,9 @@ class ArtDetailController: UIViewController {
         artDetailView.artDescription.text = art?.plaqueDescriptionEnglish
         artDetailView.artImageView.kf.setImage(with: URL(string: art?.webImage.url ?? ""))
         artDetailView.dateLabel.text = art?.dating.presentingDate
-        artDetailView.otherTitles.text = "other titles: \(art?.titles.joined(separator: ", ") ?? "")"
-        
         artDetailView.mediumLabel.text = art?.physicalMedium
         artDetailView.artSizeLabel.text = art?.subTitle
         artDetailView.objectTypeLabel.text = art?.objectTypes.joined(separator: ",")
-        
         artDetailView.artistNameLabel.text = art?.principalMaker
     }
     private func isInFavorite() {

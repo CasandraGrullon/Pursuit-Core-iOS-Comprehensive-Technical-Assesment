@@ -30,12 +30,6 @@ class EventDetailController: UIViewController {
             }
         }
     }
-    public lazy var tapGesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer()
-        gesture.addTarget(self, action: #selector(didTapURL(_:)))
-        
-        return gesture
-    }()
     
     init?(coder: NSCoder, event: Events) {
         self.event = event
@@ -51,18 +45,15 @@ class EventDetailController: UIViewController {
         configureNavBar()
         eventsUI()
         isInFavorite()
-        eventsDetailView.eventLinkLabel.isUserInteractionEnabled = true
-        eventsDetailView.eventInfoStack.isUserInteractionEnabled = true
-        eventsDetailView.eventLinkLabel.addGestureRecognizer(tapGesture)
+        eventsDetailView.eventLinkButton.addTarget(self, action: #selector(ticketButtonPressed(_:)), for: .touchUpInside)
         
     }
-
     private func configureNavBar() {
         navigationItem.title = event.name
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonPressed(_:)))
     }
-    @objc func didTapURL(_ sender: UITapGestureRecognizer) {
+    @objc func ticketButtonPressed(_ sender: UIButton) {
         print("did tap")
         guard let url = URL(string: event.url) else {
             return

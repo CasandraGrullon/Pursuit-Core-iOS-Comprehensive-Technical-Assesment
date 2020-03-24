@@ -56,20 +56,12 @@ class MuseumDetailView: UIView {
         return label
     }()
     public lazy var artInfoStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [artTitleLabel, artistNameLabel, dateLabel, objectTypeLabel, mediumLabel])
+        let stack = UIStackView(arrangedSubviews: [artTitleLabel, artistNameLabel, dateLabel])
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
-    }()
-    public lazy var otherTitles: UILabel = {
-        let label = UILabel()
-        label.text = "other titles"
-        label.textColor = .white
-        label.numberOfLines = 0
-        label.font = UIFont(name: "Thonburi", size: 17)
-        return label
     }()
     public lazy var mediumLabel: UILabel = {
         let label = UILabel()
@@ -93,7 +85,7 @@ class MuseumDetailView: UIView {
         return label
     }()
     public lazy var artDetailsStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [otherTitles, artDescription])
+        let stack = UIStackView(arrangedSubviews: [objectTypeLabel, mediumLabel, artDescription])
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
@@ -159,7 +151,7 @@ class MuseumDetailView: UIView {
             artInfoStack.topAnchor.constraint(equalTo: artImageView.bottomAnchor, constant: 10),
             artInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            artInfoStack.heightAnchor.constraint(equalToConstant: 200)
+            artInfoStack.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
     private func artDetailsConstraints() {
@@ -170,7 +162,7 @@ class MuseumDetailView: UIView {
             artDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             artDetailsStack.heightAnchor.constraint(equalToConstant: 300),
-            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
 }
