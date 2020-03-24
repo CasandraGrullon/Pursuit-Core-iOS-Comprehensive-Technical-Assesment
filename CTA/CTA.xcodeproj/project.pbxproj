@@ -50,6 +50,8 @@
 		C6B2003A242428B9005F3966 /* ArtDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B20039242428B9005F3966 /* ArtDetailController.swift */; };
 		C6B2003C24242ED7005F3966 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B2003B24242ED7005F3966 /* FavoritesController.swift */; };
 		C6CE7EB824298378002F763B /* Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE7EB724298377002F763B /* Designable.swift */; };
+		C6CE7EBA2429A07B002F763B /* ArtPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE7EB92429A07B002F763B /* ArtPieceView.swift */; };
+		C6CE7EBC2429A185002F763B /* ArtPieceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE7EBB2429A185002F763B /* ArtPieceVC.swift */; };
 		C6D3826824258E6C0096E050 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3826724258E6C0096E050 /* FavoriteCell.swift */; };
 		C6EECC4F242964780096A4B9 /* CTATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EECC4E242964780096A4B9 /* CTATests.swift */; };
 		FF85F9C6DC8373C5EB8A61A0 /* Pods_CTA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40404D2611404EA1B82F0B5 /* Pods_CTA.framework */; };
@@ -114,6 +116,8 @@
 		C6B20039242428B9005F3966 /* ArtDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDetailController.swift; sourceTree = "<group>"; };
 		C6B2003B24242ED7005F3966 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		C6CE7EB724298377002F763B /* Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designable.swift; sourceTree = "<group>"; };
+		C6CE7EB92429A07B002F763B /* ArtPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtPieceView.swift; sourceTree = "<group>"; };
+		C6CE7EBB2429A185002F763B /* ArtPieceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtPieceVC.swift; sourceTree = "<group>"; };
 		C6D3826724258E6C0096E050 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		C6EECC4C242964780096A4B9 /* CTATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CTATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EECC4E242964780096A4B9 /* CTATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTATests.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				C66C2FCD242123AF00D2A4CB /* SearchTableView.swift */,
 				C68BAE7D2421895B003E7680 /* EventDetailView.swift */,
 				C6B200372423E63F005F3966 /* MuseumDetailView.swift */,
+				C6CE7EB92429A07B002F763B /* ArtPieceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				C63A2ABF241FF105000342A0 /* SearchEventsController.swift */,
 				C68BAE7F2421BF34003E7680 /* EventDetailController.swift */,
 				C6B20039242428B9005F3966 /* ArtDetailController.swift */,
+				C6CE7EBB2429A185002F763B /* ArtPieceVC.swift */,
 				C6B2003B24242ED7005F3966 /* FavoritesController.swift */,
 				C623631B2422C42F00DD4D60 /* ProfileController.swift */,
 				C68BAEB124228105003E7680 /* EditController.swift */,
@@ -526,6 +532,7 @@
 				C61AF457241FD8990051D0F6 /* SceneDelegate.swift in Sources */,
 				C61AF46E241FDD230051D0F6 /* Collection.swift in Sources */,
 				C68BAEB224228105003E7680 /* EditController.swift in Sources */,
+				C6CE7EBA2429A07B002F763B /* ArtPieceView.swift in Sources */,
 				C6B200342422E750005F3966 /* ResizeImage.swift in Sources */,
 				C606BE11242516B400F6D66D /* DateFormatter.swift in Sources */,
 				C63A2ACC241FF78A000342A0 /* DatabaseSession.swift in Sources */,
@@ -533,6 +540,7 @@
 				C68BAE7E2421895B003E7680 /* EventDetailView.swift in Sources */,
 				C606BE1324251BE500F6D66D /* FavoriteArtwork.swift in Sources */,
 				C63A2ACF241FFAD1000342A0 /* UIViewControllerExtension.swift in Sources */,
+				C6CE7EBC2429A185002F763B /* ArtPieceVC.swift in Sources */,
 				C6137E1D24269B34003B3C8B /* ShowAlert.swift in Sources */,
 				C63A2AC2241FF27B000342A0 /* LoginController.swift in Sources */,
 				C6137E1F2426A127003B3C8B /* UserNotifications.swift in Sources */,

@@ -29,7 +29,7 @@ class MuseumDetailView: UIView {
     public lazy var artTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "artwork name"
-        label.font = UIFont(name: "Thonburi", size: 30)
+        label.font = UIFont(name: "Thonburi", size: 20)
         label.textColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
         return label
     }()
@@ -56,7 +56,7 @@ class MuseumDetailView: UIView {
         return label
     }()
     public lazy var artInfoStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [artTitleLabel, artistNameLabel, dateLabel, artDescription])
+        let stack = UIStackView(arrangedSubviews: [artTitleLabel, artistNameLabel, dateLabel, objectTypeLabel, mediumLabel])
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
@@ -93,39 +93,10 @@ class MuseumDetailView: UIView {
         return label
     }()
     public lazy var artDetailsStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [otherTitles, mediumLabel, objectTypeLabel, artSizeLabel])
+        let stack = UIStackView(arrangedSubviews: [otherTitles, artDescription])
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    public lazy var artistBirthDay: UILabel = {
-        let label = UILabel()
-        label.text = "birthday"
-        label.font = UIFont(name: "Avenir", size: 17)
-        return label
-    }()
-
-    public lazy var artistDeath: UILabel = {
-        let label = UILabel()
-        label.text = "day of death"
-        label.font = UIFont(name: "Avenir", size: 17)
-        return label
-    }()
-
-    public lazy var artistOccupation: UILabel = {
-        let label = UILabel()
-        label.text = "occpation"
-        label.font = UIFont(name: "Avenir", size: 17)
-        return label
-    }()
-    public lazy var artistInfoStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [artistBirthDay, artistDeath, artistOccupation])
-        stack.alignment = .fill
-        stack.axis = .vertical
-        stack.distribution = .equalSpacing
-        stack.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -144,7 +115,6 @@ class MuseumDetailView: UIView {
         artworkImageConstraints()
         artInfoConstraints()
         artDetailsConstraints()
-        //artistInfoConstraints()
     }
 
     private func scrollViewContraints() {
@@ -176,7 +146,7 @@ class MuseumDetailView: UIView {
         contentView.addSubview(artImageView)
         artImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            artImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            artImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             artImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             artImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             artImageView.heightAnchor.constraint(equalToConstant: 400)
@@ -186,7 +156,7 @@ class MuseumDetailView: UIView {
         contentView.addSubview(artInfoStack)
         artInfoStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            artInfoStack.topAnchor.constraint(equalTo: artImageView.bottomAnchor, constant: 20),
+            artInfoStack.topAnchor.constraint(equalTo: artImageView.bottomAnchor, constant: 10),
             artInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             artInfoStack.heightAnchor.constraint(equalToConstant: 200)
@@ -196,22 +166,11 @@ class MuseumDetailView: UIView {
         contentView.addSubview(artDetailsStack)
         artDetailsStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            artDetailsStack.topAnchor.constraint(equalTo: artInfoStack.bottomAnchor, constant: 10),
+            artDetailsStack.topAnchor.constraint(equalTo: artInfoStack.bottomAnchor, constant: 8),
             artDetailsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             artDetailsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            artDetailsStack.heightAnchor.constraint(equalToConstant: 150),
-            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            artDetailsStack.heightAnchor.constraint(equalToConstant: 300),
+            artDetailsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
-//    private func artistInfoConstraints() {
-//        contentView.addSubview(artistInfoStack)
-//        artistInfoStack.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            artistInfoStack.topAnchor.constraint(equalTo: artDetailsStack.bottomAnchor, constant: 10),
-//            artistInfoStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            artistInfoStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-//            artistInfoStack.heightAnchor.constraint(equalToConstant: 200),
-//            artistInfoStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-//        ])
-//    }
 }

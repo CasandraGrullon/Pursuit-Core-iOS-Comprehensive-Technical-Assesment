@@ -36,6 +36,11 @@ class ArtDetailController: UIViewController {
             }
         }
     }
+    private lazy var tapGesture: UITapGestureRecognizer = {
+       let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(didPressImage(_:)))
+        return gesture
+    }()
     
     init?(coder: NSCoder, artwork: ArtObjects) {
         self.artwork = artwork
@@ -51,6 +56,15 @@ class ArtDetailController: UIViewController {
         isInFavorite()
         configureNavBar()
         getArtDetails(artId: artwork.objectNumber)
+        artDetailView.artImageView.isUserInteractionEnabled = true
+        artDetailView.contentView.isUserInteractionEnabled = true
+        artDetailView.artImageView.addGestureRecognizer(tapGesture)
+        
+    }
+    @objc private func didPressImage(_ sender: UITapGestureRecognizer) {
+        let artworkDetail = ArtPieceVC()
+        artworkDetail.artwork = art
+        present(artworkDetail, animated: true)
     }
     private func getArtDetails(artId: String) {
         MuseumAPI.getArtworkDetails(objectNumber: artId) { [weak self] (result) in
@@ -75,6 +89,7 @@ class ArtDetailController: UIViewController {
         artDetailView.artImageView.kf.setImage(with: URL(string: art?.webImage.url ?? ""))
         artDetailView.dateLabel.text = art?.dating.presentingDate
         artDetailView.otherTitles.text = "other titles: \(art?.titles.joined(separator: ", ") ?? "")"
+        
         artDetailView.mediumLabel.text = art?.physicalMedium
         artDetailView.artSizeLabel.text = art?.subTitle
         artDetailView.objectTypeLabel.text = art?.objectTypes.joined(separator: ",")
@@ -85,7 +100,7 @@ class ArtDetailController: UIViewController {
         guard let art = art else {
             return
         }
-        DatabaseService.shared.isArtInFavorites(artwork: art) { [weak self] (result) in
+        DatabaseService.shared.isInFavorites(artwork: art) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -94,6 +109,9 @@ class ArtDetailController: UIViewController {
             case .success(let successful):
                 if successful {
                     self?.isFavorite = true
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Already in your favorites", message: "")
+                    }
                 } else {
                     self?.isFavorite = false
                 }
@@ -102,7 +120,7 @@ class ArtDetailController: UIViewController {
     }
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         if isFavorite {
-            DatabaseService.shared.removeArtFromFavorites(artwork: art) { [weak self] (result) in
+            DatabaseService.shared.removeFromFavorites(artwork: art) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -114,7 +132,7 @@ class ArtDetailController: UIViewController {
                 }
             }
         } else {
-            DatabaseService.shared.addArtToFavorites(artwork: art) { [weak self] (result) in
+            DatabaseService.shared.addToFavorites(artwork: art) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {

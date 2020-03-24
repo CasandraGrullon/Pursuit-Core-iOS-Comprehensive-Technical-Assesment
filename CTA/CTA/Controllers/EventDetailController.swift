@@ -73,7 +73,7 @@ class EventDetailController: UIViewController {
     
     @objc private func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         if isFavorite {
-            DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
+            DatabaseService.shared.removeFromFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -85,7 +85,7 @@ class EventDetailController: UIViewController {
                 }
             }
         } else {
-            DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
+            DatabaseService.shared.addToFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -99,7 +99,7 @@ class EventDetailController: UIViewController {
         }
     }
     private func isInFavorite() {
-        DatabaseService.shared.isEventInFavorites(event: event) { [weak self] (result) in
+        DatabaseService.shared.isInFavorites(event: event) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {

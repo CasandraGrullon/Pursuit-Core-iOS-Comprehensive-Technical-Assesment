@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 import UserNotifications
 
-
 class SearchEventsController: UIViewController {
     private var searchTableView = SearchTableView()
     
@@ -216,7 +215,7 @@ class SearchEventsController: UIViewController {
             return
         }
         if userAPIChoice == "Ticket Master" {
-            DatabaseService.shared.isEventInFavorites(event: event) { [weak self] (result) in
+            DatabaseService.shared.isInFavorites(event: event) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -231,7 +230,7 @@ class SearchEventsController: UIViewController {
                 }
             }
         } else {
-            DatabaseService.shared.isArtInFavorites(artObject: art) { [weak self] (result) in
+            DatabaseService.shared.isInFavorites(artObject: art) { [weak self] (result) in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -314,9 +313,9 @@ extension SearchEventsController: UITableViewDelegate {
 }
 extension SearchEventsController: FavoriteButtonDelegate {
     func didPressButtonEvent(_ searchCell: SearchCell, event: Events) {
-        if userAPIChoice == "Ticket Master"{
+        if userAPIChoice == "Ticket Master" {
             if isFavorite {
-                DatabaseService.shared.removeEventFromFavorites(event: event) { [weak self] (result) in
+                DatabaseService.shared.removeFromFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
@@ -330,7 +329,7 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     }
                 }
             } else {
-                DatabaseService.shared.addEventToFavorites(event: event) { [weak self] (result) in
+                DatabaseService.shared.addToFavorites(event: event) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
@@ -352,7 +351,7 @@ extension SearchEventsController: FavoriteButtonDelegate {
     func didPressButtonArtwork(_ searchCell: SearchCell, artwork: ArtObjects) {
         if userAPIChoice == "Rijksmuseum" {
             if isFavorite {
-                DatabaseService.shared.removeArtFromFavorites(artObject: artwork) { [weak self] (result) in
+                DatabaseService.shared.removeFromFavorites(artObject: artwork) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {
@@ -366,7 +365,7 @@ extension SearchEventsController: FavoriteButtonDelegate {
                     }
                 }
             } else {
-                DatabaseService.shared.addArtToFavorites(artObject: artwork) { [weak self] (result) in
+                DatabaseService.shared.addToFavorites(artObject: artwork) { [weak self] (result) in
                     switch result {
                     case .failure(let error):
                         DispatchQueue.main.async {

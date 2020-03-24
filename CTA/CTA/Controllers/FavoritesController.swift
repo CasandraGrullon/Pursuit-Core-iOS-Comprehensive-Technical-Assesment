@@ -115,47 +115,6 @@ class FavoritesController: UIViewController {
             }
         }
     }
-    private func actionSheet(event: FavoriteEvent? = nil, artwork: FavoriteArtwork? = nil) {
-        let actionSheet = UIAlertController(title: "Edit Favorites", message: "", preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "Remove From Favorites", style: .destructive) { [weak self] (action) in
-            if let event = event {
-                DatabaseService.shared.editFavorites(event: event) { [weak self] (result) in
-                    switch result {
-                    case .failure(let error):
-                        DispatchQueue.main.async {
-                            self?.showAlert(title: "Unable to remove from favorites", message: error.localizedDescription)
-                        }
-                    case .success:
-                        DispatchQueue.main.async {
-                            self?.showAlert(title: "Removed from Favorites", message: "\(event.eventName) was removed")
-                            self?.collectionView.reloadData()
-                        }
-                    }
-                }
-            } else if let artwork = artwork {
-                DatabaseService.shared.editFavorites(artwork: artwork) { [weak self] (result) in
-                    switch result {
-                    case .failure(let error):
-                        DispatchQueue.main.async {
-                            self?.showAlert(title: "Unable to remove from favorites", message: error.localizedDescription)
-                        }
-                    case .success:
-                        DispatchQueue.main.async {
-                            self?.showAlert(title: "Removed from Favorites", message: "\(artwork.artTitle) was removed")
-                            self?.collectionView.reloadData()
-                        }
-                    }
-                }
-            }
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        actionSheet.addAction(deleteAction)
-        actionSheet.addAction(cancelAction)
-        present(actionSheet, animated: true)
-    }
-    
     
 }
 extension FavoritesController: UICollectionViewDelegateFlowLayout {
@@ -163,15 +122,6 @@ extension FavoritesController: UICollectionViewDelegateFlowLayout {
         let maxWidth: CGFloat = UIScreen.main.bounds.size.width
         let itemWidth: CGFloat = maxWidth
         return CGSize(width: itemWidth, height: itemWidth * 0.90)
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if userAPIChoice == "Ticket Master" {
-            let event = favoriteEvents[indexPath.row]
-            actionSheet(event: event)
-        } else {
-            let artwork = favoriteArtworks[indexPath.row]
-            actionSheet(artwork: artwork)
-        }
     }
     
 }
