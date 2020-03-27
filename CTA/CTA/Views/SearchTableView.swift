@@ -9,16 +9,21 @@
 import UIKit
 
 class SearchTableView: UIView {
-
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        searchButton.clipsToBounds = true
+        searchButton.layer.cornerRadius = 13
+    }
+    
     public lazy var tableView: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         return table
     }()
     
     public lazy var searchBarOne: UITextField = {
-       let searchbar = UITextField()
+        let searchbar = UITextField()
         searchbar.borderStyle = .line
-        searchbar.placeholder = "search by city"
+        searchbar.placeholder = "search by event type"
         return searchbar
     }()
     public lazy var searchBarTwo: UITextField = {
@@ -28,7 +33,7 @@ class SearchTableView: UIView {
         return searchbar
     }()
     public lazy var searchStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [searchBarOne, searchBarTwo])
+        let stack = UIStackView(arrangedSubviews: [searchBarOne, searchBarTwo])
         stack.alignment = .fill
         stack.axis = .vertical
         stack.distribution = .equalSpacing

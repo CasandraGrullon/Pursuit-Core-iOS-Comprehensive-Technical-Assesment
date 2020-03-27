@@ -9,25 +9,18 @@
 import Foundation
 
 struct AppUser {
-    let username: String
+    var username: String
     let userEmail: String
     let userId: String
-    let imageURL: String
-    let apiChoice: String
+    var imageURL: String
+    var apiChoice: String
 }
 extension AppUser {
-    init?(_ dictionary: [String: Any]) {
-        guard let username = dictionary["username"] as? String,
-        let userEmail = dictionary["userEmail"] as? String,
-        let userId = dictionary["userId"] as? String,
-        let imageURL = dictionary["imageURL"] as? String,
-            let apiChoice = dictionary["apiChoice"] as? String else {
-                return nil
-        }
-        self.username = username
-        self.userEmail = userEmail
-        self.userId = userId
-        self.imageURL = imageURL
-        self.apiChoice = apiChoice
+    init(_ dictionary: [String: Any]) {
+        self.username = dictionary["username"] as? String ?? "no name"
+        self.userEmail = dictionary["userEmail"] as? String ?? "no email"
+        self.userId = dictionary["userId"] as? String ?? "no user id"
+        self.imageURL = dictionary["imageURL"] as? String ?? "no image"
+        self.apiChoice = dictionary["apiChoice"] as? String ?? "no api"
     }
 }

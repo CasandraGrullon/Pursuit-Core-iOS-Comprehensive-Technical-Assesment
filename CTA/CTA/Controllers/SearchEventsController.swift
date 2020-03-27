@@ -7,54 +7,126 @@
 //
 
 import UIKit
-
-enum UserAPIChoice {
-    case ticketMaster
-    case rijksMuseum
-}
+import FirebaseAuth
+import UserNotifications
 
 class SearchEventsController: UIViewController {
-
-    private var searchMapView = EventsSearchMapView()
     private var searchTableView = SearchTableView()
     
     override func loadView() {
         view = searchTableView
-        searchTableView.backgroundColor = .white
-        searchMapView.backgroundColor = .white
     }
-    //MARK: TicketMaster
-    private var events = [Events]() {
+    private var userAPIChoice = "" {
         didSet {
             DispatchQueue.main.async {
+                self.updateUI()
+                self.configureNavBar()
                 self.searchTableView.tableView.reloadData()
             }
         }
     }
-    private var isMapButtonPressed = false
-    private var userAPIChoice: UserAPIChoice = .ticketMaster //TODO: refactor to take in user choice
+    
+    private var refreshControl: UIRefreshControl!
+    
+    private var events = [Events]() {
+        didSet {
+            if userAPIChoice == "Ticket Master" {
+                DispatchQueue.main.async {
+                    self.searchTableView.tableView.reloadData()
+                }
+            }
+        }
+    }
+    private var artworks = [ArtObjects]() {
+        didSet {
+            if userAPIChoice == "Rijksmuseum" {
+                DispatchQueue.main.async {
+                    self.searchTableView.tableView.reloadData()
+                }
+            }
+            
+        }
+    }
+    private var isFavorite = false {
+        didSet {
+            for event in events {
+                updateButtonUI(event: event)
+            }
+            for art in artworks {
+                updateButtonUI(art: art)
+            }
+        }
+    }
+    private let center = UNUserNotificationCenter.current()
+    private let pendingNotifications = PendingNotifications()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getEvents(city: "new york", postCode: "10010")
-        configureNavBar()
+        getApiChoice()
+        searchTableView.searchBarTwo.delegate = self
+        searchTableView.searchBarOne.delegate = self
         configureSearchButton()
         configureTableView()
-
+        refreshControl = UIRefreshControl()
+        searchTableView.tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        checkForNotificationAuthorization()
+        center.delegate = self
     }
-    private func getEvents(city: String, postCode: String) {
-        TicketMasterAPI.getEvents(city: city, postalCode: postCode) { [weak self] (result) in
-            switch result {
-            case .failure(let eventsError):
-                print(eventsError)
-            case .success(let events):
-                if let noNil = events.embedded {
-                    DispatchQueue.main.async {
-                        self?.events = noNil.events
-                    }
-
-                }
+    private func checkForNotificationAuthorization() {
+        center.getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                print("app is authorized for notifications")
+            } else {
+                self.requestNotificationPermission()
             }
+        }
+    }
+    private func requestNotificationPermission() {
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if let error = error {
+                print("error requestion authorization: \(error)")
+                return
+            }
+            if granted {
+                print("access was granted")
+            } else {
+                print("access not granted")
+            }
+        }
+    }
+    @objc private func loadData() {
+        getApiChoice()
+    }
+    @objc private func getApiChoice() {
+        DatabaseService.shared.getUserApiChoice { [weak self] (result) in
+            switch result{
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Unable to get user experience", message: error.localizedDescription)
+                    self?.refreshControl.endRefreshing()
+                }
+            case .success(let api):
+                self?.userAPIChoice = api
+                self?.refreshControl.endRefreshing()
+            }
+        }
+    }
+    private func updateUI() {
+        searchTableView.tableView.backgroundColor = .clear
+        if userAPIChoice == "Ticket Master" {
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+            searchTableView.searchButton.backgroundColor = #colorLiteral(red: 1, green: 0.7171183228, blue: 0, alpha: 1)
+            searchTableView.backgroundColor = .white
+            searchTableView.searchBarOne.isHidden = false
+            searchTableView.searchBarTwo.isHidden = false
+        } else {
+            searchTableView.searchButton.backgroundColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2345507145, green: 0.5768489242, blue: 0.4764884114, alpha: 1)
+            searchTableView.backgroundColor = .darkGray
+            searchTableView.searchBarOne.placeholder = "Search by artist or keyword"
+            searchTableView.searchBarOne.backgroundColor = .white
+            searchTableView.searchBarTwo.isHidden = true
         }
     }
     private func configureTableView() {
@@ -63,75 +135,257 @@ class SearchEventsController: UIViewController {
         searchTableView.tableView.register(UINib(nibName: "SearchCell", bundle: nil), forCellReuseIdentifier: "searchCell")
     }
     private func configureNavBar() {
-        if userAPIChoice == .ticketMaster {
+        if userAPIChoice == "Ticket Master" {
             navigationItem.title = "Ticket Master Events"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(changeView(_:)))
         } else {
             navigationItem.title = "Rijks Museum Collection"
             navigationItem.rightBarButtonItem?.accessibilityElementsHidden = true
             navigationItem.rightBarButtonItem?.isEnabled = false
-
         }
+    }
+    @objc private func getEvents(keyword: String, postCode: String) {
+        if userAPIChoice == "Ticket Master" {
+            TicketMasterAPI.getEvents(keyword: keyword, postalCode: postCode) { [weak self] (result) in
+                switch result {
+                case .failure(let eventsError):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to get events from api", message: eventsError.localizedDescription)
+                        self?.refreshControl.endRefreshing()
+                    }
+                case .success(let events):
+                    if let noNil = events.embedded {
+                        DispatchQueue.main.async {
+                            self?.events = noNil.events
+                            self?.refreshControl.endRefreshing()
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    @objc private func getArtCollection(keyword: String) {
+        if userAPIChoice == "Rijksmuseum" {
+            MuseumAPI.getCollections(search: keyword) { [weak self] (result) in
+                switch result {
+                case .failure(let artError):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to get artwork from api", message: artError.localizedDescription)
+                        self?.refreshControl.endRefreshing()
+                    }
+                case .success(let artworks):
+                    DispatchQueue.main.async {
+                        self?.artworks = artworks.artObjects
+                        self?.refreshControl.endRefreshing()
+                    }
+                }
+            }
+        }
+        
     }
     private func configureSearchButton() {
         searchTableView.searchButton.addTarget(self, action: #selector(searchButtonPressed(_:)), for: .touchUpInside)
     }
-    @objc private func changeView(_ sender: UIBarButtonItem){
-        if isMapButtonPressed {
-            view = searchMapView
-        } else {
-            view = searchTableView
-        }
-    }
     @objc private func searchButtonPressed(_ sender: UIButton) {
-        //if user api is ticket master
-        //if userAPIChoice == .ticketMaster {
-            guard let city = searchTableView.searchBarOne.text, !city.isEmpty,
+        if userAPIChoice == "Ticket Master" {
+            guard let keyword = searchTableView.searchBarOne.text, !keyword.isEmpty,
                 let zipcode = searchTableView.searchBarTwo.text, !zipcode.isEmpty else {
-                    //add warning to fill all fields
-                    print("missing fields")
+                    DispatchQueue.main.async {
+                        self.showAlert(title: "Missing Fields", message: "please fill all required fields")
+                    }
                     return
             }
-            getEvents(city: city, postCode: zipcode)
+            getEvents(keyword: keyword, postCode: zipcode)
             searchTableView.searchBarOne.resignFirstResponder()
             searchTableView.searchBarTwo.resignFirstResponder()
-        //} else {
-//            searchTableView.searchBarTwo.isHidden = true
-//            guard let artSearch = searchTableView.searchBarOne.text, !artSearch.isEmpty else {
-//                print("missing fields")
-//                return
-//            }
-//            //api call
-//            searchTableView.searchBarOne.resignFirstResponder()
-//        }
+        } else {
+            guard let artSearch = searchTableView.searchBarOne.text, !artSearch.isEmpty else {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Missing Fields", message: "please fill all required fields")
+                }
+                return
+            }
+            getArtCollection(keyword: artSearch)
+            searchTableView.searchBarOne.resignFirstResponder()
+        }
     }
-    
+    private func updateButtonUI(art: ArtObjects? = nil, event: Events? = nil) {
+        guard let event = event, let art = art else {
+            return
+        }
+        if userAPIChoice == "Ticket Master" {
+            DatabaseService.shared.isInFavorites(event: event) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to check user favorite events", message: error.localizedDescription)
+                    }
+                case .success(let successful):
+                    if successful {
+                        self?.isFavorite = true
+                    } else {
+                        self?.isFavorite = false
+                    }
+                }
+            }
+        } else {
+            DatabaseService.shared.isInFavorites(artObject: art) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Unable to check user favorite artworks", message: error.localizedDescription)
+                    }
+                case .success(let successful):
+                    if successful {
+                        self?.isFavorite = true
+                    } else {
+                        self?.isFavorite = false
+                    }
+                }
+            }
+        }
+    }
     
 }
 extension SearchEventsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        if userAPIChoice == "Ticket Master" {
+            return events.count
+        } else {
+            return artworks.count
+        }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = searchTableView.tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchCell else {
             fatalError("could not cast to search cell")
         }
-        let event = events[indexPath.row]
-        cell.configureCell(event: event)
+        if userAPIChoice == "Ticket Master" {
+            let event = events[indexPath.row]
+            cell.event = event
+            cell.configureCell(event: event)
+        } else {
+            let artwork = artworks[indexPath.row]
+            cell.artwork = artwork
+            cell.configureCell(art: artwork)
+        }
+        cell.backgroundColor = .clear
+        cell.apichoice = userAPIChoice
+        cell.updateUI(apichoice: userAPIChoice)
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let event = events[indexPath.row]
         let storyboard = UIStoryboard(name: "MainApp", bundle: nil)
-        let eventDetailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
-            return DetailController(coder: coder, event: event)
+        var detailVC = UIViewController()
+        
+        if userAPIChoice == "Ticket Master" {
+            let event = events[indexPath.row]
+            detailVC = storyboard.instantiateViewController(identifier: "DetailController") { (coder) in
+                return EventDetailController(coder: coder, event: event)
+            }
+           
+        } else {
+            let artwork = artworks[indexPath.row]
+            detailVC = storyboard.instantiateViewController(identifier: "ArtDetailController") { (coder) in
+                return ArtDetailController(coder: coder, artwork: artwork)
+            }
+            
         }
-        navigationController?.pushViewController(eventDetailVC, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+extension SearchEventsController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 extension SearchEventsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        if userAPIChoice == "Ticket Master" {
+            return 120
+        } else {
+            return 160
+        }
+    }
+}
+extension SearchEventsController: FavoriteButtonDelegate {
+    func didPressButtonEvent(_ searchCell: SearchCell, event: Events) {
+        if userAPIChoice == "Ticket Master" {
+            if isFavorite {
+                DatabaseService.shared.removeFromFavorites(event: event) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Unable to remove event from favorites", message: error.localizedDescription)
+                        }
+                    case .success:
+                        UIViewController.getNotification(title: "Removed from favorites", body: "\(event.name) was removed")
+                        self?.isFavorite = false
+                        self?.updateButtonUI(event: event)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                    }
+                }
+            } else {
+                DatabaseService.shared.addToFavorites(event: event) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Unable to add event to favorites", message: error.localizedDescription)
+                        }
+                    case .success:
+                        UIViewController.getNotification(title: "Added to favorites", body: "\(event.name) was added")
+                        self?.isFavorite = true
+                        self?.updateButtonUI(event: event)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                        
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    func didPressButtonArtwork(_ searchCell: SearchCell, artwork: ArtObjects) {
+        if userAPIChoice == "Rijksmuseum" {
+            if isFavorite {
+                DatabaseService.shared.removeFromFavorites(artObject: artwork) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Unable to remove art from favorites", message: error.localizedDescription)
+                        }
+                    case .success:
+                        UIViewController.getNotification(title: "Removed from favorites", body: "\(artwork.title) was removed")
+                        self?.isFavorite = false
+                        self?.updateButtonUI(art: artwork)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                    }
+                }
+            } else {
+                DatabaseService.shared.addToFavorites(artObject: artwork) { [weak self] (result) in
+                    switch result {
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Unable to add art to favorites", message: error.localizedDescription)
+                        }
+                    case .success:
+                        UIViewController.getNotification(title: "Added to favorites", body: "\(artwork.title) was added")
+                        self?.isFavorite = true
+                        self?.updateButtonUI(art: artwork)
+                        searchCell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                    }
+                }
+            }
+        }
+        
+        
+    }
+}
+extension SearchEventsController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
     }
 }

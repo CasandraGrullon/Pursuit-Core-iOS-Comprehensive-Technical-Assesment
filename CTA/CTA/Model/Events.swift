@@ -26,10 +26,9 @@ struct Events: Codable {
     let images: [EventImages]
     let dates: EventDates
     let promoter: Promoter
-    //let info: String
     let pleaseNote: String?
     let priceRanges: [PriceRanges]
-    let venueInfo: VenueInfo //coding key required
+    let venueInfo: VenueInfo
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -39,7 +38,6 @@ struct Events: Codable {
         case images
         case dates
         case promoter
-        //case info
         case pleaseNote
         case priceRanges
         case venueInfo = "_embedded"
@@ -55,6 +53,7 @@ struct EventDates: Codable {
 struct Start: Codable {
     let localDate: String
     let localTime: String
+    let dateTime: String
 }
 struct Promoter: Codable {
     let name: String

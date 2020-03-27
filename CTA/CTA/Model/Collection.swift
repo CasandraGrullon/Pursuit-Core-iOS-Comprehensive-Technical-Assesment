@@ -16,7 +16,7 @@ struct ArtObjects: Codable {
     let id: String
     let objectNumber: String
     let title: String
-    let artist: String//coding key
+    let artist: String
     let longTitle: String
     let webImage: WebImage
     
